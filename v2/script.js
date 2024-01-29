@@ -86,7 +86,7 @@ function realizarSorteio() {
 
     resultadoElement.innerHTML = `
       <hr>
-      <p class="area-title"><strong>${resultado.area} - ${resultado.faculdade}</strong></p>
+      <p class="area-title"><strong style="font-size: 1.3em;">${resultado.area} - ${resultado.faculdade}</strong></p>
       <p><strong>Prova Escrita:</strong></p>
       
       <p><mark>${resultado.pontoProvaEscrita}</mark></p>
