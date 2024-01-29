@@ -1,0 +1,110 @@
+
+body {
+  font-family: 'Arial', sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #006666;
+  color: #333;
+  font-size: 1.2rem;
+}
+
+.container {
+  max-width: 950px;
+  margin: 20px auto;
+  padding: 20px;
+  background-color: #fff;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  border-radius: 15px;
+}
+
+h1 {
+  text-align: center;
+  color: #006666;
+}
+
+button {
+  background-color: #006666;
+  color: #fff;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #006666;
+}
+
+#areasContainer,
+#sorteioContainer {
+  margin-top: 20px;
+  
+}
+
+div {
+  margin-bottom: 15px;
+}
+
+ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+li {
+  padding-left: 20px;
+  position: relative;
+}
+
+li:before {
+  content: '\2022';
+  /* Unicode character for a bullet point */
+  position: absolute;
+  left: 0;
+  color: #006666
+}
+
+hr {
+  border: 0;
+  height: 1px;
+  background: #006666;
+  /*  #ccc; */
+  margin: 20px 0;
+}
+
+
+.d-none {
+  display: none !important;
+}
+
+.resultado-area {
+  padding-bottom: 15px;
+  /* Adiciona algum espaço entre os resultados */
+  margin-bottom: -35px;
+  /* Adiciona algum espaço entre os resultados */
+}
+
+.btn-custom {
+  background-color: #006666;
+  color: #fff;
+  /* Define a cor do texto para branco */
+}
+
+.jumbotron .img-fluid {
+  max-width: 100%;
+  height: auto;
+}
+
+.area-title {
+  text-align: center;
+  
+}
+
+
+
+.centered-container {
+  text-align: center;
+}
+
+.btn {
+  margin: 5px; /* Adjust the margin as needed for spacing between buttons */
+}

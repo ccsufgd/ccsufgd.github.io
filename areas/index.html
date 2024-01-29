@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gerador Array</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f8f9fa; /* Light gray background color */
+        }
+
+        .container {
+            background-color: #f8f9fa; /* White container background color */
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            margin-top: 50px;
+        }
+
+        textarea {
+            width: 100%;
+            height: 200px;
+            margin-bottom: 20px;
+        }
+
+        code {
+            display: block;
+            background-color: black;
+            color: white;
+            padding: 10px;
+            margin-top: 10px;
+            border-radius: 5px;
+            text-align: left;
+            white-space: pre-wrap;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+
+        <h2>Gerador Array Areas</h2>
+
+        <div class="mb-3">
+            <label for="textoInput" class="form-label">Insira seu texto:</label>
+            <textarea class="form-control" id="textoInput">
+Faculdade: FACULDADE DE CIÊNCIAS EXATAS E TECNOLOGIAS – FACET
+Área: QUÍMICA ORGÂNICA
+
+Reações de substituição em carbonos saturados 
+Reações de eliminação 
+Reações de adição à ligação dupla carbono-carbono 
+Reações de substituição em compostos aromáticos 
+Reações de adição em compostos carbonílicos 
+Reações de substituição em compostos carbonílicos 
+Química de enóis e enolatos 
+Estereoquímica 
+Ressonância e aromaticidade 
+Reações pericíclicas
+        </textarea>
+        </div>
+
+        <button class="btn btn-primary" onclick="adicionarConteudo()">Adicionar Conteúdo</button>
+        <button class="btn btn-danger" onclick="removerConteudo()">Remover Conteúdo</button>
+
+        <h3 class="mt-4">Resultado em CodeView:</h3>
+        <code id="resultadoArray" onclick="copiarArray()"></code>
+
+    </div>
+
+    <!-- Bootstrap JS and Popper.js (required for Bootstrap) -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        var areas = [];
+
+        function adicionarConteudo() {
+            // Obter o texto do campo de entrada
+            var texto = document.getElementById('textoInput').value;
+
+            // Dividir o texto em linhas
+            var linhas = texto.split('\n');
+
+            // Inicializar variáveis para armazenar dados da área
+            var faculdade = '';
+            var area = '';
+            var pontos = [];
+
+            // Iterar sobre cada linha e criar as áreas
+            linhas.forEach(function (linha) {
+                if (linha.startsWith('Faculdade:')) {
+                    // Extrair apenas a sigla da faculdade
+                    faculdade = linha.split('–')[1].trim();
+                } else if (linha.startsWith('Área:')) {
+                    area = linha.replace('Área:', '').trim();
+                } else if (linha.trim() !== '') {
+                    pontos.push(`${pontos.length + 1} - ${linha.trim()}`);
+                }
+            });
+
+            // Criar o objeto da área e adicionar ao array
+            var areaObj = {
+                faculdade: faculdade,
+                area: area,
+                pontosSorteados: [],
+                pontos: pontos
+            };
+
+            areas.push(areaObj);
+
+            // Limpar o campo de texto
+            document.getElementById('textoInput').value = '';
+
+            // Exibir o resultado na área de codeview
+            atualizarCodeView();
+        }
+
+        function removerConteudo() {
+            // Remover o último elemento do array
+            areas.pop();
+
+            // Exibir o resultado na área de codeview
+            atualizarCodeView();
+        }
+
+      function copiarArray() {
+          // Create the array of objects
+          var formattedArray = areas.map(function (area) {
+              return {
+                  faculdade: area.faculdade,
+                  area: area.area,
+                  pontosSorteados: area.pontosSorteados,
+                  pontos: area.pontos.map(function (ponto) {
+                      return ponto.replace(/"/g, "'");
+                  })
+              };
+          });
+
+          // Create the JSON string with formatted keys
+          var jsonString = '[' + formattedArray.map(function (area) {
+              return '{\n  faculdade: \'' + area.faculdade + '\',\n  area: \'' + area.area + '\',\n  pontosSorteados: ' + JSON.stringify(area.pontosSorteados) + ',\n  pontos: ' + JSON.stringify(area.pontos, null, 2).replace(/"/g, '\'') + '\n}';
+          }).join(',\n') + ']';
+
+          // Copy the formatted JSON string to the clipboard
+          var textarea = document.createElement('textarea');
+          textarea.value = jsonString;
+          document.body.appendChild(textarea);
+          textarea.select();
+          document.execCommand('copy');
+          document.body.removeChild(textarea);
+
+          alert('Array copiado para a área de transferência!');
+      }
+
+
+
+      function atualizarCodeView() {
+          // Create the array of formatted strings
+          var formattedArray = areas.map(function (area) {
+              return '{\n  faculdade: \'' + area.faculdade + '\',\n  area: \'' + area.area + '\',\n  pontosSorteados: ' + JSON.stringify(area.pontosSorteados) + ',\n  pontos: ' + JSON.stringify(area.pontos, null, 2).replace(/"/g, '\'') + '\n}';
+          });
+
+          // Create the final JSON string for display
+          var jsonString = '[' + formattedArray.join(',\n') + ']';
+
+          // Display the formatted JSON string in the code view
+          document.getElementById('resultadoArray').textContent = jsonString;
+      }
+    </script>
+</body>
+</html>
