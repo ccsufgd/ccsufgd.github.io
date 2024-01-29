@@ -82,12 +82,29 @@ function realizarSorteio() {
     resultadosSorteio.push(resultado);
 
     const resultadoElement = document.createElement('div');
-    resultadoElement.className = 'resultado-area'; // Adiciona a classe resultado-area
-    resultadoElement.innerHTML = `<hr></hr><p class="area-title"><strong>${resultado.area} - ${resultado.faculdade}</strong></p>
+    resultadoElement.className = 'resultado-area';
+
+    resultadoElement.innerHTML = `
+      <hr>
+      <p class="area-title"><strong>${resultado.area} - ${resultado.faculdade}</strong></p>
       <p><strong>Prova Escrita:</strong></p>
-      <p>${resultado.pontoProvaEscrita}</p>
+      
+      <p><mark>${resultado.pontoProvaEscrita}</mark></p>
       <p><strong>Prova Didática:</strong></p>
-      <p>${resultado.pontoProvaDidatica}</p>`;
+ 
+      <p><mark>${resultado.pontoProvaDidatica}</mark></p>
+     
+    `;
+
+    // Append the resultadoElement to the DOM or wherever you want to display it
+    document.body.appendChild(resultadoElement);
+
+
+      
+      
+      
+      
+      ;
 
     sorteioContainer.appendChild(resultadoElement);
   });
