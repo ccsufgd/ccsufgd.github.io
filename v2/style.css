@@ -111,7 +111,6 @@ hr {
 
 /* tabela */
 
-/* Adicione estas regras ao seu arquivo style.css */
 
 .table {
   width: 100%;
@@ -122,9 +121,10 @@ hr {
 
 .table th,
 .table td {
-  padding: 0.40rem;
+  padding: 0.3rem;
   vertical-align: top;
   border: 1px solid #ffffff;
+  border-radius: 8px; /* Adiciona um raio de 8px para arredondar as células */
 }
 
 .table thead th {
@@ -147,3 +147,4 @@ hr {
 .table-row-light {
   background-color: #ffffff; /* Slightly lighter blue color for specific rows */
 }
+
