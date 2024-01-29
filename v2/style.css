@@ -121,7 +121,7 @@ hr {
 
 .table th,
 .table td {
-  padding: 0.3rem;
+  padding: 0.4rem;
   vertical-align: top;
   border: 1px solid #ffffff;
   border-radius: 8px; /* Adiciona um raio de 8px para arredondar as células */
