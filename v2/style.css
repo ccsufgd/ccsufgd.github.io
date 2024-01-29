@@ -111,6 +111,7 @@ hr {
 
 /* tabela */
 
+/* Adicione estas regras ao seu arquivo style.css */
 
 .table {
   width: 100%;
@@ -148,3 +149,9 @@ hr {
   background-color: #ffffff; /* Slightly lighter blue color for specific rows */
 }
 
+
+.mark, mark {
+    padding: 0.2em;
+    background-color: #dde3e4;
+    border-radius: 2px
+}
