@@ -294,9 +294,13 @@ function saveResults() {
 function mostrarLog() {
   const sorteioContainer = document.getElementById('sorteioContainer');
   sorteioContainer.innerHTML = '';
+  // Hide the areas container
+  const areasContainer = document.getElementById('areasContainer');
+  areasContainer.classList.add('d-none');
  
 
   infoContainer.style.display = 'block';
+  
 }
 
 
