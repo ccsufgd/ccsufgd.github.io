@@ -86,7 +86,7 @@
 
  {
     faculdade: 'FADIR',
-    area: 'Economia e Comércio Internacional',
+    area: 'ECONOMIA E COMÉRCIO INTERNACIONAL',
     pontosSorteados: [],
     pontos: [
       '1 - Economia internacional: análise comparativa dos modelos teóricos sobre comércio internacional.',
