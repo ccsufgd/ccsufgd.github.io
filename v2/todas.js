@@ -159,14 +159,14 @@
   area: 'ESTÁGIO, DIDÁTICA, CURRÍCULO E ENSINO DE CIÊNCIAS E MATEMÁTICA.',
   pontosSorteados: [],
   pontos: [
-  '1 - Ações e projetos para ensinar Ciências e MatemáƟca desenvolvidos nos estágios supervisionados;',
-  '2 - A especificidade do currículo para ensinar Ciências e MatemáƟca na Educação InfanƟl',
-  '3 - A especificidade do currículo para ensinar Ciências e MatemáƟca nos anos iniciais do Ensino Fundamental;',
-  '4 - Estágio na formação de professores para atuar na Educação InfanƟl;',
+  '1 - Ações e projetos para ensinar Ciências e Matemática desenvolvidos nos estágios supervisionados;',
+  '2 - A especificidade do currículo para ensinar Ciências e Matemática na Educação Infantil',
+  '3 - A especificidade do currículo para ensinar Ciências e Matemática nos anos iniciais do Ensino Fundamental;',
+  '4 - Estágio na formação de professores para atuar na Educação Infantil;',
   '5 - Estágio na formação de professores para atuar Ensino Fundamental, anos iniciais;',
-  '6 - DidáƟca e ensino-aprendizagem no Ensino Fundamental, anos iniciais;',
-  '7 - DidáƟca e ensino-aprendizagem na Educação InfanƟl;',
-  '8 - DidáƟca para ensino-aprendizagem de ciências e matemáƟca no Ensino Fundamental, anos iniciais.'
+  '6 - Didática e ensino-aprendizagem no Ensino Fundamental, anos iniciais;',
+  '7 - Didática e ensino-aprendizagem na Educação Infantil;',
+  '8 - Didática para ensino-aprendizagem de ciências e matemática no Ensino Fundamental, anos iniciais.'
 ]
 },
  
