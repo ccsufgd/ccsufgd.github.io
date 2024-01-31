@@ -108,3 +108,50 @@ hr {
 .btn {
   margin: 5px; /* Adjust the margin as needed for spacing between buttons */
 }
+
+/* tabela */
+
+/* Adicione estas regras ao seu arquivo style.css */
+
+.table {
+  width: 100%;
+  margin-bottom: 1rem;
+  color: #212529;
+  border-collapse: collapse;
+}
+
+.table th,
+.table td {
+  padding: 0.4rem;
+  vertical-align: top;
+  border: 1px solid #ffffff;
+  border-radius: 8px; /* Adiciona um raio de 8px para arredondar as células */
+}
+
+.table thead th {
+  vertical-align: bottom;
+  border-bottom: 2px solid #0582ff;
+}
+
+.table-hover tbody tr:hover {
+  background-color: #f0f0f0; /* Lighter blue color on hover */
+}
+
+.table-striped tbody tr:nth-of-type(odd) {
+  background-color: #f0f0f0; /* Light blue color for odd rows */
+}
+
+.table-striped tbody tr:nth-of-type(even) {
+  background-color: #ffffff; /* Slightly lighter blue color for even rows */
+}
+
+.table-row-light {
+  background-color: #ffffff; /* Slightly lighter blue color for specific rows */
+}
+
+
+.mark, mark {
+    padding: 0.4em;
+    background-color: #f0f0f0;
+    border-radius: 8px
+}
