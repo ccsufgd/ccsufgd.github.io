@@ -1,0 +1,166 @@
+
+body {
+  font-family: 'Arial', sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #006666;
+  color: #333;
+  font-size: 1.2rem;
+}
+
+.container {
+  max-width: 950px;
+  margin: 20px auto;
+  padding: 20px;
+  background-color: #fff;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  border-radius: 15px;
+}
+
+h1 {
+  text-align: center;
+  color: #006666;
+}
+
+button {
+  background-color: #006666;
+  color: #fff;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #006666;
+}
+
+#areasContainer,
+#sorteioContainer 
+#{
+  margin-top: 20px;
+  
+}
+
+div {
+  margin-bottom: 15px;
+}
+
+ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+li {
+  padding-left: 20px;
+  position: relative;
+}
+
+li:before {
+  content: '\2022';
+  /* Unicode character for a bullet point */
+  position: absolute;
+  left: 0;
+  color: #006666
+}
+
+hr {
+  border: 0;
+  height: 1px;
+  background: #006666;
+  /*  #ccc; */
+  margin: 20px 0;
+}
+
+
+.d-none {
+  display: none !important;
+}
+
+.resultado-area {
+  padding-bottom: 15px;
+  /* Adiciona algum espaço entre os resultados */
+  margin-bottom: -35px;
+  /* Adiciona algum espaço entre os resultados */
+}
+
+.btn-custom {
+  background-color: #006666;
+  color: #fff;
+  /* Define a cor do texto para branco */
+}
+
+.jumbotron .img-fluid {
+  max-width: 100%;
+  height: auto;
+}
+
+.area-title {
+  text-align: center;
+  
+}
+
+
+
+.centered-container {
+  text-align: center;
+}
+
+.btn {
+  margin: 5px; /* Adjust the margin as needed for spacing between buttons */
+}
+
+/* tabela */
+
+/* Adicione estas regras ao seu arquivo style.css */
+
+.table {
+  width: 100%;
+  margin-bottom: 1rem;
+  color: #212529;
+  border-collapse: collapse;
+}
+
+.table th,
+.table td {
+  padding: 0.4rem;
+  vertical-align: top;
+  border: 1px solid #ffffff;
+  border-radius: 8px; /* Adiciona um raio de 8px para arredondar as células */
+}
+
+.table thead th {
+  vertical-align: bottom;
+  border-bottom: 2px solid #0582ff;
+}
+
+.table-hover tbody tr:hover {
+  background-color: #f0f0f0; /* Lighter blue color on hover */
+}
+
+.table-striped tbody tr:nth-of-type(odd) {
+  background-color: #f0f0f0; /* Light blue color for odd rows */
+}
+
+.table-striped tbody tr:nth-of-type(even) {
+  background-color: #ffffff; /* Slightly lighter blue color for even rows */
+}
+
+.table-row-light {
+  background-color: #ffffff; /* Slightly lighter blue color for specific rows */
+}
+
+
+.mark, mark {
+    padding: 0.4em;
+    background-color: #f0f0f0;
+
+  
+    border-radius: 8px
+}
+
+#contador {
+    text-align: center;
+    font-size: 19.2px;
+}
+

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sorteio de Pontos</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <div class="container mt-5">
+    <div class="jumbotron" style="background-color: #f000; padding: 1rem 1rem;">
+      
+      <img src="https://files.ufgd.edu.br/arquivos/imagens/83/1691775935994_grande6919277014956096410.png" alt="Logo" class="img-fluid" style="border-radius:15px;" >
+    </div>
+
+
+    <div id="areasContainer"></div>
+
+    <button class="btn btn-custom btn-block mt-4" onclick="realizarSorteio()">Realizar Sorteio</button>
+
+    <div id="sorteioContainer" class="mt-4"></div>
+    <div id="infoContainer"></div>
+  </div>
+
+ 
+  <script src="areas.js"></script>
+  <script src="script.js"></script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
+
+</body>
+ 
+  <div id="buttonsContainer" class="centered-container" style="display: none; background-color: #f000;">
+    <button id="homeButton" onclick="goHome()">
+      <i class="fa fa-home"></i>
+    </button>
+
+    <button id="saveButton" onclick="saveResults()">
+      <i class="fa fa-save"></i> 
+    </button>
+    <!--
+    <button id="trashButton" onclick="deleteResults()">
+      <i class="fa fa-trash"></i>
+    </button>
+    -->
+    <button id="fileButton" onclick="viewResults()">
+      <i class="fa fa-file"></i>
+    </button>
+    
+    <button id="logButton" onclick="mostrarLog()">
+      <i class="fa fa-cogs"></i>
+    </button>
+
+  </div>
+
+
+  
+</html>
