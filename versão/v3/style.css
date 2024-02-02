@@ -1,12 +1,9 @@
-﻿:root {
-  --cor: #006666;
-}
 
 body {
   font-family: 'Arial', sans-serif;
   margin: 0;
   padding: 0;
-  background-color: var(--cor);
+  background-color: #006666;
   color: #333;
   font-size: 1.2rem;
 }
@@ -22,11 +19,11 @@ body {
 
 h1 {
   text-align: center;
-  color: var(--cor);
+  color: #006666;
 }
 
 button {
-  background-color: var(--cor);
+  background-color: #006666;
   color: #fff;
   padding: 10px 15px;
   border: none;
@@ -35,7 +32,7 @@ button {
 }
 
 button:hover {
-  background-color: var(--cor);
+  background-color: #006666;
 }
 
 #areasContainer,
@@ -64,13 +61,13 @@ li:before {
   /* Unicode character for a bullet point */
   position: absolute;
   left: 0;
-  color: var(--cor)
+  color: #006666
 }
 
 hr {
   border: 0;
   height: 1px;
-  background: var(--cor);
+  background: #006666;
   /*  #ccc; */
   margin: 20px 0;
 }
@@ -88,7 +85,7 @@ hr {
 }
 
 .btn-custom {
-  background-color: var(--cor);
+  background-color: #006666;
   color: #fff;
   /* Define a cor do texto para branco */
 }
@@ -134,7 +131,7 @@ hr {
 
 .table thead th {
   vertical-align: bottom;
-  border-bottom: 2px solid #000000;
+  border-bottom: 2px solid #0582ff;
 }
 
 .table-hover tbody tr:hover {
