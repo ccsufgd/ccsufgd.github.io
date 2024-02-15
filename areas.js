@@ -131,10 +131,9 @@
   '5 - Energia, Calor e Trabalho.',
   '6 - Balanço de massa e energia em volumes de controle.',
   '7 - 1ª e 2ª Lei da Termodinâmica.',
-  '8 - Elementos geométricos (ângulos, polígonos, triângulos, quadriláteros, circunferências, concordâncias, arcos, ovais e corpos de revolução): morfologia, nomenclaturas',
-  '9 - e conceitos.',
-  '10 - Introdução ao desenho técnico: escalas numéricas e gráficas.',
-  '11 - Vistas ortográficas: vistas ortográficas principais no primeiro e terceiro diedro, escolha das vistas.'
+  '8 - Elementos geométricos (ângulos, polígonos, triângulos, quadriláteros, circunferências, concordâncias, arcos, ovais e corpos de revolução): morfologia, nomenclaturas e conceitos.',
+  '9 - Introdução ao desenho técnico: escalas numéricas e gráficas.',
+  '10 - Vistas ortográficas: vistas ortográficas principais no primeiro e terceiro diedro, escolha das vistas.'
 ]
 },
  
