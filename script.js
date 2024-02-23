@@ -1,9 +1,10 @@
-﻿
+
 const areas = areasData;
 
 console.log(areas);
 
 const resultadosSorteio = [];
+
 
 
 
@@ -50,6 +51,19 @@ function imprimirArea(area) {
 let sorteioRealizado = false;
 let print = false;
 
+
+function loadingSorteio() {
+  // Mostra a div de carregamento
+  document.querySelector('.loading').style.display = 'block';
+  document.querySelector('.sorteio').style.display = 'none'; // Esconde a div de sorteio
+
+  // Define um timeout para esconder a div de carregamento e mostrar a div de sorteio depois de 3 segundos
+  setTimeout(function() {
+      document.querySelector('.loading').style.display = 'none';
+      document.querySelector('.sorteio').style.display = 'block';
+      exibirAlerta('success', 'Sorteio Realizado!');
+  }, 2000); 
+}
 
 
 function realizarSorteio() {
@@ -137,6 +151,8 @@ function realizarSorteio() {
   print = false;
   
   exibirAlerta('success', 'Sorteio Realizado!');
+  document.getElementById("resultadoDiv").style.display = "block";
+  loadingSorteio(); 
   showButtons();
 }
 
@@ -194,6 +210,7 @@ function sortearPonto(pontos, pontoExcluido, area) {
 
   const randomBytes = new Uint8Array(1);
   crypto.getRandomValues(randomBytes);
+  crypto.getRandomValues(randomBytes);
   const indiceAleatorio = randomBytes[0] % pontosDisponiveis.length;
   const pontoSorteado = pontosDisponiveis[indiceAleatorio];
 
@@ -249,11 +266,14 @@ areas.forEach(imprimirArea);
 
 function showButtons() {
   const buttonsContainer = document.getElementById('buttonsContainer');
+  const buttonsContainer2 = document.getElementById('buttonsContainer2');
   buttonsContainer.style.display = 'block';
+  buttonsContainer2.style.display = 'block';
 }
 
 
 function goHome() {
+  document.getElementById("resultadoDiv").style.display = "none";
   // Clear the results container
   const sorteioContainer = document.getElementById('sorteioContainer');
   sorteioContainer.innerHTML = '';
@@ -267,6 +287,7 @@ function goHome() {
 }
 
 function viewResults() {
+  document.getElementById("resultadoDiv").style.display = "block";
 
   if (infoContainer) {
     infoContainer.style.display = 'none';
@@ -408,7 +429,7 @@ function exibirAlerta(tipo, mensagem) {
 
   setTimeout(() => {
     customAlert.style.display = 'none';
-  }, 2500);
+  }, 4000);
 }
 
 
