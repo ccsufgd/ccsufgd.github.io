@@ -4,9 +4,40 @@ console.log(areas);
 
 const resultadosSorteio = [];
 
+document.addEventListener('keydown', function(event) {
+    if (event.key === 'ArrowRight' || event.key === 'ArrowLeft') {
+        scrollToSection(event.key);
+    }
+});
 
+function scrollToSection(keyPressed) {
+    const sections = document.querySelectorAll('section'); // Seleciona todas as seções da página
 
+    let currentSectionIndex = -1;
 
+    // Encontra o índice da seção atualmente visível
+    sections.forEach((section, index) => {
+        const rect = section.getBoundingClientRect();
+        if (rect.top >= 0 && rect.bottom <= window.innerHeight) {
+            currentSectionIndex = index;
+        }
+    });
+
+    let targetIndex;
+
+    // Determina o índice da seção de destino com base na tecla pressionada
+    if (keyPressed === 'ArrowRight') {
+        targetIndex = currentSectionIndex + 1;
+    } else if (keyPressed === 'ArrowLeft') {
+        targetIndex = currentSectionIndex - 1;
+    }
+
+    // Verifica se a seção de destino é válida e rola para ela
+    if (targetIndex >= 0 && targetIndex < sections.length) {
+        const targetSection = sections[targetIndex];
+        targetSection.scrollIntoView({ behavior: 'smooth', block: 'center' }); // Rola para a seção de destino e centraliza verticalmente
+    }
+}
 console.log(areas.length);
 let areasContador = areas.length;
 let contadorElement = document.getElementById('contador');
@@ -14,14 +45,16 @@ contadorElement.innerHTML = `Áreas: ${areasContador}</strong>`;
 
 
 
+
 function imprimirArea(area) {
   const container = document.getElementById('areasContainer');
 
   // Criar elementos HTML
-  const areaElement = document.createElement('div');
-  areaElement.innerHTML = `<hr></hr>
+  const areaElement = document.createElement('section');
+  areaElement.innerHTML = `<div><hr></hr>
     <p class="area-title"><strong style="font-size: 1.3em;">${area.area}</strong></p>
-    <p class="area-title">${area.faculdade}</p>`;
+    <p class="area-title">${area.faculdade}</p>
+    </div>`;
 
   const tabelaElement = document.createElement('table');
   tabelaElement.classList.add('table', 'table-striped', 'table-bordered'); // Adiciona as classes do Bootstrap
@@ -107,10 +140,10 @@ function realizarSorteio() {
 
     resultadosSorteio.push(resultado);
 
-    const resultadoElement = document.createElement('div');
+    const resultadoElement = document.createElement('section');
     resultadoElement.className = 'resultado-area';
 
-    resultadoElement.innerHTML = `
+    resultadoElement.innerHTML = `<div>
       <hr>
       <br>
       <p class="area-title"><strong style="font-size: 1.3em;">${resultado.area} - ${resultado.faculdade}</strong></p>
@@ -121,7 +154,7 @@ function realizarSorteio() {
       <br>
       <br>
 
-
+     </div>
     `;
 
     // Append the resultadoElement to the DOM or wherever you want to display it
@@ -274,9 +307,10 @@ function viewResults() {
   sorteioContainer.innerHTML = ''; // Clear previous results
 
   resultadosSorteio.forEach(resultado => {
-    const resultadoElement = document.createElement('div');
+    const resultadoElement = document.createElement('section');
     resultadoElement.className = 'resultado-area';
     resultadoElement.innerHTML = `
+    <div>
       <hr>
       <br>
       <p class="area-title"><strong style="font-size: 1.3em;">${resultado.area} - ${resultado.faculdade}</strong></p>
@@ -287,7 +321,7 @@ function viewResults() {
       <br>
       <br>
 
-
+    </div>
     `;
     sorteioContainer.appendChild(resultadoElement);
   });
