@@ -1,9 +1,9 @@
-
 const areas = areasData;
 
 console.log(areas);
 
 const resultadosSorteio = [];
+
 
 
 
@@ -51,6 +51,19 @@ let sorteioRealizado = false;
 let print = false;
 
 
+function loadingSorteio() {
+    // Mostra a div de carregamento
+    document.querySelector('.loading').style.display = 'block';
+    document.querySelector('.sorteio').style.display = 'none'; // Esconde a div de sorteio
+  
+    // Define um timeout para esconder a div de carregamento e mostrar a div de sorteio depois de 3 segundos
+    setTimeout(function() {
+        document.querySelector('.loading').style.display = 'none';
+        document.querySelector('.sorteio').style.display = 'block';
+        exibirAlerta('success', 'Sorteio Realizado!');
+    }, 2000); 
+  }
+
 
 function realizarSorteio() {
   ocultarAlerta();
@@ -60,6 +73,7 @@ function realizarSorteio() {
       return; // Se o usuário clicar em "Cancelar", não faz nada
     }
   }
+
 
   const sorteioContainer = document.getElementById('sorteioContainer');
   sorteioContainer.innerHTML = ''; // Limpar resultados anteriores
@@ -131,6 +145,8 @@ function realizarSorteio() {
   print = false;
 
   exibirAlerta('success', 'Sorteio Realizado!');
+document.getElementById("resultadoDiv").style.display = "block";
+  loadingSorteio(); 
   showButtons();
 }
 
@@ -158,6 +174,7 @@ function sortearPonto(pontos, area) {
   infoContainer.innerHTML += `<p><strong>Os pontos disponíveis para sorteio da Prova Didática:</strong> <br>${pontos.join('<br> ')}</p>`;
 
   const randomBytes = new Uint8Array(1);
+  crypto.getRandomValues(randomBytes);
   crypto.getRandomValues(randomBytes);
   const indiceAleatorio = randomBytes[0] % pontos.length;
   const pontoSorteado = pontos[indiceAleatorio];
@@ -204,11 +221,14 @@ areas.forEach(imprimirArea);
 
 function showButtons() {
   const buttonsContainer = document.getElementById('buttonsContainer');
+const buttonsContainer2 = document.getElementById('buttonsContainer2');
   buttonsContainer.style.display = 'block';
+buttonsContainer2.style.display = 'block';
 }
 
 
 function goHome() {
+document.getElementById("resultadoDiv").style.display = "none";
   // Clear the results container
   const sorteioContainer = document.getElementById('sorteioContainer');
   sorteioContainer.innerHTML = '';
@@ -222,7 +242,7 @@ function goHome() {
 }
 
 function viewResults() {
-  const infoContainer = document.getElementById('infoContainer');
+  document.getElementById("resultadoDiv").style.display = "block";
 
   if (infoContainer) {
     infoContainer.style.display = 'none';
@@ -235,7 +255,7 @@ function viewResults() {
   }
 
   const sorteioContainer = document.getElementById('sorteioContainer');
-  sorteioContainer.innerHTML = ''; // Limpar resultados anteriores
+  sorteioContainer.innerHTML = ''; // Clear previous results
 
   resultadosSorteio.forEach(resultado => {
     const resultadoElement = document.createElement('div');
@@ -366,7 +386,7 @@ function exibirAlerta(tipo, mensagem) {
 
   setTimeout(() => {
     customAlert.style.display = 'none';
-  }, 2500);
+  }, 4000);
 }
 
 
