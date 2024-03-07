@@ -163,11 +163,10 @@ const areasData = [
     pontosSorteados: [],
     pontos: [
     '1 - Conceito de Alimentação Coletiva/ O papel do nutricionista na Alimentação Coletiva.',
-    '2 - UAN (unidades de Alimentação e Nutrição) e UPR (Unidades Produtoras de Refeições):',
-    '3 - conceitos; características; exigências legais para o seu funcionamento.',
-    '4 - Localização, layout, setores, ambiência e instalações de uma UPR.',
-    '5 - Dimensionamento de pessoal; segurança e saúde no trabalho.',
-    '6 - Gestão de resíduos em UPR. Ações sustentáveis em UPR.'
+    '2 - UAN (unidades de Alimentação e Nutrição) e UPR (Unidades Produtoras de Refeições): conceitos; características; exigências legais para o seu funcionamento.',
+    '3 - Localização, layout, setores, ambiência e instalações de uma UPR.',
+    '4 - Dimensionamento de pessoal; segurança e saúde no trabalho.',
+    '5 - Gestão de resíduos em UPR. Ações sustentáveis em UPR.'
   ]
   }
 
