@@ -64,6 +64,18 @@ const areasData = [
     '5 - O uso das línguas Guarani e Kaiowa no ensino de Ciências Humanas'
   ]
   },
+  {
+    faculdade: 'FCS',
+    area: 'Alimentação Coletiva',
+    pontosSorteados: [],
+    pontos: [
+    '1 - Conceito de Alimentação Coletiva/ O papel do nutricionista na Alimentação Coletiva.',
+    '2 - UAN (unidades de Alimentação e Nutrição) e UPR (Unidades Produtoras de Refeições): conceitos; características; exigências legais para o seu funcionamento.',
+    '3 - Localização, layout, setores, ambiência e instalações de uma UPR.',
+    '4 - Dimensionamento de pessoal; segurança e saúde no trabalho.',
+    '5 - Gestão de resíduos em UPR. Ações sustentáveis em UPR.'
+  ]
+  },
 
   {
     faculdade: 'FCS',
@@ -155,21 +167,7 @@ const areasData = [
     '4 - Gestão agroindustrial: conceitos e aplicações;',
     '5 - Fundamentos da representação digital e modelagem.'
   ]
-  },
-
-  {
-    faculdade: 'FCS',
-    area: 'Alimentação Coletiva',
-    pontosSorteados: [],
-    pontos: [
-    '1 - Conceito de Alimentação Coletiva/ O papel do nutricionista na Alimentação Coletiva.',
-    '2 - UAN (unidades de Alimentação e Nutrição) e UPR (Unidades Produtoras de Refeições): conceitos; características; exigências legais para o seu funcionamento.',
-    '3 - Localização, layout, setores, ambiência e instalações de uma UPR.',
-    '4 - Dimensionamento de pessoal; segurança e saúde no trabalho.',
-    '5 - Gestão de resíduos em UPR. Ações sustentáveis em UPR.'
-  ]
   }
-
 
 
 ]
