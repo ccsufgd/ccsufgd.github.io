@@ -213,7 +213,6 @@ function sortearPonto(pontos, area) {
   
     const randomBytes = new Uint8Array(1);
     crypto.getRandomValues(randomBytes);
-    crypto.getRandomValues(randomBytes);
     const indiceAleatorio = randomBytes[0] % pontosEmbaralhados.length;
     const pontoSorteado = pontosEmbaralhados[indiceAleatorio];
   
