@@ -13,8 +13,8 @@ const areasData = [
   			]
   },
   {
-    faculdade: 'Letras / Língua Portuguesa',
-    area: 'EAD',
+    faculdade: 'EAD',
+    area: 'Letras / Língua Portuguesa',
     pontosSorteados: [],
     pontos: [
 			'1. Elementos de textualidade em Língua Portuguesa: coesão e coerência.',
@@ -28,8 +28,8 @@ const areasData = [
   
   	
 	{
-    faculdade: 'Tradução e Interpretação em Libras / Língua Portuguesa',
-    area: 'EAD',
+    faculdade: 'EAD',
+    area: 'Tradução e Interpretação em Libras / Língua Portuguesa',
     pontosSorteados: [],
     pontos: [
 		    '1. Interpretação comunitária e os papéis em diferentes espaços de atuação.',
@@ -42,8 +42,8 @@ const areasData = [
 	
 		
 	{
-    faculdade: 'Educação Especial / Libras',
-    area: 'EAD',
+    faculdade: 'EAD',
+    area: 'Educação Especial / Libras',
     pontosSorteados: [],
     pontos: [
 		    '1- Alunos público-alvo da educação especial e o atendimento das necessidades educacionais específicas de aprendizagem.',
