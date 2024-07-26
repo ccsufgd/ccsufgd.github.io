@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #000000; /* Fundo preto */
+            color: #ffffff; /* Texto branco */
+        }
+        .container {
+            background-color: #1e1e1e; /* Tom mais escuro para o container */
+            padding: 20px;
+            border-radius: 8px;
+        }
+        .form-control {
+            background-color: #333333; /* Fundo preto para o textarea */
+            color: #ffffff; /* Texto branco para o textarea */
+            border: 1px solid #444444; /* Borda cinza escura */
+        }
+        .form-control:focus {
+            background-color: #333333; /* Mantém fundo preto ao focar */
+            color: #ffffff; /* Mantém texto branco ao focar */
+            border-color: #555555; /* Borda ligeiramente mais clara ao focar */
+            box-shadow: none; /* Remove sombra ao focar */
+        }
+        .btn-primary {
+            background-color: #007bff; /* Cor padrão do botão */
+            border-color: #007bff;
+        }
+        .btn-primary:hover {
+            background-color: #0056b3; /* Cor do botão ao passar o mouse */
+            border-color: #004085;
+        }
+        table {
+            color: #ffffff; /* Texto branco nas tabelas */
+        }
+        thead th {
+            background-color: #333333; /* Tom mais escuro para o cabeçalho da tabela */
+        }
+        tbody tr:nth-child(odd) {
+            background-color: #2a2a2a; /* Tom cinza escuro para linhas ímpares */
+        }
+        tbody tr:nth-child(even) {
+            background-color: #1e1e1e; /* Tom preto para linhas pares */
+        }
+        tbody td {
+            color: #ffffff; /* Texto branco nas células */
+        }
+    </style>
+    <title>Verificador de Dados</title>
+</head>
+<body>
+    <div class="container mt-5">
+        <h1>Verificador de Dados</h1>
+
+        <div class="form-group">
+            <label for="tipoComparacao">Tipo de Comparação:</label>
+            <select class="form-control" id="tipoComparacao">
+                <option value="linha">Linha Completa</option>
+                <option value="coluna">Apenas Primeira Coluna</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="arquivoSistema">ARQUIVO SISTEMA:</label>
+            <textarea class="form-control" id="arquivoSistema" rows="5" placeholder="Insira os dados do sistema aqui..."></textarea>
+        </div>
+
+        <div class="form-group">
+            <label for="arquivoComparacao">ARQUIVO COMPARAÇÃO:</label>
+            <textarea class="form-control" id="arquivoComparacao" rows="5" placeholder="Insira os dados de comparação aqui..."></textarea>
+        </div>
+
+        <button class="btn btn-primary" onclick="verificar()">Verificar Dados</button>
+
+        <div id="result-container" class="mt-4">
+            <!-- Resultados serão exibidos aqui -->
+        </div>
+    </div>
+
+    <script>
+        function parseData(input) {
+            return input.trim().split('\n').map(line => line.trim().split('\t'));
+        }
+
+        function verificarDadosFaltantes(base, comparacao, tipo) {
+            return base.filter(line => {
+                const valorBase = tipo === 'coluna' ? line[0] : line.join('\t');
+                return !comparacao.some(comp => {
+                    const valorComparacao = tipo === 'coluna' ? comp[0] : comp.join('\t');
+                    return valorBase === valorComparacao;
+                });
+            });
+        }
+
+        function exibirResultados(titulo, resultados) {
+            const container = document.createElement('div');
+            const header = `<h2>${titulo}</h2>`;
+            let html = '';
+
+            if (resultados.length === 0) {
+                html = '<p>Não há dados faltantes.</p>';
+            } else {
+                html = '<table class="table table-bordered"><thead><tr>';
+                html += '<th>Nome</th><th>Outros Dados</th></tr></thead><tbody>';
+                resultados.forEach(item => {
+                    html += `<tr><td>${item[0]}</td><td>${item.slice(1).join(' ')}</td></tr>`;
+                });
+                html += '</tbody></table>';
+            }
+
+            container.innerHTML = header + html;
+            document.getElementById('result-container').appendChild(container);
+        }
+
+        function verificar() {
+            const tipoComparacao = document.getElementById('tipoComparacao').value;
+            const sistemaInput = document.getElementById('arquivoSistema').value;
+            const comparacaoInput = document.getElementById('arquivoComparacao').value;
+
+            if (!sistemaInput.trim() || !comparacaoInput.trim()) {
+                alert('Por favor, preencha ambos os campos de dados.');
+                return;
+            }
+
+            const sistemaData = parseData(sistemaInput);
+            const comparacaoData = parseData(comparacaoInput);
+
+            document.getElementById('result-container').innerHTML = ''; // Limpa resultados anteriores
+            const faltantesNoSistema = verificarDadosFaltantes(comparacaoData, sistemaData, tipoComparacao);
+            exibirResultados('Faltantes no Sistema', faltantesNoSistema);
+
+            const faltantesNaComparacao = verificarDadosFaltantes(sistemaData, comparacaoData, tipoComparacao);
+            exibirResultados('Faltantes na Comparação', faltantesNaComparacao);
+        }
+    </script>
+</body>
+</html>
