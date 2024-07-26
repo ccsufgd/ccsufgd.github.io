@@ -19,7 +19,7 @@ const areasData = [
         "pontos": [
             "1- Inflamação aguda.",
             "2- Apoptose.",
-            "3.Cardiopatia Valvular.",
+            "3- Cardiopatia Valvular.",
             "4- Mecanismo das reações de hipersensibilidade.",
             "5- Anemia por diminuição da eritropoese."
         ]
