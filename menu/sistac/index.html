@@ -4,44 +4,57 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Importar ODS</title>
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <style>
         body {
-            background-color: #000000; /* Fundo preto */
-            color: #ffffff; /* Texto branco */
+            background-color: #121212; /* Fundo escuro */
+            color: #e0e0e0; /* Texto claro */
             font-family: Arial, sans-serif;
-            margin: 20px;
+            padding-top: 20px;
         }
-        h1 {
-            color: #ffffff; /* Cor do título */
+        .container {
+            background-color: #1e1e1e; /* Fundo escuro para o container */
+            padding: 30px;
+            border-radius: 8px;
         }
-        input[type="file"] {
-            background-color: #333333; /* Fundo escuro para o input */
-            color: #ffffff; /* Texto branco para o input */
-            border: 1px solid #444444; /* Borda cinza escuro */
-            border-radius: 4px; /* Bordas arredondadas */
-            padding: 10px;
-        }
-        textarea {
-            width: 100%;
-            height: 200px;
-            margin-top: 20px;
-            background-color: #333333; /* Fundo escuro para o textarea */
-            color: #ffffff; /* Texto branco para o textarea */
+        .form-control, .form-control-file {
+            background-color: #333333; /* Fundo escuro para campos */
+            color: #e0e0e0; /* Texto claro para campos */
             border: 1px solid #444444; /* Borda cinza escuro */
             border-radius: 4px; /* Bordas arredondadas */
         }
-        textarea:focus {
+        .form-control:focus, .form-control-file:focus {
             border-color: #555555; /* Borda ligeiramente mais clara ao focar */
             box-shadow: none; /* Remove sombra ao focar */
+        }
+        textarea {
+            height: 300px; /* Ajusta altura do textarea */
+        }
+        .btn-primary {
+            background-color: #007bff; /* Cor padrão do botão */
+            border-color: #007bff;
+        }
+        .btn-primary:hover {
+            background-color: #0056b3; /* Cor do botão ao passar o mouse */
+            border-color: #004085;
         }
     </style>
 </head>
 <body>
-    <h1>Importar Arquivo ODS</h1>
-    <input type="file" id="fileInput" accept=".ods">
-    <textarea id="output" readonly></textarea>
+    <div class="container">
+        <h1 class="text-center text-light">Importar Arquivo ODS</h1>
+        <form>
+            <div class="form-group">
+                <label for="fileInput" class="text-light">Escolha um arquivo:</label>
+                <input type="file" class="form-control-file" id="fileInput" accept=".ods">
+            </div>
+            <div class="form-group">
+                <label for="output" class="text-light">Saída:</label>
+                <textarea id="output" class="form-control" readonly></textarea>
+            </div>
+        </form>
+    </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
     <script>
