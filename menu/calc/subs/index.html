@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Calculadora de Média de Avaliadores</title>
+<style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #000;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            color: #fff;
+        }
+
+        h1 {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .card-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: flex-start;
+        }
+
+        .avaliador-card, .titulo-card, .conteudo-card {
+            width: 300px;
+            background-color: #333;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            margin: 20px;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .avaliador-card:nth-child(3n) {
+            margin-right: 0;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            padding: 10px;
+        }
+
+        th {
+            background-color: #444;
+            color: #fff;
+            vertical-align: middle;
+        }
+
+        input[type="number"] {
+            width: 60px;
+            padding: 5px;
+            text-align: center;
+            border-radius: 4px;
+            margin: 5px;
+            background-color: #000;
+            color: #fff;
+            padding: 5px;
+            border: none;
+        }
+
+        button {
+            display: block;
+            margin: 10px auto;
+            padding: 10px 20px;
+            background-color: #555;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #777;
+        }
+
+        .result {
+            text-align: center;
+            margin: 10px 0;
+            padding: 10px;
+            background-color: #444;
+            border-radius: 4px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        #mediaGeral, #mediaTitulos, #scoreFinal {
+            text-align: center;
+            margin: 20px 0;
+            padding: 20px;
+            background-color: #555;
+            color: #fff;
+            border-radius: 4px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .tabela-customizada {
+        width: 100%;
+        border-collapse: collapse;
+    	}
+
+    	.tabela-customizada th, .tabela-customizada td {
+        padding: 10px;
+        text-align: center;
+        border: 1px solid #ddd; /* Adiciona bordas às células */
+    	}
+
+   		 .tabela-customizada th {
+        background-color: #444;
+        color: #fff;
+   	 	}
+
+    	.tabela-customizada tr:nth-child(even) {
+        background-color: #222; /* Cor mais escura para linhas pares */
+    	}
+
+    	.tabela-customizada tr:nth-child(odd) {
+        background-color: #333; /* Cor mais clara para linhas ímpares */
+    	}
+
+    	.tabela-customizada tbody tr:hover {
+        background-color: #555; /* Cor de fundo quando o mouse passa por cima de uma linha */
+    	}
+
+    	 #nomeCandidato {
+        background-color: #000;
+        color: #fff;
+        padding: 5px;
+        border: none;
+        border-radius: 4px;
+        margin: 5px;
+        width: 100%;
+        text-align: center;
+    }
+    
+}
+    </style>
+
+    <script>
+        var candidatos = []; // Variável global para armazenar os candidatos
+
+function salvarMedia() {
+    // Verifica se o campo de nome do candidato está preenchido
+    var nomeCandidato = document.getElementById("nomeCandidato").value.trim();
+    if (nomeCandidato === "") {
+        alert("Por favor, preencha o nome do candidato antes de calcular a média.");
+        return; // Impede a execução do cálculo se o campo estiver vazio
+    }
+
+    // Obtém as notas dos avaliadores e da prova de títulos (código existente)
+ // Obtém as notas dos avaliadores
+            var notasAvaliador1 = [];
+            var notasAvaliador2 = [];
+            var notasAvaliador3 = [];
+            var notasTitulos = [];
+
+            for (var i = 1; i <= 7; i++) {
+                var nota1 = parseFloat(document.getElementById("avaliador1_nota" + i).value) || 0;
+                var nota2 = parseFloat(document.getElementById("avaliador2_nota" + i).value) || 0;
+                var nota3 = parseFloat(document.getElementById("avaliador3_nota" + i).value) || 0;
+
+                notasAvaliador1[i - 1] = nota1;
+                notasAvaliador2[i - 1] = nota2;
+                notasAvaliador3[i - 1] = nota3;
+            }
+
+            for (var i = 1; i <= 18; i++) {
+                var notaTitulo = parseFloat(document.getElementById("titulo_nota" + i).value) || 0;
+                notasTitulos[i - 1] = notaTitulo;
+            }
+
+            // Calcula a soma das notas de cada avaliador
+            var somaAvaliador1 = calcularSoma(notasAvaliador1);
+            var somaAvaliador2 = calcularSoma(notasAvaliador2);
+            var somaAvaliador3 = calcularSoma(notasAvaliador3);
+            var somaTitulos = calcularSoma(notasTitulos);
+
+            // Exibe as somas em tempo real
+            document.getElementById("resultado1").innerHTML = "Soma Avaliador 1: " + somaAvaliador1;
+            document.getElementById("resultado2").innerHTML = "Soma Avaliador 2: " + somaAvaliador2;
+            document.getElementById("resultado3").innerHTML = "Soma Avaliador 3: " + somaAvaliador3;
+            document.getElementById("resultadoTitulos").innerHTML = "Soma Prova de Títulos: " + somaTitulos;
+
+            // Calcula a média final com truncamento para 2 casas decimais
+            var mediaFinal = (somaAvaliador1 + somaAvaliador2 + somaAvaliador3) / 3;
+            var mediaFinalTruncada = mediaFinal.toFixed(2);
+
+            // Exibe a média final em tempo real
+            document.getElementById("mediaGeral").innerHTML = "Média Final (Avaliadores): " + mediaFinalTruncada;
+
+            // Calcula a média da prova de títulos com truncamento para 2 casas decimais
+            var mediaTitulosTruncada = somaTitulos.toFixed(2);
+
+            // Exibe a média da prova de títulos em tempo real
+            document.getElementById("mediaTitulos").innerHTML = "Média Prova de Títulos: " + mediaTitulosTruncada;
+
+            // Calcula o Score Final
+            var scoreFinal = mediaFinal + somaTitulos;
+            var scoreFinalTruncado = scoreFinal.toFixed(2);
+
+            // Exibe o Score Final
+            document.getElementById("scoreFinal").innerHTML = "Score Final: " + scoreFinalTruncado;
+    // Calcula as médias e o score final (código existente)
+
+    // Cria um objeto para representar o candidato
+    var candidato = {
+        nome: nomeCandidato,
+        somaAvaliador1: somaAvaliador1,
+        somaAvaliador2: somaAvaliador2,
+        somaAvaliador3: somaAvaliador3,
+        somaTitulos: somaTitulos,
+        mediaFinal: mediaFinalTruncada,
+        mediaTitulos: mediaTitulosTruncada,
+        scoreFinal: scoreFinalTruncado
+    };
+
+    // Adiciona o candidato à lista de candidatos
+    candidatos.push(candidato);
+
+    // Atualiza a tabela com os resultados
+    atualizarTabela();
+
+    // Limpa os campos
+    limparCampos();
+}
+
+function calcularMedia() {
+   
+
+    // Obtém as notas dos avaliadores e da prova de títulos (código existente)
+ // Obtém as notas dos avaliadores
+            var notasAvaliador1 = [];
+            var notasAvaliador2 = [];
+            var notasAvaliador3 = [];
+            var notasTitulos = [];
+
+            for (var i = 1; i <= 7; i++) {
+                var nota1 = parseFloat(document.getElementById("avaliador1_nota" + i).value) || 0;
+                var nota2 = parseFloat(document.getElementById("avaliador2_nota" + i).value) || 0;
+                var nota3 = parseFloat(document.getElementById("avaliador3_nota" + i).value) || 0;
+
+                notasAvaliador1[i - 1] = nota1;
+                notasAvaliador2[i - 1] = nota2;
+                notasAvaliador3[i - 1] = nota3;
+            }
+
+            for (var i = 1; i <= 18; i++) {
+                var notaTitulo = parseFloat(document.getElementById("titulo_nota" + i).value) || 0;
+                notasTitulos[i - 1] = notaTitulo;
+            }
+
+            // Calcula a soma das notas de cada avaliador
+            var somaAvaliador1 = calcularSoma(notasAvaliador1);
+            var somaAvaliador2 = calcularSoma(notasAvaliador2);
+            var somaAvaliador3 = calcularSoma(notasAvaliador3);
+            var somaTitulos = calcularSoma(notasTitulos);
+
+            // Exibe as somas em tempo real
+            document.getElementById("resultado1").innerHTML = "Soma Avaliador 1: " + somaAvaliador1;
+            document.getElementById("resultado2").innerHTML = "Soma Avaliador 2: " + somaAvaliador2;
+            document.getElementById("resultado3").innerHTML = "Soma Avaliador 3: " + somaAvaliador3;
+            document.getElementById("resultadoTitulos").innerHTML = "Soma Prova de Títulos: " + somaTitulos;
+
+            // Calcula a média final com truncamento para 2 casas decimais
+            var mediaFinal = (somaAvaliador1 + somaAvaliador2 + somaAvaliador3) / 3;
+            var mediaFinalTruncada = mediaFinal.toFixed(2);
+
+            // Exibe a média final em tempo real
+            document.getElementById("mediaGeral").innerHTML = "Média Final (Avaliadores): " + mediaFinalTruncada;
+
+            // Calcula a média da prova de títulos com truncamento para 2 casas decimais
+            var mediaTitulosTruncada = somaTitulos.toFixed(2);
+
+            // Exibe a média da prova de títulos em tempo real
+            document.getElementById("mediaTitulos").innerHTML = "Média Prova de Títulos: " + mediaTitulosTruncada;
+
+            // Calcula o Score Final
+            var scoreFinal = mediaFinal + somaTitulos;
+            var scoreFinalTruncado = scoreFinal.toFixed(2);
+
+            // Exibe o Score Final
+            document.getElementById("scoreFinal").innerHTML = "Score Final: " + scoreFinalTruncado;
+    // Calcula as médias e o score final (código existente)
+
+}
+
+function atualizarTabela() {
+    var tableBody = document.querySelector("#candidateTable tbody");
+    
+    // Limpa o corpo da tabela
+    tableBody.innerHTML = "";
+
+    // Popula a tabela com os candidatos e resultados
+    for (var i = 0; i < candidatos.length; i++) {
+        var candidato = candidatos[i];
+        var row = tableBody.insertRow(-1);
+        var cellOrd = row.insertCell(0);
+        var cellNome = row.insertCell(1);
+        var cellSoma1 = row.insertCell(2);
+        var cellSoma2 = row.insertCell(3);
+        var cellSoma3 = row.insertCell(4);
+        var cellSomaTitulos = row.insertCell(5);
+        var cellScoreFinal = row.insertCell(6);
+
+        cellOrd.innerHTML = i + 1;
+        cellNome.innerHTML = candidato.nome;
+        cellSoma1.innerHTML = candidato.somaAvaliador1;
+        cellSoma2.innerHTML = candidato.somaAvaliador2;
+        cellSoma3.innerHTML = candidato.somaAvaliador3;
+        cellSomaTitulos.innerHTML = candidato.somaTitulos;
+        cellScoreFinal.innerHTML = candidato.scoreFinal;
+    }
+}
+
+
+function limparCampos() {
+    // Limpa todos os campos de entrada
+    document.getElementById("nomeCandidato").value = "";
+    for (var i = 1; i <= 7; i++) {
+        document.getElementById("avaliador1_nota" + i).value = "";
+        document.getElementById("avaliador2_nota" + i).value = "";
+        document.getElementById("avaliador3_nota" + i).value = "";
+    }
+
+    for (var i = 1; i <= 18; i++) {
+        document.getElementById("titulo_nota" + i).value = "";
+    }
+
+    // Limpa os resultados
+    document.getElementById("resultado1").innerHTML = "Soma Avaliador 1: 0";
+    document.getElementById("resultado2").innerHTML = "Soma Avaliador 2: 0";
+    document.getElementById("resultado3").innerHTML = "Soma Avaliador 3: 0";
+    document.getElementById("resultadoTitulos").innerHTML = "Soma Prova de Títulos: 0";
+    document.getElementById("mediaGeral").innerHTML = "Média Final (Avaliadores): 0.00";
+    document.getElementById("mediaTitulos").innerHTML = "Média Prova de Títulos: 0.00";
+    document.getElementById("scoreFinal").innerHTML = "Score Final: 0.00";
+}
+
+// Função para somar valores de um array
+function calcularSoma(notas) {
+    var soma = 0;
+    for (var i = 0; i < notas.length; i++) {
+        soma += notas[i];
+    }
+    return soma;
+}
+
+ function somarAvaliador(avaliador) {
+            var notasAvaliador = [];
+            for (var i = 1; i <= 7; i++) {
+                var nota = parseFloat(document.getElementById(avaliador + "_nota" + i).value) || 0;
+                notasAvaliador[i - 1] = nota;
+            }
+            var somaAvaliador = calcularSoma(notasAvaliador);
+            alert("Soma " + avaliador + ": " + somaAvaliador);
+        }
+
+
+    </script>
+</head>
+<body>
+    <h1>Calculadora de Média de Avaliadores</h1>
+    <div class="card-container">
+        <div class="avaliador-card">
+            <table>
+                <tr>
+                    <th>Avaliador 1</th>
+                </tr>
+                <!-- Coluna de Notas do Avaliador 1 -->
+                <tr>
+                    <td>
+                        <input type="number" id="avaliador1_nota1"><br>
+                        <input type="number" id="avaliador1_nota2"><br>
+                        <input type="number" id="avaliador1_nota3"><br>
+                        <input type="number" id="avaliador1_nota4"><br>
+                        <input type="number" id="avaliador1_nota5"><br>
+                        <input type="number" id="avaliador1_nota6"><br>
+                        <input type="number" id="avaliador1_nota7">
+                    </td>
+                </tr>
+            </table>
+            <div class="result" id="resultado1">Soma Avaliador 1: 0</div>
+            <button onclick="somarAvaliador('avaliador1')">Somar</button>
+        </div>
+        <div class="avaliador-card">
+            <table>
+                <tr>
+                    <th>Avaliador 2</th>
+                </tr>
+                <!-- Coluna de Notas do Avaliador 2 -->
+                <tr>
+                    <td>
+                        <input type="number" id="avaliador2_nota1"><br>
+                        <input type="number" id="avaliador2_nota2"><br>
+                        <input type="number" id="avaliador2_nota3"><br>
+                        <input type="number" id="avaliador2_nota4"><br>
+                        <input type="number" id="avaliador2_nota5"><br>
+                        <input type="number" id="avaliador2_nota6"><br>
+                        <input type="number" id="avaliador2_nota7">
+                    </td>
+                </tr>
+            </table>
+            <div class="result" id="resultado2">Soma Avaliador 2: 0</div>
+            <button onclick="somarAvaliador('avaliador2')">Somar</button>
+        </div>
+        <div class="avaliador-card">
+            <table>
+                <tr>
+                    <th>Avaliador 3</th>
+                </tr>
+                <!-- Coluna de Notas do Avaliador 3 -->
+                <tr>
+                    <td>
+                        <input type="number" id="avaliador3_nota1"><br>
+                        <input type="number" id="avaliador3_nota2"><br>
+                        <input type="number" id="avaliador3_nota3"><br>
+                        <input type="number" id="avaliador3_nota4"><br>
+                        <input type="number" id="avaliador3_nota5"><br>
+                        <input type="number" id="avaliador3_nota6"><br>
+                        <input type="number" id="avaliador3_nota7">
+                    </td>
+                </tr>
+            </table>
+            <div class="result" id="resultado3">Soma Avaliador 3: 0</div>
+            <button onclick="somarAvaliador('avaliador3')">Somar</button>
+        </div>
+        <div class="titulo-card">
+            <table>
+                <tr>
+                    <th colspan="2">Prova de Títulos</th>
+                </tr>
+                <!-- Coluna de Notas da Prova de Títulos -->
+                <tr>
+                    <td>
+                        <input type="number" id="titulo_nota1"><br>
+                        <input type="number" id="titulo_nota2"><br>
+                        <input type="number" id="titulo_nota3"><br>
+                        <input type="number" id="titulo_nota4"><br>
+                        <input type="number" id="titulo_nota5"><br>
+                        <input type="number" id="titulo_nota6"><br>
+                        <input type="number" id="titulo_nota8"><br>
+                        <input type="number" id="titulo_nota9"><br>
+                        <input type="number" id="titulo_nota7"><br>
+  </td>
+                 <td>
+                        <input type="number" id="titulo_nota10"><br>
+                        <input type="number" id="titulo_nota11"><br>
+                        <input type="number" id="titulo_nota12"><br>
+                        <input type="number" id="titulo_nota13"><br>
+                        <input type="number" id="titulo_nota14"><br>
+                        <input type="number" id="titulo_nota15"><br>
+                        <input type="number" id="titulo_nota16"><br>
+                        <input type="number" id="titulo_nota17"><br>
+                        <input type="number" id="titulo_nota18">
+  </td>
+                  
+                </tr>
+
+            </table>
+            <div class="result" id="resultadoTitulos">Soma Prova de Títulos: 0</div>
+            <button onclick="somarTitulos('titulos')">Somar</button>
+        </div>
+
+    <div class="conteudo-card">
+    	 <input type="text" id="nomeCandidato" placeholder="Nome do Candidato">
+    <button onclick="calcularMedia()">Calcular Média</button>
+    <button onclick="salvarMedia()">Salvar</button>
+    <!-- Resultado da Média Geral -->
+   
+    <div id="mediaGeral">Média Final (Avaliadores): 0.00</div>
+    <!-- Resultado da Média da Prova de Títulos -->
+    <div id="mediaTitulos">Média Prova de Títulos: 0.00</div>
+    <!-- Score Final -->
+    <div id="scoreFinal">Score Final: 0.00</div>
+    <button onclick="limparCampos()">Iniciar Novo Cálculo</button>
+   </div>
+   </div>
+
+
+    <table id="candidateTable" class="tabela-customizada">
+    <thead>
+        <tr>
+            <th>Ord</th>
+            <th>Nome</th>
+            <th>Soma Avaliador 1</th>
+            <th>Soma Avaliador 2</th>
+            <th>Soma Avaliador 3</th>
+            <th>Soma Prova de Títulos</th>
+            <th>Score Final</th>
+        </tr>
+    </thead>
+    <tbody>
+        <!-- Linhas da tabela podem ser adicionadas dinamicamente via JavaScript -->
+    </tbody>
+</body>
+</html>
+
+   
+       
