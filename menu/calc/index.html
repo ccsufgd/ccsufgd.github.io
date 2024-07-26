@@ -1,31 +1,165 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Calculadora Simples</title>
-  <link rel="stylesheet" type="text/css" href="style.css">
+    <title>Recibo</title>
+    <style>
+        body {
+            background-color: #000;
+            color: #fff;
+            font-family: 'Arial', sans-serif;
+        }
+
+        .card {
+            display: inline-block;
+            vertical-align: top;
+            width: 300px;
+            border: 2px solid #808080; /* Neon gray border */
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(128, 128, 128, 0.5); /* Neon gray glow */
+            padding: 20px;
+            margin: 20px;
+            text-align: center;
+            background-color: #111; /* Dark background */
+        }
+
+        h1 {
+            color: #fff; /* White heading */
+        }
+
+        label, input {
+            display: block;
+            margin: 10px auto; /* Centralize o campo de entrada horizontalmente */
+            color: #000; /* Black text for better contrast */
+            padding: 8px;
+            width: 100%;
+            box-sizing: border-box;
+            background-color: #fff; /* White input background */
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        button {
+            background-color: #007BFF;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        p {
+            font-size: 18px;
+            color: #fff;
+        }
+
+        .red-text {
+            color: #ff0000; /* Red text */
+        }
+
+        .green-text {
+            color: #00ff00; /* Green text */
+        }
+
+        .result-card {
+            display: inline-block;
+            vertical-align: top;
+            width: 300px;
+            border: 2px solid #808080; /* Neon gray border */
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(128, 128, 128, 0.5); /* Neon gray glow */
+            text-align: center; /* Align the result card with the main card */
+            background-color: #111; /* Dark background */
+            color: #fff; /* White text */
+        }
+    </style>
 </head>
 <body>
-  <div class="calculator">
-    <div id="display" class="display">0</div>
-    <div class="buttons">
-      <button id="btn-7">7</button>
-      <button id="btn-8">8</button>
-      <button id="btn-9">9</button>
-      <button id="btn-divide">/</button>
-      <button id="btn-4">4</button>
-      <button id="btn-5">5</button>
-      <button id="btn-6">6</button>
-      <button id="btn-multiply">*</button>
-      <button id="btn-1">1</button>
-      <button id="btn-2">2</button>
-      <button id="btn-3">3</button>
-      <button id="btn-subtract">-</button>
-      <button id="btn-0">0</button>
-      <button id="btn-clear">C</button>
-      <button id="btn-equals">=</button>
-      <button id="btn-add">+</button>
+    <div class="card">
+        <h1>Recibo</h1>
+
+        <label for="valorBruto">Valor Bruto:</label>
+        <input type="number" id="valorBruto" step="0.01" placeholder="Insira o valor bruto"><br>
+
+        <button onclick="calcularDesconto()">Cálcular</button>
+
+        <button onclick="limparCalculos()" style="background-color: #FF5733; margin-top: 10px;">Limpar</button>
+
+        <p>Desconto de ISS (3%): <span id="valorISS" class="red-text">R$ 0.00</span></p>
+        <p>Desconto de INSS (11%): <span id="valorINSS" class="red-text">R$ 0.00</span></p>
+        <p>Valor Líquido: <span id="valorLiquido" class="green-text">R$ 0.00</span></p>
     </div>
-  </div>
-  <script src="script.js"></script>
+
+    <div class="result-card" id="calculosAnteriores">
+        <h1>Resultados</h1>
+    </div>
+
+    <script>
+        const resultadosAnteriores = [];
+
+        function calcularAoPressionarEnter(event) {
+            if (event.key === "Enter") {
+                calcularDesconto();
+            }
+        }
+
+        function calcularDesconto() {
+            const valorBruto = parseFloat(document.getElementById("valorBruto").value);
+
+            if (!isNaN(valorBruto)) {
+                const iss = trunc(valorBruto * 0.03, 2); // 3% de ISS
+                const inss = trunc(valorBruto * 0.11, 2); // 11% de INSS
+                const valorLiquido = valorBruto - iss - inss;
+
+                document.getElementById("valorISS").textContent = trunc(iss, 2);
+                document.getElementById("valorINSS").textContent = trunc(inss, 2);
+                document.getElementById("valorLiquido").textContent = trunc(valorLiquido, 2);
+
+                resultadosAnteriores.push({
+                    valorBruto: trunc(valorBruto, 2),
+                    valorISS: trunc(iss, 2),
+                    valorINSS: trunc(inss, 2),
+                    valorLiquido: trunc(valorLiquido, 2)
+                });
+
+                exibirResultadosAnteriores();
+            } else {
+                alert("Por favor, insira um valor bruto válido para o cálculo.");
+            }
+        }
+
+        function trunc(number, precision) {
+            const factor = Math.pow(10, precision);
+            return Math.trunc(number * factor) / factor;
+        }
+
+        function exibirResultadosAnteriores() {
+            const resultadosAnterioresDiv = document.getElementById("calculosAnteriores");
+            resultadosAnterioresDiv.innerHTML = "<h1>Resultados</h1>";
+            
+            for (let i = 0; i < resultadosAnteriores.length; i++) {
+                const resultado = resultadosAnteriores[i];
+                const cardResultado = document.createElement("div");
+                cardResultado.className = "result-card";
+
+                cardResultado.innerHTML = `
+                    <p>Valor Bruto:R$ ${resultado.valorBruto}</p>
+                    <p>Desconto de ISS (3%):R$ ${resultado.valorISS}</p>
+                    <p>Desconto de INSS (11%):R$ ${resultado.valorINSS}</p>
+                    <p>Valor Líquido:R$ ${resultado.valorLiquido}</p>
+                `;
+
+                resultadosAnterioresDiv.appendChild(cardResultado);
+            }
+        }
+
+        function limparCalculos() {
+            resultadosAnteriores.length = 0;
+            exibirResultadosAnteriores();
+        }
+    </script>
 </body>
 </html>
