@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gerador de Link WhatsApp</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #121212; /* Fundo escuro */
+            color: #e0e0e0; /* Texto claro */
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 50px;
+        }
+
+        .container {
+            background-color: #1e1e1e; /* Fundo mais escuro para o container */
+            padding: 30px;
+            border-radius: 8px;
+        }
+
+        .form-control {
+            background-color: #333333; /* Fundo escuro para o input */
+            color: #e0e0e0; /* Texto claro para o input */
+            border: 1px solid #444444; /* Borda cinza escuro */
+            border-radius: 4px; /* Bordas arredondadas */
+        }
+
+        .form-control:focus {
+            border-color: #555555; /* Borda ligeiramente mais clara ao focar */
+            box-shadow: none; /* Remove sombra ao focar */
+        }
+
+        .btn-primary {
+            background-color: #007bff; /* Cor padrão do botão */
+            border-color: #007bff;
+            font-size: 1rem; /* Tamanho da fonte */
+            padding: 10px 20px; /* Tamanho do botão */
+            border-radius: 4px; /* Bordas arredondadas */
+        }
+
+        .btn-primary:hover {
+            background-color: #0056b3; /* Cor do botão ao passar o mouse */
+            border-color: #004085;
+        }
+
+        .btn-primary:focus {
+            box-shadow: none; /* Remove sombra ao focar */
+        }
+
+        a {
+            color: #007bff; /* Cor do texto do hyperlink */
+            text-decoration: none; /* Remove sublinhado do hyperlink */
+        }
+
+        a:hover {
+            text-decoration: underline; /* Adiciona sublinhado ao passar o mouse sobre o hyperlink */
+        }
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Gerador de Link WhatsApp</h1>
+
+        <input type="text" id="phoneNumber" class="form-control" placeholder="Digite o número de telefone">
+
+        <button class="btn btn-primary mt-3" onclick="generateLink()">Gerar Link</button>
+
+        <p id="result" class="mt-4"></p>
+    </div>
+
+    <script>
+        function generateLink() {
+            var phoneNumber = document.getElementById('phoneNumber').value;
+            var link = `https://web.whatsapp.com/send/?phone=${phoneNumber}&text&type=phone_number&app_absent=0`;
+
+            // Atualiza o parágrafo com o número digitado como um hyperlink
+            document.getElementById('result').innerHTML = `<a href="${link}" target="_blank">${phoneNumber}</a>`;
+        }
+    </script>
+</body>
+</html>
