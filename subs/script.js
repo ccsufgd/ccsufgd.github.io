@@ -410,6 +410,7 @@ function mostrarLog() {
 
   infoContainer.style.display = 'block';
   window.scrollTo({ top: 0, behavior: 'smooth' });
+  window.print()
 }
 
 
