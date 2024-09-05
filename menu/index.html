@@ -15,7 +15,14 @@
             background-color: #0056b3; /* Cor do botão ao passar o mouse */
             color: #ffffff; /* Mantém o texto branco */
         }
+		
     </style>
+	<script defer>
+        function toggleModal() {
+            const modal = document.getElementById('driveModal');
+            modal.classList.toggle('hidden');
+        }
+    </script>
 </head>
 <body class="bg-black text-white">
     <header class="bg-black-800 py-8">
@@ -26,50 +33,97 @@
 
     <main class="container mx-auto px-4 py-8">
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            <section>
-                <h2 class="text-xl font-bold mb-4 flex items-center space-x-2">
+            <section class="text-center">
+                <h2 class="text-xl font-bold mb-4 flex justify-center items-center space-x-2">
                     <i class="fas fa-trophy text-yellow-400"></i>
                     <span>Sorteios</span>
                 </h2>
                 <a class="btn-menu bg-blue-500 hover:bg-blue-600 rounded-lg px-4 py-2 block text-center mb-2" href="https://ccsufgd.github.io/">Sorteio Docente</a>
                 <a class="btn-menu bg-blue-500 hover:bg-blue-600 rounded-lg px-4 py-2 block text-center" href="https://ccsufgd.github.io/subs">Sorteio Substituto</a>
             </section>
-            <section>
-                <h2 class="text-xl font-bold mb-4 flex items-center space-x-2">
+            <section class="text-center">
+                <h2 class="text-xl font-bold mb-4 flex justify-center items-center space-x-2">
                     <i class="fas fa-tools text-green-400"></i>
                     <span>Ferramentas</span>
                 </h2>
-                <a class="btn-menu bg-green-500 hover:bg-green-600 rounded-lg px-4 py-2 block text-center mb-2" href="https://selecao-admin.app.homolog.ufgd.edu.br/">Adm Testador</a>
-                <a class="btn-menu bg-green-500 hover:bg-green-600 rounded-lg px-4 py-2 block text-center mb-2" href="https://selecao.app.homolog.ufgd.edu.br/">Testador</a>
+                <a class="btn-menu bg-green-500 hover:bg-green-600 rounded-lg px-4 py-2 block text-center mb-2 flex items-center justify-center space-x-2" href="https://selecao-admin.app.homolog.ufgd.edu.br/">
+					<img src="https://ufgdnet.ufgd.edu.br/imagens/ufgdnet.ico" alt="Ícone UFGD" class="w-5 h-5">
+					<span>Testador Admin</span>
+				</a>	
+                <a class="btn-menu bg-green-500 hover:bg-green-600 rounded-lg px-4 py-2 block text-center mb-2 flex items-center justify-center space-x-2" href="https://selecao.app.homolog.ufgd.edu.br/">
+					<img src="https://ufgdnet.ufgd.edu.br/imagens/ufgdnet.ico" alt="Ícone UFGD" class="w-5 h-5">
+   					 <span>Testador</span>
+				</a>
                 <a class="btn-menu bg-green-500 hover:bg-green-600 rounded-lg px-4 py-2 block text-center mb-2" href="comp">Verificador de Dados</a>
                 <a class="btn-menu bg-green-500 hover:bg-green-600 rounded-lg px-4 py-2 block text-center mb-2" href="contadorInscritos">Contador Inscritos Data</a>
                 <a class="btn-menu bg-green-500 hover:bg-green-600 rounded-lg px-4 py-2 block text-center" href="verificaEscola">Verifica Escolas</a>
             </section>
-            <section>
-                <h2 class="text-xl font-bold mb-4 flex items-center space-x-2">
+            <section class="text-center">
+                <h2 class="text-xl font-bold mb-4 flex justify-center items-center space-x-2">
                     <i class="fas fa-calculator text-red-400"></i>
                     <span>Calculadoras</span>
                 </h2>
                 <a class="btn-menu bg-red-500 hover:bg-red-600 rounded-lg px-4 py-2 block text-center mb-2" href="calc">Calculadora Desconto</a>
                 <a class="btn-menu bg-red-500 hover:bg-red-600 rounded-lg px-4 py-2 block text-center" href="calc/subs">Calculadora Substituto</a>
             </section>
-            <section>
-    <h2 class="text-xl font-bold mb-4 flex items-center space-x-2">
-        <i class="fas fa-ellipsis-h text-purple-400"></i>
-        <span>Outros</span>
+            <section class="text-center">
+                <h2 class="text-xl font-bold mb-4 flex justify-center items-center space-x-2">
+                    <i class="fas fa-ellipsis-h text-purple-400"></i>
+                    <span>Outros</span>
+                </h2>
+                <a class="btn-menu bg-purple-500 hover:bg-purple-600 rounded-lg px-4 py-2 block text-center mb-2 flex items-center justify-center space-x-2" href="https://siafi.tesouro.gov.br/senha/public/pages/security/login.jsf">
+                    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAACD0lEQVR4AUzMQ6AFxxIA0FN9537EtrmK7WQX27Zt27btZBXbtm3bTt5MVybO4nSXww5XMxzQ/G7Ym4tYTcYi0vgYIT6QbsOVeEloSdAAYAwRuxPrEuPI+J/0ndQQU2BmYQ3yRJwEUP61fHJvO0yK/+MM+jziPRnRG1WajjhAOhSgYCBzH6yBUQC3CXvjeTX+CyCDNDY2w8YiNTIXlNaW2QAeIneR8TkWFjkFAUgCjCMchacarEaOT8Jd2B5Pi4T7iC3IiaQWSEJB4ttGrQvIMlD9otZLlPK6MBlZpJ+FK/FfdASSQGSgNmpOp1a9/2jrrqJuZ1BGFUHoZH6PVihkCN/iM4H0RqPWA9UYQ621N4Gu/leJKnrh/9KYSjRo1fxRmAwrqOi65xu1O00bIWrSJVIkZTAUvlGaTla6jmYAh8qcV1dHtN1jpQ+W7psX9i7pXdS72C/txUZGLu/jg7XtxH76WY/abaPrdur7+n6r7e5oVJ+LupiRbnSJxCCp2TOjbuRStfvQcLhpP3OMWoe6Ss2ncVMj82ZtPUjJfcjRSWqh9Gp9q/cFFtPVQ7XdUK1kvoXDlPJJ2PASMgtxuEFsZFDGUYr+1//34jrFqsQcEv2ydFTfPxX+OqAHmyllOyUm7Y3Sx0QMUPGN8BKOMGiuNiigAQAR56j1dtUSoiym5NRKVLyEmw3iNoNfx/wCWQsAyo8O8lKm/mMAAAAASUVORK5CYII=" 
+                         alt="Siafi Web Icon" class="w-5 h-5"/>
+                    <span>Siafi Web</span>
+                </a>
+                <a class="btn-menu bg-purple-500 hover:bg-purple-600 rounded-lg px-4 py-2 block text-center mb-2" href="sistac">Formata Sistac</a>
+                <a class="btn-menu bg-purple-500 hover:bg-purple-600 rounded-lg px-4 py-2 block text-center mb-2" href="https://aplicacoes.mds.gov.br/sistac/">Sistac</a>
+                <a class="btn-menu bg-purple-500 hover:bg-purple-600 rounded-lg px-4 py-2 block text-center" href="outros/wpp">WPP Link</a>
+            </section>
+			<!-- Seção Links Drive -->
+       		 <section class="text-center">
+    <h2 class="text-xl font-bold mb-4 flex justify-center items-center space-x-2">
+        <i class="fas fa-cloud text-blue-400"></i>
+        <span>Drive</span>
     </h2>
-    <a class="btn-menu bg-purple-500 hover:bg-purple-600 rounded-lg px-4 py-2 block text-center mb-2 flex items-center justify-center space-x-2" 
-        href="https://siafi.tesouro.gov.br/senha/public/pages/security/login.jsf">
-        <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAACD0lEQVR4AUzMQ6AFxxIA0FN9537EtrmK7WQX27Zt27btZBXbtm3bTt5MVybO4nSXww5XMxzQ/G7Ym4tYTcYi0vgYIT6QbsOVeEloSdAAYAwRuxPrEuPI+J/0ndQQU2BmYQ3yRJwEUP61fHJvO0yK/+MM+jziPRnRG1WajjhAOhSgYCBzH6yBUQC3CXvjeTX+CyCDNDY2w8YiNTIXlNaW2QAeIneR8TkWFjkFAUgCjCMchacarEaOT8Jd2B5Pi4T7iC3IiaQWSEJB4ttGrQvIMlD9otZLlPK6MBlZpJ+FK/FfdASSQGSgNmpOp1a9/2jrrqJuZ1BGFUHoZH6PVihkCN/iM4H0RqPWA9UYQ621N4Gu/leJKnrh/9KYSjRo1fxRmAwrqOi65xu1O00bIWrSJVIkZTAUvlGaTla6jmYAh8qcV1dHtN1jpQ+W7psX9i7pXdS72C/txUZGLu/jg7XtxH76WY/abaPrdur7+n6r7e5oVJ+LupiRbnSJxCCp2TOjbuRStfvQcLhpP3OMWoe6Ss2ncVMj82ZtPUjJfcjRSWqh9Gp9q/cFFtPVQ7XdUK1kvoXDlPJJ2PASMgtxuEFsZFDGUYr+1//34jrFqsQcEv2ydFTfPxX+OqAHmyllOyUm7Y3Sx0QMUPGN8BKOMGiuNiigAQAR56j1dtUSoiym5NRKVLyEmw3iNoNfx/wCWQsAyo8O8lKm/mMAAAAASUVORK5CYII=" 
-             alt="Siafi Web Icon" class="w-5 h-5"/>
-        <span>Siafi Web</span>
-    </a>
-    <a class="btn-menu bg-purple-500 hover:bg-purple-600 rounded-lg px-4 py-2 block text-center mb-2" href="sistac">Formata Sistac</a>
-    <a class="btn-menu bg-purple-500 hover:bg-purple-600 rounded-lg px-4 py-2 block text-center mb-2" href="https://aplicacoes.mds.gov.br/sistac/">Sistac</a>
-    <a class="btn-menu bg-purple-500 hover:bg-purple-600 rounded-lg px-4 py-2 block text-center" href="outros/wpp">WPP Link</a>
+    <button class="btn-menu bg-blue-500 hover:bg-blue-600 rounded-lg px-4 py-2 block text-center mb-2 flex items-center justify-center space-x-2" onclick="toggleModal()">
+        <i class="fas fa-folder-open text-white"></i>
+        <span>Abrir Links Drive</span>
+    </button>
 </section>
 
+      
+<!-- Modal -->
+<div id="driveModal" class="hidden fixed inset-0 bg-gray-800 bg-opacity-75 flex items-center justify-center">
+    <div class="bg-gray-900 text-white rounded-lg p-6 w-1/3">
+        <h3 class="text-xl font-bold mb-4">Links do Google Drive</h3>
+        
+        <!-- Seção Isenção -->
+        <div class="space-y-2">
+            <h4 class="font-bold">Isenção</h4>
+            <a href="https://docs.google.com/spreadsheets/d/1gAXgdXq05ItohbvWVxLCim81w6hRf6sw4xsNXBIgIFc/edit?usp=sharing" target="_blank" class="block text-blue-400 hover:underline">PSSPS-2024.2</a>
+            <a href="https://docs.google.com/spreadsheets/d/15DKAKQ2zjpyyloYdi35Dai9ylk62mfqvAjyh91q7n-k/edit?usp=sharing" target="_blank" class="block text-blue-400 hover:underline">PSPVO.2</a>
+            <a href="https://docs.google.com/spreadsheets/d/1GfBkENNxuyBV-eBmCR21a_Ahl37B7tZCzz8OydOjliM/edit?usp=sharing" target="_blank" class="block text-blue-400 hover:underline">PSV 2025</a>
         </div>
+        
+        <!-- Seção Ensalamento -->
+        <div class="mt-4 space-y-2">
+            <h4 class="font-bold">Ensalamento</h4>
+            <a href="https://docs.google.com/spreadsheets/d/1DK9dIvoBK1ZEykXPCfw0eycDyqfPPxKMb2NGErs5pAM/edit?gid=0#gid=0" target="_blank" class="block text-blue-400 hover:underline">1- Solicitação de escolas para prova PSV 2025</a>
+        </div>
+
+        <!-- Seção Valores -->
+        <div class="mt-4 space-y-2">
+            <h4 class="font-bold">Valores</h4>
+            <a href="https://docs.google.com/spreadsheets/d/13xSFsaD7oXFNF3JEUqYmq0y85jz8sEOYF06YWSVdavI/edit?gid=904480495#gid=904480495" target="_blank" class="block text-blue-400 hover:underline">Empenhos</a>
+            <a href="https://docs.google.com/spreadsheets/d/1JXMkVWLSrjL3JLSuRyKyVc-wjxS5k40dmUbC1QJxVSg/edit?gid=106205784#gid=106205784" target="_blank" class="block text-blue-400 hover:underline">Previsão</a>
+        </div>
+
+        <button class="mt-4 bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-lg" onclick="toggleModal()">Fechar</button>
+    </div>
+</div>
+
+
     </main>
 </body>
 </html>
