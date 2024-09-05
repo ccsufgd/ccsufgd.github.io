@@ -1,165 +1,87 @@
 <!DOCTYPE html>
-<html>
+<html lang="pt-br">
 <head>
-    <title>Recibo</title>
-    <style>
-        body {
-            background-color: #000;
-            color: #fff;
-            font-family: 'Arial', sans-serif;
-        }
-
-        .card {
-            display: inline-block;
-            vertical-align: top;
-            width: 300px;
-            border: 2px solid #808080; /* Neon gray border */
-            border-radius: 10px;
-            box-shadow: 0 0 20px rgba(128, 128, 128, 0.5); /* Neon gray glow */
-            padding: 20px;
-            margin: 20px;
-            text-align: center;
-            background-color: #111; /* Dark background */
-        }
-
-        h1 {
-            color: #fff; /* White heading */
-        }
-
-        label, input {
-            display: block;
-            margin: 10px auto; /* Centralize o campo de entrada horizontalmente */
-            color: #000; /* Black text for better contrast */
-            padding: 8px;
-            width: 100%;
-            box-sizing: border-box;
-            background-color: #fff; /* White input background */
-            border: 1px solid #ccc;
-            border-radius: 5px;
-        }
-
-        button {
-            background-color: #007BFF;
-            color: #fff;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-
-        button:hover {
-            background-color: #0056b3;
-        }
-
-        p {
-            font-size: 18px;
-            color: #fff;
-        }
-
-        .red-text {
-            color: #ff0000; /* Red text */
-        }
-
-        .green-text {
-            color: #00ff00; /* Green text */
-        }
-
-        .result-card {
-            display: inline-block;
-            vertical-align: top;
-            width: 300px;
-            border: 2px solid #808080; /* Neon gray border */
-            border-radius: 10px;
-            box-shadow: 0 0 20px rgba(128, 128, 128, 0.5); /* Neon gray glow */
-            text-align: center; /* Align the result card with the main card */
-            background-color: #111; /* Dark background */
-            color: #fff; /* White text */
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Calculadora de Desconto - Tema Knight</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body {
+      background-color: #1e293b; /* Dark Blue-Gray */
+    }
+  </style>
 </head>
-<body>
-    <div class="card">
-        <h1>Recibo</h1>
+<body class="bg-gray-900 text-gray-300">
 
-        <label for="valorBruto">Valor Bruto:</label>
-        <input type="number" id="valorBruto" step="0.01" placeholder="Insira o valor bruto"><br>
+  <div class="max-w-md mx-auto p-4">
+    <div class="bg-gray-800 shadow-lg rounded-lg p-6">
+      <div class="text-center">
+        <h2 class="text-2xl font-bold text-white mb-4">Calculadora de Desconto</h2>
+      </div>
+      <div class="mb-4 text-center">
+        <label for="grossValue" class="block text-sm font-medium text-gray-400 mb-2">Valor Bruto (R$)</label>
+        <input
+          type="text"
+          id="grossValue"
+          class="border border-gray-700 bg-gray-900 text-gray-300 rounded-md px-3 py-2 w-full focus:outline-none focus:ring-2 focus:ring-blue-500"
+          placeholder="Digite o valor bruto"
+        />
+      </div>
+      <button
+        id="calculateButton"
+        class="bg-blue-700 text-white font-semibold py-2 px-4 rounded-md w-full hover:bg-blue-600"
+      >
+        Calcular Desconto
+      </button>
 
-        <button onclick="calcularDesconto()">Cálcular</button>
-
-        <button onclick="limparCalculos()" style="background-color: #FF5733; margin-top: 10px;">Limpar</button>
-
-        <p>Desconto de ISS (3%): <span id="valorISS" class="red-text">R$ 0.00</span></p>
-        <p>Desconto de INSS (11%): <span id="valorINSS" class="red-text">R$ 0.00</span></p>
-        <p>Valor Líquido: <span id="valorLiquido" class="green-text">R$ 0.00</span></p>
+      <div id="results" class="mt-4 hidden">
+        <div class="text-center">
+          <p class="mb-2"><strong>Valor Bruto:</strong> R$ <span id="grossValueDisplay"></span></p>
+          <p class="mb-2"><strong>INSS (11%):</strong> R$ <span id="inssValueDisplay"></span></p>
+          <p class="mb-2"><strong>ISS (3%):</strong> R$ <span id="issValueDisplay"></span></p>
+          <p class="text-lg font-bold text-white mt-4"><strong>Valor Líquido:</strong> R$ <span id="netValueDisplay"></span></p>
+        </div>
+        <button
+          id="clearButton"
+          class="bg-red-600 text-white font-semibold py-2 px-4 rounded-md w-full mt-4 hover:bg-red-500"
+        >
+          Limpar
+        </button>
+      </div>
     </div>
+  </div>
 
-    <div class="result-card" id="calculosAnteriores">
-        <h1>Resultados</h1>
-    </div>
+  <script>
+    function truncate(num) {
+      return Math.trunc(num * 100) / 100;
+    }
 
-    <script>
-        const resultadosAnteriores = [];
+    document.getElementById('calculateButton').addEventListener('click', function() {
+      const grossValueInput = document.getElementById('grossValue').value;
+      const gross = parseFloat(grossValueInput.replace(',', '.'));
 
-        function calcularAoPressionarEnter(event) {
-            if (event.key === "Enter") {
-                calcularDesconto();
-            }
-        }
+      if (isNaN(gross)) {
+        alert('Por favor, insira um valor válido.');
+        return;
+      }
 
-        function calcularDesconto() {
-            const valorBruto = parseFloat(document.getElementById("valorBruto").value);
+      const inss = truncate(gross * 0.11);
+      const iss = truncate(gross * 0.03);
+      const net = truncate(gross - inss - iss);
 
-            if (!isNaN(valorBruto)) {
-                const iss = trunc(valorBruto * 0.03, 2); // 3% de ISS
-                const inss = trunc(valorBruto * 0.11, 2); // 11% de INSS
-                const valorLiquido = valorBruto - iss - inss;
+      document.getElementById('grossValueDisplay').textContent = gross.toFixed(2).replace('.', ',');
+      document.getElementById('inssValueDisplay').textContent = inss.toFixed(2).replace('.', ',');
+      document.getElementById('issValueDisplay').textContent = iss.toFixed(2).replace('.', ',');
+      document.getElementById('netValueDisplay').textContent = net.toFixed(2).replace('.', ',');
 
-                document.getElementById("valorISS").textContent = trunc(iss, 2);
-                document.getElementById("valorINSS").textContent = trunc(inss, 2);
-                document.getElementById("valorLiquido").textContent = trunc(valorLiquido, 2);
+      document.getElementById('results').classList.remove('hidden');
+    });
 
-                resultadosAnteriores.push({
-                    valorBruto: trunc(valorBruto, 2),
-                    valorISS: trunc(iss, 2),
-                    valorINSS: trunc(inss, 2),
-                    valorLiquido: trunc(valorLiquido, 2)
-                });
+    document.getElementById('clearButton').addEventListener('click', function() {
+      document.getElementById('grossValue').value = '';
+      document.getElementById('results').classList.add('hidden');
+    });
+  </script>
 
-                exibirResultadosAnteriores();
-            } else {
-                alert("Por favor, insira um valor bruto válido para o cálculo.");
-            }
-        }
-
-        function trunc(number, precision) {
-            const factor = Math.pow(10, precision);
-            return Math.trunc(number * factor) / factor;
-        }
-
-        function exibirResultadosAnteriores() {
-            const resultadosAnterioresDiv = document.getElementById("calculosAnteriores");
-            resultadosAnterioresDiv.innerHTML = "<h1>Resultados</h1>";
-            
-            for (let i = 0; i < resultadosAnteriores.length; i++) {
-                const resultado = resultadosAnteriores[i];
-                const cardResultado = document.createElement("div");
-                cardResultado.className = "result-card";
-
-                cardResultado.innerHTML = `
-                    <p>Valor Bruto:R$ ${resultado.valorBruto}</p>
-                    <p>Desconto de ISS (3%):R$ ${resultado.valorISS}</p>
-                    <p>Desconto de INSS (11%):R$ ${resultado.valorINSS}</p>
-                    <p>Valor Líquido:R$ ${resultado.valorLiquido}</p>
-                `;
-
-                resultadosAnterioresDiv.appendChild(cardResultado);
-            }
-        }
-
-        function limparCalculos() {
-            resultadosAnteriores.length = 0;
-            exibirResultadosAnteriores();
-        }
-    </script>
 </body>
 </html>
