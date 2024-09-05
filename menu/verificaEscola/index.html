@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Escolas</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Configurações personalizadas para o modo escuro */
+        .dark-mode {
+            background-color: #1f2937; /* Escuro */
+            color: #e5e7eb; /* Claro */
+        }
+        .card {
+            background-color: #374151; /* Escuro */
+            border-color: #4b5563; /* Cinza escuro */
+        }
+        .card.opened {
+            background-color: #ef4444; /* Vermelho claro */
+            border-color: #f87171; /* Vermelho escuro */
+        }
+        .card.marked {
+            background-color: #16a34a; /* Verde claro */
+            border-color: #15803d; /* Verde escuro */
+        }
+        .card.opened.marked {
+            background-color: #16a34a; /* Verde claro */
+            border-color: #15803d; /* Verde escuro */
+        }
+        .summary-card {
+            background-color: #374151; /* Escuro */
+            border-color: #4b5563; /* Cinza escuro */
+        }
+        .card-button, .mark-button, .unmark-button {
+            transition: background-color 0.3s ease;
+        }
+        .card-button:hover {
+            background-color: #2563eb; /* Azul mais escuro */
+        }
+        .mark-button {
+            background-color: #10b981; /* Verde */
+        }
+        .mark-button:hover {
+            background-color: #059669; /* Verde escuro */
+        }
+        .unmark-button {
+            background-color: #ef4444; /* Vermelho */
+        }
+        .unmark-button:hover {
+            background-color: #dc2626; /* Vermelho escuro */
+        }
+    </style>
+</head>
+<body class="dark-mode bg-gray-900 text-gray-100 p-6">
+    <h1 class="text-3xl font-bold mb-4">Verifica Escolas</h1>
+    <textarea id="textareaField" class="w-full h-40 p-2 mb-4 bg-gray-800 text-gray-100 border border-gray-700 rounded-md" placeholder="Digite o nome das escolas, uma por linha..."></textarea>
+    <button id="searchButton" class="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600">Pesquisar</button>
+
+    <div id="cardContainer" class="mt-6"></div>
+
+    <div id="summaryCard" class="summary-card hidden border border-gray-700 rounded-md p-4 mt-6">
+        <h2 class="text-xl font-semibold mb-2">Escolas Marcadas</h2>
+        <ul id="summaryList" class="list-disc pl-5"></ul>
+    </div>
+
+    <script>
+        document.getElementById('searchButton').addEventListener('click', function() {
+            var input = document.getElementById('textareaField').value.trim();
+            var lines = input.split('\n').filter(function(line) {
+                return line.trim().length > 0; // Filtra linhas vazias
+            });
+
+            var cardContainer = document.getElementById('cardContainer');
+            var summaryCard = document.getElementById('summaryCard');
+            var summaryList = document.getElementById('summaryList');
+            cardContainer.innerHTML = ''; // Limpa cartões existentes
+            summaryList.innerHTML = ''; // Limpa lista existente
+            summaryCard.classList.add('hidden'); // Esconde o cartão de resumo
+
+            if (lines.length > 0) {
+                lines.forEach(function(line) {
+                    var card = document.createElement('div');
+                    card.className = 'card border border-gray-700 rounded-md p-4 mb-2 flex items-center justify-between';
+                    card.innerHTML = `
+                        <span>${line}</span>
+                        <div>
+                            <button class="card-button px-3 py-1 rounded-md" onclick="openGoogleSearch('${encodeURIComponent(line)}', this)">Abrir</button>
+                            <button class="mark-button px-3 py-1 rounded-md" onclick="toggleMarkCard(this, '${line}')">Selecionar</button>
+                        </div>
+                    `;
+                    cardContainer.appendChild(card);
+                });
+            } else {
+                alert('Por favor, insira o nome das escolas.');
+            }
+        });
+
+        function openGoogleSearch(query, button) {
+            window.open('https://www.google.com/search?q=' + query, '_blank');
+            var card = button.closest('.card');
+            card.classList.add('opened');
+        }
+
+        function toggleMarkCard(button, line) {
+            var card = button.closest('.card');
+            var isMarked = card.classList.contains('marked');
+            
+            if (isMarked) {
+                card.classList.remove('marked');
+                button.classList.remove('unmark-button');
+                button.classList.add('mark-button');
+                button.textContent = 'Marcar';
+            } else {
+                card.classList.add('marked');
+                button.classList.remove('mark-button');
+                button.classList.add('unmark-button');
+                button.textContent = 'Desmarcar';
+            }
+            
+            updateSummaryCard();
+        }
+
+        function updateSummaryCard() {
+            var markedCards = document.querySelectorAll('.card.marked');
+            var summaryCard = document.getElementById('summaryCard');
+            var summaryList = document.getElementById('summaryList');
+
+            summaryList.innerHTML = ''; // Limpa lista existente
+
+            if (markedCards.length > 0) {
+                markedCards.forEach(function(card) {
+                    var itemText = card.querySelector('span').textContent;
+                    var listItem = document.createElement('li');
+                    listItem.textContent = itemText;
+                    summaryList.appendChild(listItem);
+                });
+                summaryCard.classList.remove('hidden'); // Mostra o cartão de resumo
+            } else {
+                summaryCard.classList.add('hidden'); // Esconde o cartão de resumo
+            }
+        }
+    </script>
+</body>
+</html>
