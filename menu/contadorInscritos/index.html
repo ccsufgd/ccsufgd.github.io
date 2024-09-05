@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Análise de Inscrições</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Força o modo escuro */
+        html {
+            color-scheme: dark;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 2rem; /* Espaçamento entre tabelas */
+        }
+
+        th, td {
+            padding: 12px;
+            text-align: center;
+            border: 1px solid #4B5563; /* cor das bordas */
+        }
+
+        th {
+            background-color: #374151;
+            color: #ffffff; /* Cor do texto dos cabeçalhos */
+            cursor: pointer; /* Cursor indicando que é clicável */
+        }
+
+        td {
+            background-color: #1F2937;
+            color: #e5e7eb; /* Cor do texto das células */
+        }
+
+        tbody tr:hover {
+            background-color: #374151; /* cor de hover nas linhas */
+        }
+
+        h2 {
+            color: #e5e7eb; /* cor dos títulos das seções */
+        }
+    </style>
+</head>
+<body class="bg-gray-900 text-gray-100 font-sans">
+    <div class="container mx-auto p-6">
+        <h1 class="text-3xl font-bold mb-6 text-center">Análise de Inscrições</h1>
+
+        <div class="mb-4">
+            <textarea id="inputDates" class="w-full h-40 p-4 border border-gray-700 bg-gray-800 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none"
+                placeholder="Cole as datas no formato dd/mm/aaaa"></textarea>
+        </div>
+
+        <div class="text-center">
+            <button onclick="processarDatas()"
+                class="bg-blue-600 text-white px-6 py-2 rounded-lg shadow-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-300">
+                Processar
+            </button>
+        </div>
+
+        <div id="resultado" class="mt-6 bg-gray-800 p-6 rounded-lg shadow-md">
+            <!-- Tabelas geradas aqui -->
+        </div>
+    </div>
+
+    <script>
+        let ordemQuantidade = true; // True para crescente, False para decrescente
+
+        function processarDatas() {
+            const input = document.getElementById('inputDates').value;
+            const resultadoDiv = document.getElementById('resultado');
+            resultadoDiv.innerHTML = '';
+
+            const inscricoesPorMes = {};
+            const inscricoesPorDia = {};
+
+            // Limpa e separa as datas
+            const datas = input.split('\n').map(data => data.trim()).filter(data => data.length > 0);
+
+            // Valida as datas (DD/MM/AAAA)
+            datas.forEach(data => {
+                const partesData = data.split('/');
+                if (partesData.length !== 3 || isNaN(partesData[0]) || isNaN(partesData[1]) || isNaN(partesData[2])) {
+                    console.error(`Data inválida: ${data}`);
+                    return;
+                }
+                const dia = parseInt(partesData[0]);
+                const mes = parseInt(partesData[1]) - 1; // Meses em JavaScript começam em 0
+                const ano = parseInt(partesData[2]);
+
+                // Verifica se a data é válida
+                const dataObj = new Date(ano, mes, dia);
+                if (dataObj.getDate() !== dia || dataObj.getMonth() !== mes || dataObj.getFullYear() !== ano) {
+                    console.error(`Data inválida: ${data}`);
+                    return;
+                }
+
+                const nomeMes = dataObj.toLocaleString('pt-BR', { month: 'long' });
+                const dataCompleta = `${dia.toString().padStart(2, '0')}/${(mes + 1).toString().padStart(2, '0')}/${ano}`; // Reconstruindo a data completa para usar como chave
+
+                inscricoesPorMes[nomeMes] = (inscricoesPorMes[nomeMes] || 0) + 1;
+                inscricoesPorDia[dataCompleta] = (inscricoesPorDia[dataCompleta] || 0) + 1;
+            });
+
+            // Ordena por mês
+            let html = '<h2 class="text-xl font-semibold mb-4 text-center">Inscrições por mês:</h2>';
+            html += '<table id="tabelaMeses"><thead><tr><th onclick="ordenarPorMes()">Mês</th><th onclick="ordenarPorQuantidadeMes()">Quantidade de Inscrições</th></tr></thead><tbody>';
+
+            for (const mes in inscricoesPorMes) {
+                html += `<tr><td>${mes.charAt(0).toUpperCase() + mes.slice(1)}</td><td>${inscricoesPorMes[mes]}</td></tr>`;
+            }
+
+            html += '</tbody></table>';
+
+            // Ordena as datas
+            const datasOrdenadas = Object.keys(inscricoesPorDia).map(data => ({
+                data: data,
+                inscricoes: inscricoesPorDia[data]
+            }));
+
+            // Exibe inscrições por dia em tabela
+            html += '<h2 class="text-xl font-semibold mb-4 text-center">Inscrições por dia (ordenadas):</h2>';
+            html += '<table id="tabelaDias"><thead><tr><th onclick="ordenarPorData()">Data</th><th onclick="ordenarPorQuantidadeDia()">Quantidade de Inscrições</th></tr></thead><tbody>';
+
+            datasOrdenadas.forEach(item => {
+                html += `<tr><td>${item.data}</td><td>${item.inscricoes}</td></tr>`;
+            });
+
+            html += '</tbody></table>';
+
+            resultadoDiv.innerHTML = html;
+        }
+
+        function ordenarPorQuantidadeDia() {
+            const tabela = document.querySelector('#tabelaDias');
+            const tbody = tabela.querySelector('tbody');
+            const linhas = Array.from(tbody.querySelectorAll('tr'));
+
+            // Ordena as linhas com base na quantidade de inscrições
+            linhas.sort((a, b) => {
+                const quantidadeA = parseInt(a.children[1].textContent);
+                const quantidadeB = parseInt(b.children[1].textContent);
+                return ordemQuantidade ? quantidadeB - quantidadeA : quantidadeA - quantidadeB;
+            });
+
+            ordemQuantidade = !ordemQuantidade; // Alterna a ordem para o próximo clique
+
+            // Reinsere as linhas na tabela
+            linhas.forEach(linha => tbody.appendChild(linha));
+        }
+
+        function ordenarPorQuantidadeMes() {
+            const tabela = document.querySelector('#tabelaMeses');
+            const tbody = tabela.querySelector('tbody');
+            const linhas = Array.from(tbody.querySelectorAll('tr'));
+
+            // Ordena as linhas com base na quantidade de inscrições
+            linhas.sort((a, b) => {
+                const quantidadeA = parseInt(a.children[1].textContent);
+                const quantidadeB = parseInt(b.children[1].textContent);
+                return ordemQuantidade ? quantidadeB - quantidadeA : quantidadeA - quantidadeB;
+            });
+
+            ordemQuantidade = !ordemQuantidade; // Alterna a ordem para o próximo clique
+
+            // Reinsere as linhas na tabela
+            linhas.forEach(linha => tbody.appendChild(linha));
+        }
+
+        function ordenarPorData() {
+            const tabela = document.querySelector('#tabelaDias');
+            const tbody = tabela.querySelector('tbody');
+            const linhas = Array.from(tbody.querySelectorAll('tr'));
+
+            // Ordena as linhas com base na data
+            linhas.sort((a, b) => {
+                const dataA = a.children[0].textContent.split('/').reverse().join('-'); // Inverte para formato YYYY-MM-DD
+                const dataB = b.children[0].textContent.split('/').reverse().join('-'); // Inverte para formato YYYY-MM-DD
+                return new Date(dataA) - new Date(dataB);
+            });
+
+            // Reinsere as linhas na tabela
+            linhas.forEach(linha => tbody.appendChild(linha));
+        }
+
+        function ordenarPorMes() {
+            const tabela = document.querySelector('#tabelaMeses');
+            const tbody = tabela.querySelector('tbody');
+            const linhas = Array.from(tbody.querySelectorAll('tr'));
+
+            // Ordena as linhas com base no mês
+            linhas.sort((a, b) => {
+                const mesA = a.children[0].textContent.toLowerCase();
+                const mesB = b.children[0].textContent.toLowerCase();
+                return mesA.localeCompare(mesB);
+            });
+
+            // Reinsere as linhas na tabela
+            linhas.forEach(linha => tbody.appendChild(linha));
+        }
+    </script>
+</body>
+</html>
