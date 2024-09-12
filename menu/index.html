@@ -1,6 +1,4 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
+<html lang="pt-BR"><head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CCS</title>
@@ -17,7 +15,7 @@
         }
 		
     </style>
-	<script defer>
+	<script defer="">
         function toggleModal() {
             const modal = document.getElementById('driveModal');
             modal.classList.toggle('hidden');
@@ -71,15 +69,28 @@
                     <i class="fas fa-ellipsis-h text-purple-400"></i>
                     <span>Outros</span>
                 </h2>
-                <a class="btn-menu bg-purple-500 hover:bg-purple-600 rounded-lg px-4 py-2 block text-center mb-2 flex items-center justify-center space-x-2" href="https://siafi.tesouro.gov.br/senha/public/pages/security/login.jsf">
-                    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAACD0lEQVR4AUzMQ6AFxxIA0FN9537EtrmK7WQX27Zt27btZBXbtm3bTt5MVybO4nSXww5XMxzQ/G7Ym4tYTcYi0vgYIT6QbsOVeEloSdAAYAwRuxPrEuPI+J/0ndQQU2BmYQ3yRJwEUP61fHJvO0yK/+MM+jziPRnRG1WajjhAOhSgYCBzH6yBUQC3CXvjeTX+CyCDNDY2w8YiNTIXlNaW2QAeIneR8TkWFjkFAUgCjCMchacarEaOT8Jd2B5Pi4T7iC3IiaQWSEJB4ttGrQvIMlD9otZLlPK6MBlZpJ+FK/FfdASSQGSgNmpOp1a9/2jrrqJuZ1BGFUHoZH6PVihkCN/iM4H0RqPWA9UYQ621N4Gu/leJKnrh/9KYSjRo1fxRmAwrqOi65xu1O00bIWrSJVIkZTAUvlGaTla6jmYAh8qcV1dHtN1jpQ+W7psX9i7pXdS72C/txUZGLu/jg7XtxH76WY/abaPrdur7+n6r7e5oVJ+LupiRbnSJxCCp2TOjbuRStfvQcLhpP3OMWoe6Ss2ncVMj82ZtPUjJfcjRSWqh9Gp9q/cFFtPVQ7XdUK1kvoXDlPJJ2PASMgtxuEFsZFDGUYr+1//34jrFqsQcEv2ydFTfPxX+OqAHmyllOyUm7Y3Sx0QMUPGN8BKOMGiuNiigAQAR56j1dtUSoiym5NRKVLyEmw3iNoNfx/wCWQsAyo8O8lKm/mMAAAAASUVORK5CYII=" 
-                         alt="Siafi Web Icon" class="w-5 h-5"/>
-                    <span>Siafi Web</span>
-                </a>
                 <a class="btn-menu bg-purple-500 hover:bg-purple-600 rounded-lg px-4 py-2 block text-center mb-2" href="sistac">Formata Sistac</a>
                 <a class="btn-menu bg-purple-500 hover:bg-purple-600 rounded-lg px-4 py-2 block text-center mb-2" href="https://aplicacoes.mds.gov.br/sistac/">Sistac</a>
                 <a class="btn-menu bg-purple-500 hover:bg-purple-600 rounded-lg px-4 py-2 block text-center" href="outros/wpp">WPP Link</a>
             </section>
+			  <section class="text-center">
+                <h2 class="text-xl font-bold mb-4 flex justify-center items-center space-x-2">
+                    <i class="fas fa-money-bill-wave text-yellow-400"></i>
+                    <span>Pagamento</span>
+                </h2>
+				<a class="btn-menu bg-yellow-500 hover:bg-yellow-600 rounded-lg px-4 py-2 block text-center mb-2 flex items-center justify-center space-x-2" href="https://gratificacao.sigepe.gov.br/" target="_blank">
+    				<img src="https://gratificacao.sigepe.gov.br/assets/template/favicons/favicon.ico" alt="Ícone Gratificações" class="w-6 h-6">
+    				<span>Sistema Gratificações</span>
+				</a>
+				<a class="btn-menu bg-yellow-500 hover:bg-yellow-600 rounded-lg px-4 py-2 block text-center mb-2 flex items-center justify-center space-x-2" href="https://siafi.tesouro.gov.br/senha/public/pages/security/login.jsf">
+                    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAACD0lEQVR4AUzMQ6AFxxIA0FN9537EtrmK7WQX27Zt27btZBXbtm3bTt5MVybO4nSXww5XMxzQ/G7Ym4tYTcYi0vgYIT6QbsOVeEloSdAAYAwRuxPrEuPI+J/0ndQQU2BmYQ3yRJwEUP61fHJvO0yK/+MM+jziPRnRG1WajjhAOhSgYCBzH6yBUQC3CXvjeTX+CyCDNDY2w8YiNTIXlNaW2QAeIneR8TkWFjkFAUgCjCMchacarEaOT8Jd2B5Pi4T7iC3IiaQWSEJB4ttGrQvIMlD9otZLlPK6MBlZpJ+FK/FfdASSQGSgNmpOp1a9/2jrrqJuZ1BGFUHoZH6PVihkCN/iM4H0RqPWA9UYQ621N4Gu/leJKnrh/9KYSjRo1fxRmAwrqOi65xu1O00bIWrSJVIkZTAUvlGaTla6jmYAh8qcV1dHtN1jpQ+W7psX9i7pXdS72C/txUZGLu/jg7XtxH76WY/abaPrdur7+n6r7e5oVJ+LupiRbnSJxCCp2TOjbuRStfvQcLhpP3OMWoe6Ss2ncVMj82ZtPUjJfcjRSWqh9Gp9q/cFFtPVQ7XdUK1kvoXDlPJJ2PASMgtxuEFsZFDGUYr+1//34jrFqsQcEv2ydFTfPxX+OqAHmyllOyUm7Y3Sx0QMUPGN8BKOMGiuNiigAQAR56j1dtUSoiym5NRKVLyEmw3iNoNfx/wCWQsAyo8O8lKm/mMAAAAASUVORK5CYII=" alt="Siafi Web Icon" class="w-5 h-5">
+                    <span>Siafi Web</span>
+                </a>
+            </section>
+			
+			
+			
+			
 			<!-- Seção Links Drive -->
        		 <section class="text-center">
     <h2 class="text-xl font-bold mb-4 flex justify-center items-center space-x-2">
@@ -124,6 +135,7 @@
 </div>
 
 
-    </main>
-</body>
-</html>
+    </div></main>
+
+
+</body></html>
