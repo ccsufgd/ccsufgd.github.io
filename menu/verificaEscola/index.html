@@ -6,48 +6,48 @@
     <title>Escolas</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        /* Configurações personalizadas para o modo escuro */
+     
         .dark-mode {
-            background-color: #1f2937; /* Escuro */
-            color: #e5e7eb; /* Claro */
+            background-color: #1f2937; 
+            color: #e5e7eb; 
         }
         .card {
-            background-color: #374151; /* Escuro */
-            border-color: #4b5563; /* Cinza escuro */
+            background-color: #374151; 
+            border-color: #4b5563; 
         }
         .card.opened {
-            background-color: #ef4444; /* Vermelho claro */
-            border-color: #f87171; /* Vermelho escuro */
+            background-color: #ef4444; 
+            border-color: #f87171; 
         }
         .card.marked {
-            background-color: #16a34a; /* Verde claro */
-            border-color: #15803d; /* Verde escuro */
+            background-color: #16a34a; 
+            border-color: #15803d; 
         }
         .card.opened.marked {
-            background-color: #16a34a; /* Verde claro */
-            border-color: #15803d; /* Verde escuro */
+            background-color: #16a34a; 
+            border-color: #15803d; 
         }
         .summary-card {
-            background-color: #374151; /* Escuro */
-            border-color: #4b5563; /* Cinza escuro */
+            background-color: #374151;
+            border-color: #4b5563; 
         }
         .card-button, .mark-button, .unmark-button {
             transition: background-color 0.3s ease;
         }
         .card-button:hover {
-            background-color: #2563eb; /* Azul mais escuro */
+            background-color: #2563eb; 
         }
         .mark-button {
-            background-color: #10b981; /* Verde */
+            background-color: #10b981; 
         }
         .mark-button:hover {
-            background-color: #059669; /* Verde escuro */
+            background-color: #059669; 
         }
         .unmark-button {
-            background-color: #ef4444; /* Vermelho */
+            background-color: #ef4444; 
         }
         .unmark-button:hover {
-            background-color: #dc2626; /* Vermelho escuro */
+            background-color: #dc2626; 
         }
     </style>
 </head>
@@ -56,7 +56,7 @@
     <textarea id="textareaField" class="w-full h-40 p-2 mb-4 bg-gray-800 text-gray-100 border border-gray-700 rounded-md" placeholder="Digite o nome das escolas, uma por linha..."></textarea>
     <button id="searchButton" class="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600">Pesquisar</button>
     <button id="importarEstaduais" class="px-4 py-2 bg-green-500 text-white rounded-md hover:bg-green-600">Importar Escolas Estaduais</button>
-    <button id="importarMunicipais" class="px-4 py-2 bg-yellow-500 text-white rounded-md hover:bg-yellow-600">Importar Escolas Municipais</button>
+    <button id="importarMunicipais" class="px-4 py-2 bg-purple-500 text-white rounded-md hover:bg-purple-600">Importar Escolas Municipais</button>
 
     <div id="cardContainer" class="mt-6"></div>
 
@@ -66,57 +66,43 @@
     </div>
 
     <script>
-        document.getElementById('importarEstaduais').addEventListener('click', importarEstaduais);
-        document.getElementById('importarMunicipais').addEventListener('click', importarMunicipais);
-        
-         let escolasMunicipais = [
-            "Escola Municipal Agrotecnica Pe Andre Capelli",
-			"Escola Municipal Armando Campos Belo",
-			"Escola Municipal Arthur Campos Mello",
-			"Escola Municipal Aurora Pedroso de Camargo",
-			"Escola Municipal Bernardina Correa de Almeida",
-			"Escola Municipal Cel Firmino Vieira de Matos",
-			"Escola Municipal Clarice Bastos Rosa",
-			"Escola Municipal Dom Aquino Correa",
-			"Escola Municipal Dr Camilo Hermelindo da Silva",
-			"Escola Municipal Etalivio Penzo",
-			"Escola Municipal Fazenda Miya",
-			"Escola Municipal Francisco Meireles",
-			"Escola Municipal Franklin Luiz Azambuja",
-			"Escola Municipal Frei Eucario Schmitt",
-			"Escola Municipal Geraldino Neves Correa",
-			"Escola Municipal Indigena Agustinho",
-			"Escola Municipal Indigena Arapora",
-			"Escola Municipal Indigena Pa I Chiquito- Chiquito Pedro",
-			"Escola Municipal Indigena Ramao Martins",
-			"Escola Municipal Indigena Tengatui Marangatu - Polo",
-			"Escola Municipal Izabel Muzzi Fioravanti",
-			"Escola Municipal Januario Pereira de Araujo",
-			"Escola Municipal Joaquim Murtinho",
-			"Escola Municipal José Eduardo Canuto Estolano - Perequete",
-			"Escola Municipal Laudemira Coutinho de Melo",
-			"Escola Municipal Loide Bonfim Andrade",
-			"Escola Municipal Maria da Rosa Antunes da Silveira Camara",
-			"Escola Municipal Neil Fioravanti",
-			"Escola Municipal Padre Anchieta",
-			"Escola Municipal Pedro Palhano",
-			"Escola Municipal Pref Alvaro Brandao",
-			"Escola Municipal Pref Luiz Antonio Alvares Goncalves",
-			"Escola Municipal Pref Ruy Gomes",
-			"Escola Municipal Professor Clori Benedetti de Freitas",
-			"Escola Municipal Professor Manoel Santiago de Oliveira",
-			"Escola Municipal Profª Antonia Candida de Melo",
-			"Escola Municipal Profª Avani Cargnelutti Fehlauer",
-			"Escola Municipal Profª Efantina de Quadros",
-			"Escola Municipal Profª Elza Farias Kintschev Real",
-			"Escola Municipal Profª Iria Lucia Wilhelm Konzen",
-			"Escola Municipal Profª Maria da Conceicao Angelica",
-			"Escola Municipal Rotary Dr Nelson de Araujo",
-			"Escola Municipal Socrates Camara",
-			"Escola Municipal Ver Albertina Pereira de Matos",
-			"Escola Municipal Weimar Goncalves Torres",
-			"Escola Municipal Indigena Lacui Roque Isnard"
-
+        let escolasMunicipais = [
+            "ESCOLA MUNICIPAL AURORA PEDROSO DE CAMARGO",
+            "ESCOLA MUNICIPAL BERNARDINA CORRÊA DE ALMEIDA",
+            "ESCOLA MUNICIPAL CLARICE BASTOS ROSA",
+            "ESCOLA MUNICIPAL CORONEL FIRMINO VIEIRA DE MATOS",
+            "ESCOLA MUNICIPAL DOM AQUINO CORREA",
+            "ESCOLA MUNICIPAL DR. CAMILO HERMELINDO DA SILVA – PÓLO",
+            "ESCOLA MUNICIPAL ETALÍVIO PENZO",
+            "ESCOLA MUNICIPAL FAZENDA MIYA – PÓLO",
+            "ESCOLA MUNICIPAL FRANCISCO MEIRELES",
+            "ESCOLA MUNICIPAL FRANKLIN LUIZ AZAMBUJA",
+            "ESCOLA MUNICIPAL FREI EUCÁRIO SCHMITT",
+            "ESCOLA MUNICIPAL GERALDINO NEVES CORRÊA – PÓLO",
+            "ESCOLA MUNICIPAL IZABEL MUZZI FIORAVANTI",
+            "ESCOLA MUNICIPAL JANUÁRIO PEREIRA DE ARAÚJO",
+            "ESCOLA MUNICIPAL JOAQUIM MURTINHO",
+            "ESCOLA MUNICIPAL JOSÉ EDUARDO CANUTO ESTOLANO – PEREQUETÉ",
+            "ESCOLA MUNICIPAL LAUDEMIRA COUTINHO DE MELO",
+            "ESCOLA MUNICIPAL LÓIDE BONFIM ANDRADE",
+            "ESCOLA MUNICIPAL MARIA DA ROSA ANTUNES DA SILVEIRA CÂMARA",
+            "ESCOLA MUNICIPAL NEIL FIORAVANTI",
+            "ESCOLA MUNICIPAL PADRE ANCHIETA",
+            "ESCOLA MUNICIPAL PEDRO PALHANO",
+            "ESCOLA MUNICIPAL PREF. ÁLVARO BRANDÃO",
+            "ESCOLA MUNICIPAL PREF. LUIZ ANTÔNIO ÁLVARES GONÇALVES",
+            "ESCOLA MUNICIPAL PREF. RUY GOMES",
+            "ESCOLA MUNICIPAL PROF° MANOEL SANTIAGO DE OLIVEIRA",
+            "ESCOLA MUNICIPAL PROFª ANTONIA CANDIDA DE MELO",
+            "ESCOLA MUNICIPAL PROFª AVANI CARGNELUTTI FEHLAUER",
+            "ESCOLA MUNICIPAL PROFª CLORI BENEDETTI DE FREITAS",
+            "ESCOLA MUNICIPAL PROFª EFANTINA DE QUADROS",
+            "ESCOLA MUNICIPAL PROFª ELZA FARIAS KINTSCHEV REAL",
+            "ESCOLA MUNICIPAL PROFª IRIA LUCIA WILHELM KONZEN",
+            "ESCOLA MUNICIPAL PROFª MARIA DA CONCEIÇÃO ANGÉLICA",
+            "ESCOLA MUNICIPAL ROTARY DR. NELSON DE ARAÚJO",
+            "ESCOLA MUNICIPAL SÓCRATES CÂMARA",
+            "ESCOLA MUNICIPAL VEREADORA ALBERTINA PEREIRA DE MATOS"
         ];
 
         let escolasEstaduais = [
@@ -146,13 +132,13 @@
             "Escola Estadual Vereador Moacir Djalma Barros"
         ];
 
-        function importarEstaduais() {
+        document.getElementById('importarEstaduais').addEventListener('click', function() {
             document.getElementById('textareaField').value = escolasEstaduais.join('\n');
-        }
+        });
 
-        function importarMunicipais() {
+        document.getElementById('importarMunicipais').addEventListener('click', function() {
             document.getElementById('textareaField').value = escolasMunicipais.join('\n');
-        }
+        });
 
         document.getElementById('searchButton').addEventListener('click', function() {
             var input = document.getElementById('textareaField').value.trim();
@@ -174,51 +160,49 @@
                     card.innerHTML = `
                         <span>${line}</span>
                         <div>
-                            <button class="card-button px-2 py-1 bg-blue-500 text-white rounded-md" onclick="toggleCard(this)">Abrir</button>
-                            <button class="mark-button px-2 py-1 text-white rounded-md" onclick="markCard(this)">Marcar</button>
-                            <button class="unmark-button px-2 py-1 text-white rounded-md hidden" onclick="unmarkCard(this)">Desmarcar</button>
+                            <a href="https://www.google.com/search?q=${encodeURIComponent(line)}" target="_blank" class="card-button bg-blue-500 text-white px-3 py-1 rounded-md mr-2">Google</a>
+                            <button class="mark-button text-white px-3 py-1 rounded-md mr-2">Marcar</button>
+                            <button class="unmark-button text-white px-3 py-1 rounded-md hidden">Desmarcar</button>
                         </div>
                     `;
+
+                    var markButton = card.querySelector('.mark-button');
+                    var unmarkButton = card.querySelector('.unmark-button');
+
+                    markButton.addEventListener('click', function() {
+                        card.classList.add('marked');
+                        markButton.classList.add('hidden');
+                        unmarkButton.classList.remove('hidden');
+                        updateSummary();
+                    });
+
+                    unmarkButton.addEventListener('click', function() {
+                        card.classList.remove('marked');
+                        markButton.classList.remove('hidden');
+                        unmarkButton.classList.add('hidden');
+                        updateSummary();
+                    });
+
                     cardContainer.appendChild(card);
                 });
+            }
 
-                summaryCard.classList.remove('hidden'); // Exibe o cartão de resumo
+            function updateSummary() {
+                var markedCards = document.querySelectorAll('.card.marked');
+                summaryList.innerHTML = ''; // Limpa a lista existente
+                if (markedCards.length > 0) {
+                    markedCards.forEach(function(card) {
+                        var schoolName = card.querySelector('span').innerText;
+                        var listItem = document.createElement('li');
+                        listItem.textContent = schoolName;
+                        summaryList.appendChild(listItem);
+                    });
+                    summaryCard.classList.remove('hidden');
+                } else {
+                    summaryCard.classList.add('hidden');
+                }
             }
         });
-
-        function toggleCard(button) {
-            var card = button.closest('.card');
-            card.classList.toggle('opened');
-        }
-
-        function markCard(button) {
-            var card = button.closest('.card');
-            card.classList.add('marked');
-            button.classList.add('hidden');
-            var unmarkButton = card.querySelector('.unmark-button');
-            unmarkButton.classList.remove('hidden');
-            updateSummary();
-        }
-
-        function unmarkCard(button) {
-            var card = button.closest('.card');
-            card.classList.remove('marked');
-            button.classList.add('hidden');
-            var markButton = card.querySelector('.mark-button');
-            markButton.classList.remove('hidden');
-            updateSummary();
-        }
-
-        function updateSummary() {
-            var markedCards = document.querySelectorAll('.card.marked span');
-            var summaryList = document.getElementById('summaryList');
-            summaryList.innerHTML = '';
-            markedCards.forEach(function(card) {
-                var listItem = document.createElement('li');
-                listItem.textContent = card.textContent;
-                summaryList.appendChild(listItem);
-            });
-        }
     </script>
 </body>
 </html>
