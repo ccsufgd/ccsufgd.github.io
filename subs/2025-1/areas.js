@@ -48,7 +48,7 @@ const areasData = [
         ]
     },
     {
-        "faculdade": "FAEAD",
+        "faculdade": "FAED",
         "area": "Educação Física Escolar",
         "pontosSorteados": [],
         "pontos": [
@@ -60,7 +60,7 @@ const areasData = [
         ]
     },
     {
-        "faculdade": "FAEAD",
+        "faculdade": "FAED",
         "area": "Pedagogia/Política e Gestão da Educação",
         "pontosSorteados": [],
         "pontos": [
@@ -72,7 +72,7 @@ const areasData = [
         ]
     },
     {
-        "faculdade": "FAEAD",
+        "faculdade": "FAED",
         "area": "Pedagogia/Educação Especial",
         "pontosSorteados": [],
         "pontos": [
@@ -84,7 +84,7 @@ const areasData = [
         ]
     },
     {
-        "faculdade": "FAEAD",
+        "faculdade": "FAED",
         "area": "Formação de Professores(as), Currículo e Estágio Supervisionado",
         "pontosSorteados": [],
         "pontos": [
@@ -96,7 +96,7 @@ const areasData = [
         ]
     },
     {
-        "faculdade": "FAEAD",
+        "faculdade": "FAED",
         "area": "Pedagogia/História da Educação",
         "pontosSorteados": [],
         "pontos": [
