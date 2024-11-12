@@ -1,363 +1,158 @@
 const areasData = [
-
-  {
+    {
+        "faculdade": "FAEAD",
+        "area": "Tradução e Interpretação em Libras/Língua Portuguesa",
+        "pontosSorteados": [],
+        "pontos": [
+            "1. Interpretação comunitária e os papéis em diferentes espaços de atuação.",
+            "2. Estratégias de escolhas tradutórias no processo de elaboração de glosas.",
+            "3. Conceitos, tipologias e conscientização dos problemas teóricos e práticos da tradução.",
+            "4. Metodologia do Ensino de Libras como L2.",
+            "5. Metodologia do Ensino de Libras como L1."
+        ]
+    },
+    {
         "faculdade": "FACET",
-        "area": "Ciência da Computação / Algoritmos e Teoria da Computação II",
+        "area": "Ciência da Computação/Algoritmos e Teoria da Computação",
         "pontosSorteados": [],
         "pontos": [
-            "1- Vetores, matrizes e registros.",
-            "2- Algoritmos de Ordenação.",
-            "3- Autômatos Finitos.",
-            "4- Pilhas e Filas.",
-            "5- Linguagens Regulares."
+            "1. Vetores, matrizes e registros.",
+            "2. Algoritmos de Ordenação.",
+            "3. Autômatos Finitos.",
+            "4. Pilhas e Filas.",
+            "5. Linguagens Regulares."
         ]
     },
-	{
-        "faculdade": "FCS",
-        "area": "Ciências Morfofuncionais",
-        "pontosSorteados": [],
-        "pontos": [
-            "1- Inflamação aguda.",
-            "2- Apoptose.",
-            "3- Cardiopatia Valvular.",
-            "4- Mecanismo das reações de hipersensibilidade.",
-            "5- Anemia por diminuição da eritropoese."
-        ]
-    },
-	 {
-        "faculdade": "FCH",
-        "area": "Ciências Sociais / Antropologia",
-        "pontosSorteados": [],
-        "pontos": [
-            "1- Teorias Antropológicas.",
-            "2- Antropologia no Brasil.",
-            "3- A questão da inserção do negro na sociedade nacional: a mestiçagem.",
-            "4- Cultura, identidade, relações interétnicas e políticas da alteridade.",
-            "5- Abordagens teórico-metodológicas da pesquisa de campo em antropologia."
-        ]
-    },
-	 {
-        "faculdade": "FCH",
-        "area": "Ciências Sociais / Sociologia",
-        "pontosSorteados": [],
-        "pontos": [
-            "1- Sociologia e modernidade: o surgimento da \"ciência da sociedade\".",
-            "2- Introdução à Sociologia Clássica: Marx, Durkheim e Weber.",
-            "3- Sociologia Contemporânea.",
-            "4- Pensamento Social no Brasil.",
-            "5- Educação em Direitos Humanos."
-        ]
-    },
-	 {
-        "faculdade": "FCS",
-        "area": "Clínica Médica",
-        "pontosSorteados": [],
-        "pontos": [
-            "1- Lúpus eritematoso sistêmico.",
-            "2- Sarcoidose.",
-            "3- Doenças pulmonares intersticiais difusas crônicas.",
-            "4- Febre reumática aguda.",
-            "5- Tumores ósseos."
-        ]
-    },
-	 {
-        "faculdade": "FACE",
-        "area": "Contabilidade Avançada I e Contabilidade Avançada II",
-        "pontosSorteados": [],
-        "pontos": [
-            "1- Método de Equivalência Patrimonial.",
-            "2- Combinação de negócios.",
-            "3- Instrumentos Financeiros.",
-            "4- Demonstrações consolidadas.",
-            "5- Valor Justo considerando Ativos Biológicos."
-        ]
-    },
-	 {
-        "faculdade": "FACE",
-        "area": "Contabilidade Financeira / Análise das demonstrações contábeis",
-        "pontosSorteados": [],
-        "pontos": [
-            "1- Análise de empresas por meio de indicadores econômicos e financeiros.",
-            "2- Análise de setores por meio de Índice padrão.",
-            "3- Método Dupont.",
-            "4- Administração de Capital de Giro.",
-            "5- Análise de Investimentos – VPL, TIR, Payback e análise de sensibilidade."
-        ]
-    },
-	  {
-        "faculdade": "FCH",
-        "area": "Desenvolvimento, aprendizagem e formação de professoras(es)",
-        "pontosSorteados": [],
-        "pontos": [
-            "1- Desenvolvimento e Aprendizagem: diferentes perspectivas teóricas.",
-            "2- Avaliação da aprendizagem: pressupostos teóricos e metodológicos da avaliação em diferentes momentos históricos.",
-            "3- Funções, finalidades e modalidades da avaliação da aprendizagem.",
-            "4- Psicologia. Formação docente. Licenciatura em Psicologia.",
-            "5- Instrumentos e critérios na avaliação da aprendizagem no contexto escolar."
-        ]
-    },
-	   {
+    {
         "faculdade": "FADIR",
-        "area": "Direito Internacional",
+        "area": "Direito/Prática Jurídica",
         "pontosSorteados": [],
         "pontos": [
-            "1- A Personalidade Jurídica Internacional e os Sujeitos do Direito Internacional Público.",
-            "2- Conflitos entre Tratados Internacionais e Normas de Direito Interno no Brasil.",
-            "3- A Condição Jurídica dos Migrantes, Refugiados e Apátridas no Brasil.",
-            "4- Contratos Internacionais: Foro Competente e Legislação Aplicável.",
-            "5- Modalidades de Cooperação Jurídica Internacional."
+            "1. Conciliação, mediação e arbitragem.",
+            "2. Do procedimento comum: aspectos essenciais da petição inicial e da contestação.",
+            "3. Direitos do consumidor: características e princípios norteadores da relação de consumo.",
+            "4. Teoria Geral dos recursos e recursos cíveis em espécies.",
+            "5. Alimentos: conceito, características, espécies, aspectos materiais e processuais."
         ]
     },
-	 {
+    {
         "faculdade": "FADIR",
-        "area": "Economia Política Internacional",
+        "area": "Relações Internacionais/Política Internacional",
         "pontosSorteados": [],
         "pontos": [
-            "1- Relações monetárias, financeiras, comerciais e de investimento em perspectiva histórica.",
-            "2- Reestruturação Produtiva e Globalização Econômica.",
-            "3- A OMC e a Governança do Sistema Multilateral de Comércio.",
-            "4- Arquitetura do Sistema Financeiro Internacional pós-crise de 2008.",
-            "5- Economia Política Internacional, Desenvolvimento e Dependência."
+            "1. Organismos multilaterais e a governança global.",
+            "2. Cooperação Internacional e Governança Global.",
+            "3. Meio ambiente, crise climática e política global.",
+            "4. Integração Regional e fluxos transfronteiriços.",
+            "5. Direitos Humanos, Soberania e Relações Internacionais."
         ]
     },
-	{
-        "faculdade": "FAIND",
-        "area": "Educação",
-        "pontosSorteados": [],
-        "pontos": [
-            "1- Educação escolar indígena Guarani e Kaiowa no Ensino Fundamental.",
-            "2- Perspectivas teórico-práticas no Estágio Supervisionado no Ensino Fundamental na Educação Escolar Indígena.",
-            "3- Saberes Indígenas e a cultura escolar na Educação Escolar.",
-            "4- Metodologias de ensino para educação escolar nas escolas indígenas.",
-            "5- Processos de Letramento e numeramento nas escolas indígenas."
-        ]
-    },
-	 {
-        "faculdade": "FAED",
+    {
+        "faculdade": "FAEAD",
         "area": "Educação Física Escolar",
         "pontosSorteados": [],
         "pontos": [
-            "1- Corpo e movimento na escola: o trabalho da Educação Física no desenvolvimento infantil.",
-            "2- O estágio como campo de conhecimento: reflexões teórico-práticas.",
-            "3- Aspectos específicos do Estágio Supervisionado e da Prática de Ensino de Educação Física na Educação Infantil, no Ensino Fundamental e no Ensino Médio.",
-            "4- Educação no e para o lazer e suas relações com a Educação Física Escolar.",
-            "5- Gênero, Sexualidade e práticas corporais e esportivas."
-        ]
-    },
-	  {
-        "faculdade": "FCA",
-        "area": "Engenharia / Eletrônica e Eletrotécnica",
-        "pontosSorteados": [],
-        "pontos": [
-            "1- Luminotécnica e instalações elétricas residencial e predial.",
-            "2- Circuitos eletrônicos de acionamento e controle de potência DC.",
-            "3- Circuitos elétricos de acionamento e controle de potência AC.",
-            "4- Controle de fator de potência.",
-            "5- Tecnologias de automação para sistemas agrícolas e aquícolas."
-        ]
-    },
-	  {
-        "faculdade": "FCBA",
-        "area": "Ensino de Ciências",
-        "pontosSorteados": [],
-        "pontos": [
-            "1- Teorias de aprendizagem.",
-            "2- Planejamento e Avaliação da aprendizagem no Ensino de Ciências e Biologia.",
-            "3- Estágio e docência na formação do professor de Ciências e Biologia.",
-            "4- Tendências e Perspectivas do Ensino de Ciências e Biologia.",
-            "5- Tecnologia no ensino de ciências e biologia."
+            "1. Corpo, movimento e expressão corporal na escola: o trabalho da Educação Física no desenvolvimento infantil.",
+            "2. O estágio como campo de conhecimento: reflexões teórico-práticas.",
+            "3. Teoria e prática da dança na Educação Física Escolar.",
+            "4. Teoria e prática da ginástica na Educação Física Escolar.",
+            "5. Gênero, Sexualidade e práticas corporais e esportivas."
         ]
     },
     {
-        "faculdade": "FCH",
-        "area": "Ensino de Geografia",
+        "faculdade": "FAEAD",
+        "area": "Pedagogia/Política e Gestão da Educação",
         "pontosSorteados": [],
         "pontos": [
-            "1- O Estágio Supervisionado na formação do professor de Geografia. ",
-            "2- Propostas Curriculares para o ensino de Geografia. ",
-            "3- Educação, escola e ensino de Geografia na sociedade contemporânea. ",
-            "4- Cartografia escolar e ensino de Geografia. ",
-            "5- Linguagens e ensino de Geografia. "
-        ]
-    },
-	{
-        "faculdade": "FACET",
-        "area": "Ensino de Química",
-        "pontosSorteados": [],
-        "pontos": [
-            "1- Educação Ciência, Tecnologia, Sociedade (CTS) no ensino de química.",
-            "2- Estágio supervisionado: concepções, práticas de orientação, acompanhamento e avaliação.",
-            "3- Teorias de aprendizagem: aspectos cognitivos, sociais, culturais e afetivos envolvidos no Ensino de Química.",
-            "4- Pesquisa em ensino de química: caracterização e importância no Ensino de Química e na formação inicial e continuada de professores de química.",
-            "5- Possibilidades, desafios e perspectivas da experimentação no Ensino de Química. "
+            "1. Políticas educacionais para a Educação Básica.",
+            "2. Organização e gestão da educação escolar.",
+            "3. Gestão educacional e escolar.",
+            "4. Planejamento Educacional Brasileiro.",
+            "5. Medidas e avaliação da educação."
         ]
     },
     {
-        "faculdade": "FACET",
-        "area": "Física / Física Geral",
+        "faculdade": "FAEAD",
+        "area": "Pedagogia/Educação Especial",
         "pontosSorteados": [],
         "pontos": [
-            "1- Leis de conservação na mecânica newtoniana. ",
-            "2- Movimento oscilatório e suas aplicações. ",
-            "3- Fluídos. ",
-            "4- Leis da termodinâmica. ",
-            "5- Cargas Elétricas e Campos Elétricos. "
+            "1. História da Educação Especial.",
+            "2. Políticas públicas de Educação Especial.",
+            "3. Inclusão escolar: raízes históricas, definição e características.",
+            "4. O atendimento educacional especializado voltado ao aluno público-alvo da Educação Especial.",
+            "5. Práticas pedagógicas inclusivas."
+        ]
+    },
+    {
+        "faculdade": "FAEAD",
+        "area": "Formação de Professores(as), Currículo e Estágio Supervisionado",
+        "pontosSorteados": [],
+        "pontos": [
+            "1. Didática e formação de professores.",
+            "2. Teoria e prática do currículo.",
+            "3. Avaliação da aprendizagem.",
+            "4. Desafios do estágio supervisionado na Pedagogia.",
+            "5. Planejamento das práticas pedagógicas."
+        ]
+    },
+    {
+        "faculdade": "FAEAD",
+        "area": "Pedagogia/História da Educação",
+        "pontosSorteados": [],
+        "pontos": [
+            "1. História e historiografia da Educação Brasileira.",
+            "2. Aspectos teórico-metodológicos da pesquisa em História da Educação.",
+            "3. Perspectivas de pesquisa em Memória e História da Educação.",
+            "4. História da Educação e instituições educativas.",
+            "5. História da Educação, práticas e representações."
         ]
     },
     {
         "faculdade": "FAEN",
-        "area": "Gerenciamento de Projetos Industriais",
+        "area": "Estruturas/Solos/Instalações Prediais",
         "pontosSorteados": [],
         "pontos": [
-            "1- Planejamento e controle de projetos: escopo, cronograma e orçamento.",
-            "2- Teoria da decisão para estratégias de produção.",
-            "3- Gestão das variáveis de mercado e Marketing.",
-            "4- Previsão de Demanda: definição, características e métodos.",
-            "5- Projeto do arranjo físico industrial: centros de produção, fluxos e modelagem."
+            "1. Mecânica vetorial de forças e Momentos.",
+            "2. Análise estrutural (treliças, método dos nós e das seções).",
+            "3. Propriedades mecânicas dos materiais.",
+            "4. Atribuições, direitos e deveres do profissional da Engenharia Civil.",
+            "5. Instalações prediais de água fria."
         ]
     },
-	{
-        "faculdade": "FACE",
-        "area": "Introdução à Economia",
-        "pontosSorteados": [],
-        "pontos": [
-            "1- As forças de mercado da oferta e da demanda.",
-            "2- Elasticidade e sua aplicação.",
-            "3- Os custos de produção.",
-            "4- Empresas em mercados competitivos.",
-            "5- Medindo a renda nacional."
-        ]
-    },
-	{
-        "faculdade": "EAD",
-        "area": "Libras / Linguística da Libras",
-        "pontosSorteados": [],
-        "pontos": [
-            "1- Língua Brasileira de Sinais – Morfologia.",
-            "2- Língua Brasileira de Sinais – Sintaxe.",
-            "3- Ensino de Língua Brasileira de Sinais como primeira língua.",
-            "4- Ensino de Língua Brasileira de Sinais como segunda língua.",
-            "5- Introdução aos estudos linguísticos da Língua Brasileira de Sinais."
-        ]
-    },
-	{
+	  {
         "faculdade": "FALE",
         "area": "Linguística e Língua Portuguesa",
         "pontosSorteados": [],
         "pontos": [
-            "1- Concepções teóricas de língua, linguagem, gramática e ensino de línguas. ",
-            "2- Gêneros discursivos acadêmicos.",
-            "3- Língua e discurso. ",
-            "4- Linguagem, sociedade e escola: norma, uso, variação e preconceito linguístico. ",
-            "5- Texto e textualidade no ensino de língua portuguesa e nos gêneros discursivos."
+            "1. Concepções teóricas de língua, linguagem e gramática e o ensino de línguas;",
+            "2. Gêneros discursivos acadêmicos;",
+            "3. Língua e discurso;",
+            "4. Linguagem, sociedade e escola: norma, uso, variação e preconceito linguístico;",
+            "5. Texto e textualidade no ensino de língua portuguesa e nos gêneros discursivos."
+        ]
+    },
+    {
+        "faculdade": "FALE",
+        "area": "Teoria do Teatro",
+        "pontosSorteados": [],
+        "pontos": [
+            "1. Poéticas e elementos do texto dramatúrgico;",
+            "2. Vanguardas artísticas do Séc. XX;",
+            "3. O Teatro do Absurdo;",
+            "4. O Teatro Épico;",
+            "5. O Teatro Pós-Dramático."
         ]
     },
 	{
-        "faculdade": "FALE",
-        "area": "Literatura",
+        "faculdade": "FCA",
+        "area": "Produção Animal – Aquicultura",
         "pontosSorteados": [],
         "pontos": [
-            "1- Literatura Brasileira. ",
-            "2- Literatura Comparada. ",
-            "3- Literatura Portuguesa. ",
-            "4- O Ensino de Literatura nas Escolas Públicas. ",
-            "5- Teorias Literárias."
-        ]
-    },
-    {
-        "faculdade": "FACET",
-        "area": "Matemática / Estatística",
-        "pontosSorteados": [],
-        "pontos": [
-            "1- Cálculo Diferencial: Análise do comportamento de funções e Problemas de Otimização.",
-            "2- Mudanças de Coordenadas: integrais duplas em coordenadas polares. integrais triplas: integrais triplas em coordenadas cilíndricas e esféricas.",
-            "3- Autovalores e Autovetores.",
-            "4- Medidas de Variabilidade: variância, desvio padrão e coeficiente de variação.",
-            "5- Distribuições de Probabilidade: binomial, Poisson e Normal."
-        ]
-    },
-	 {
-        "faculdade": "FALE",
-        "area": "Metodologia do Ensino de Teatro",
-        "pontosSorteados": [],
-        "pontos": [
-            "1- Teatro, educação e os movimentos de(s)coloniais.",
-            "2- Drama como método de ensino: perspectivas formais e não formais.",
-            "3- Os jogos teatrais e a criação de espetáculos no ambiente formal de ensino.",
-            "4- Teatro, política, movimentos sociais e opressão: processos artísticos e educacionais.",
-            "5- Políticas públicas, teatro e a escola."
-        ]
-    },
-    {
-        "faculdade": "FAED",
-        "area": "Pedagogia / Política e Gestão da Educação",
-        "pontosSorteados": [],
-        "pontos": [
-            "1- Políticas educacionais para a Educação Básica.",
-            "2- Organização e gestão da educação escolar.",
-            "3- Gestão educacional e escolar.",
-            "4- Planejamento Educacional Brasileiro.",
-            "5- Medidas e avaliação da educação."
-        ]
-    },
-	 {
-        "faculdade": "FALE",
-        "area": "Pedagogia das Artes Cênicas e Práticas Teatrais Contemporâneas ",
-        "pontosSorteados": [],
-        "pontos": [
-            "1- Possíveis articulações entre teorias e prática no Estágio Supervisionado e a formação artística pedagógica do docente/artista.",
-            "2- Artes circenses na educação básica, abordagens possíveis.",
-            "3- Perspectiva histórica de teatralidades não hegemônicas: indígena e/ou negra.",
-            "4- A pedagogia teatral contemporânea: procedimentos metodológicos e seus objetivos.",
-            "5- O ensino de teatro nos espaços formais e não formais da educação."
-        ]
-    },
-	 {
-        "faculdade": "FCH",
-        "area": "Psicologia Escolar",
-        "pontosSorteados": [],
-        "pontos": [
-            "1- História do ensino e da escola. Psicologia Escolar.",
-            "2- Psicologia Escolar e Inclusão Escolar.",
-            "3- Queixa escolar, aprendizagem e medicalização.",
-            "4- Psicologia Escolar e Educação Inclusiva.",
-            "5- A atuação do psicólogo na escola. legislação e normas."
-        ]
-    },
-	  {
-        "faculdade": "FCH",
-        "area": "Psicologia Fenomenológico-Existencial",
-        "pontosSorteados": [],
-        "pontos": [
-            "1- O problema da consciência na fenomenologia.",
-            "2- Sentido ético-político e antropológico da teoria do Self em Gestalt-Terapia.",
-            "3- Modelos de Psicologia fenomenológico-existenciais e humanistas.",
-            "4- Fundamentos fenomenológico-existenciais da prática clínica.",
-            "5- Contribuições da Fenomenologia para o aconselhamento psicológico."
-        ]
-    },
-    {
-        "faculdade": "FCH",
-        "area": "Psicoterapia Cognitiva",
-        "pontosSorteados": [],
-        "pontos": [
-            "1- História e fundamentos filosóficos da Psicologia Cognitiva.",
-            "2- Neurociência Cognitiva.",
-            "3- Conceitualização Cognitiva de Casos Clínicos.",
-            "4- Técnicas da Terapia Cognitiva-Comportamental.",
-            "5- Terapia Cognitiva e Psicopatologia."
-        ]
-    },
-    {
-        "faculdade": "FCS",
-        "area": "Semiologia médica",
-        "pontosSorteados": [],
-        "pontos": [
-            "1- Anamnese.",
-            "2- Dor.",
-            "3- Exame físico do sistema cardiovascular.",
-            "4- Dispneia.",
-            "5- Doenças da parede e da cavidade abdominal."
+            "1. Parâmetros Genéticos Aplicados no Melhoramento de Organismos Aquáticos;",
+            "2. Diagnóstico Participativo Rural e Sustentabilidade no Desenvolvimento da Aquicultura;",
+            "3. Seleção Genética de Organismos Aquáticos;",
+            "4. Produção de Híbridos: Impactos e Potencialidades;",
+            "5. A Bromatologia como Ferramenta de Sustentabilidade na Aquicultura."
         ]
     },
     {
@@ -365,14 +160,108 @@ const areasData = [
         "area": "Topografia e Geodésia",
         "pontosSorteados": [],
         "pontos": [
-            "1- Medida direta e indireta de distâncias.",
-            "2- Ângulos horizontais, ângulos verticais e ângulos de orientação.",
-            "3- Tipos de levantamento topográfico planimétrico.",
-            "4- Altimetria: Cotas e altitude. levantamento altimétrico.",
-            "5- Sistemas sensores: Caracterização, classificação. níveis de coleta de dados espectral."
+            "1. Medida direta e indireta de distâncias;",
+            "2. Ângulos horizontais, ângulos verticais e ângulos de orientação;",
+            "3. Tipos de levantamento topográfico planimétrico;",
+            "4. Altimetria: Cotas e altitude; levantamento altimétrico;",
+            "5. Sistemas sensores: Caracterização, classificação; níveis de coleta de dados espectral."
         ]
-    } 
-
+    },
+    {
+        "faculdade": "FCA",
+        "area": "Engenharia/Eletrônica e Eletrotécnica",
+        "pontosSorteados": [],
+        "pontos": [
+            "1. Instrumentação e Componentes Eletrônicos Aplicados à Agricultura (utilização de sensores, resistores, capacitores e semicondutores no monitoramento e controle agrícola; ferramentas de medição e técnicas de busca de falhas em circuitos eletrônicos; potencial elétrico, corrente elétrica, resistência elétrica, Lei de Ohm, potência elétrica, energia e queda de tensão);",
+            "2. Sistemas de Controle Eletrônico e Potência (circuitos retificadores, acionamentos por transistores e controle de potência usando tiristores; amplificadores operacionais e temporizadores (família 555) aplicados em sistemas agrícolas);",
+            "3. Eletrônica Digital e Confecção de Placas de Circuito Impresso (PCI) – (introdução à eletrônica digital: sinais e funções digitais; desenvolvimento, simulação e montagem de circuitos por computador; técnicas de soldagem e confecção de PCI);",
+            "4. Instalações Elétricas Rurais, NR-10 e Força Eletromotriz (regras de segurança elétrica segundo a NR-10 para instalações em ambientes rurais; montagem e manutenção de instalações elétricas residenciais e prediais; produção de força eletromotriz por geradores monofásicos e trifásicos; grandezas em circuitos de corrente alternada);",
+            "5. Motores, Transformadores e Potência para Aplicações Rurais (funcionamento e aplicação de geradores e motores de corrente contínua e alternada no campo; circuitos trifásicos e ligação dos enrolamentos dos geradores; expressão e correção do fator de potência; cálculo do rendimento e otimização energética rural)."
+        ]
+    },
+	 {
+        "faculdade": "FCH",
+        "area": "Estágio supervisionado em História/metodologias do ensino e da pesquisa em História",
+        "pontosSorteados": [],
+        "pontos": [
+            "1. O estágio supervisionado na formação do professor de História;",
+            "2. Currículo e ensino de História;",
+            "3. Metodologias da História e interdisciplinaridade;",
+            "4. Fontes para o ensino de História;",
+            "5. O professor e a pesquisa histórica."
+        ]
+    },
+    {
+        "faculdade": "FCH",
+        "area": "Geografia Humana",
+        "pontosSorteados": [],
+        "pontos": [
+            "1. Lugar e identidade na Geografia;",
+            "2. Gênese da Geografia Cultural;",
+            "3. Formação socioespacial brasileira;",
+            "4. Relações entre cultura, sociedade e espaço;",
+            "5. Metodologias qualitativas em trabalho de campo."
+        ]
+    },
+    {
+        "faculdade": "FCH",
+        "area": "Psicologia / Orientação Profissional",
+        "pontosSorteados": [],
+        "pontos": [
+            "1. Teorias da motivação no trabalho;",
+            "2. Percepção organizacional;",
+            "3. Saúde mental no trabalho;",
+            "4. Análise crítica em Orientação Profissional e de Carreira;",
+            "5. Orientação Profissional e de Carreira na interface com o mundo do trabalho."
+        ]
+    },
+    {
+        "faculdade": "FCH",
+        "area": "Psicologia/Psicologia do Desenvolvimento",
+        "pontosSorteados": [],
+        "pontos": [
+            "1. Diferentes perspectivas em desenvolvimento humano;",
+            "2. Estabilidade e mudança durante o ciclo vital;",
+            "3. Pesquisa e intervenção no campo de desenvolvimento humano: limites e possibilidades;",
+            "4. Teorias da Personalidade. Análise da estrutura, dinâmica e desenvolvimento da personalidade segundo diferentes teorias. Influências do temperamento no desenvolvimento humano;",
+            "5. Intervenção precoce e múltiplos olhares sobre as potencialidades e necessidades das famílias."
+        ]
+    },
+    {
+        "faculdade": "FCS",
+        "area": "Ciências morfofuncionais",
+        "pontosSorteados": [],
+        "pontos": [
+            "1. Lesão e Morte celular;",
+            "2. Doenças ambientais;",
+            "3. Imunidade aos microrganismos;",
+            "4. Mecanismo das reações de hipersensibilidade;",
+            "5. Imunodeficiências primárias e adquiridas."
+        ]
+    },
+    {
+        "faculdade": "FCS",
+        "area": "Ginecologia e Obstetrícia",
+        "pontosSorteados": [],
+        "pontos": [
+            "1. Dor pélvica e dismenorreia;",
+            "2. Infecções genito-urinárias;",
+            "3. Síndrome de Ovários Policísticos;",
+            "4. Assistência pré-natal;",
+            "5. Distócias."
+        ]
+    },
+    {
+        "faculdade": "FCS",
+        "area": "Dietética nos Ciclos da Vida e Nutrição Esportiva",
+        "pontosSorteados": [],
+        "pontos": [
+            "1. Classificação NOVA e o Guia alimentar para a população brasileira;",
+            "2. Avaliação do estado nutricional de praticantes de atividade física;",
+            "3. Planejamento de intervenção nutricional para diferentes modalidades esportivas, em diferentes momentos da competição;",
+            "4. Fisiologia da gestação;",
+            "5. Avaliação do estado nutricional e planejamento dietético para gestantes."
+        ]
+    }
 ]
-
 	
