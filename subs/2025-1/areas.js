@@ -144,6 +144,42 @@ const areasData = [
         ]
     },
 	  {
+        "faculdade": "FAEN",
+        "area": "Sistemas Elétricos de Potência",
+        "pontosSorteados": [],
+        "pontos": [
+            "1. Planejamento da Operação e Expansão de Sistemas Energéticos;",
+            "2. Modelagem matricial de sistemas de potência e análise de fluxo de potência;",
+            "3. Projeto de sistemas de distribuição de energia;",
+            "4. Projeto elétrico de cabine de medição, proteção e transformação de energia em média tensão;",
+            "5. Gestão e eficiência energética."
+        ]
+    },
+    {
+        "faculdade": "FAEN",
+        "area": "Engenharia Mecânica/Mecânica dos Sólidos",
+        "pontosSorteados": [],
+        "pontos": [
+            "1. Resistência dos materiais: tensão, deformação, propriedades mecânicas e carregamentos simples (axial, torção, flexão e cisalhamento);",
+            "2. Resistência dos materiais: cargas combinadas, transformação de tensão e de deformação, deflexão e projetos de vigas e eixos, flambagem de colunas;",
+            "3. Elementos de máquinas: análise de carregamentos e tensões, deflexão e rigidez. Prevenção de falhas, fatores de segurança, confiabilidade e danos em superfícies;",
+            "4. Elementos de máquinas: elementos de fixação (parafusos, rebites, juntas soldadas/coladas) e molas mecânicas;",
+            "5. Elementos de máquinas: elementos de transmissão de potência (mancais e lubrificação; engrenagens, eixos, embreagens, freios, acoplamentos, volantes) e outros (elementos flexíveis, polias, correias, etc)."
+        ]
+    },
+    {
+        "faculdade": "FAEN",
+        "area": "Engenharia de Produção/Gerenciamento Ambiental",
+        "pontosSorteados": [],
+        "pontos": [
+            "1. Metodologia Científica para Engenharia de Produção: Importância da metodologia científica na pesquisa e desenvolvimento de projetos em engenharia.",
+            "2. Gerenciamento de Recursos Naturais e Energéticos: Estratégias para a utilização eficiente de recursos energéticos renováveis e não renováveis;",
+            "3. Segurança e Saúde do Trabalho: Normas e regulamentações de segurança no ambiente de trabalho;",
+            "4. Gerenciamento Ambiental: Planejamento e implementação de sistemas de gestão ambiental;",
+            "5. ESG (Environmental, Social, and Governance): Implementação de práticas ESG para melhorar a sustentabilidade e responsabilidade social."
+        ]
+    },
+	  {
         "faculdade": "FALE",
         "area": "Linguística e Língua Portuguesa",
         "pontosSorteados": [],
