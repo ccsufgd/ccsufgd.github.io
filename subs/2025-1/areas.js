@@ -49,13 +49,37 @@ const areasData = [
     },
     {
         "faculdade": "FAED",
-        "area": "Educação Física Escolar",
+        "area": "Educação Física: Dança, Ginástica",
         "pontosSorteados": [],
         "pontos": [
             "1. Corpo, movimento e expressão corporal na escola: o trabalho da Educação Física no desenvolvimento infantil.",
             "2. O estágio como campo de conhecimento: reflexões teórico-práticas.",
             "3. Teoria e prática da dança na Educação Física Escolar.",
             "4. Teoria e prática da ginástica na Educação Física Escolar.",
+            "5. Gênero, Sexualidade e práticas corporais e esportivas."
+        ]
+    },
+	{
+        "faculdade": "FAED",
+        "area": "Educação Física: Gênero, Sexualidade e práticas corporais e esportivas",
+        "pontosSorteados": [],
+        "pontos": [
+            "1. Corpo, movimento e expressão corporal na escola: o trabalho da Educação Física no desenvolvimento infantil",
+            "2. O estágio como campo de conhecimento: reflexões teórico-práticas;",
+            "3. Teoria e prática da dança na Educação Física Escolar; ",
+            "4. Teoria e prática da ginástica na Educação Física Escolar;",
+            "5. Gênero, Sexualidade e práticas corporais e esportivas."
+        ]
+    },
+	{
+        "faculdade": "FAED",
+        "area": "Educação Física: Esportes Individuais; Atpa; Handebol",
+        "pontosSorteados": [],
+        "pontos": [
+           	"1. Corpo, movimento e expressão corporal na escola: o trabalho da Educação Física no desenvolvimento infantil",
+            "2. O estágio como campo de conhecimento: reflexões teórico-práticas;",
+            "3. Teoria e prática da dança na Educação Física Escolar; ",
+            "4. Teoria e prática da ginástica na Educação Física Escolar;",
             "5. Gênero, Sexualidade e práticas corporais e esportivas."
         ]
     },
