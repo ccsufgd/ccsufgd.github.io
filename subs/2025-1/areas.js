@@ -49,37 +49,13 @@ const areasData = [
     },
     {
         "faculdade": "FAED",
-        "area": "Educação Física: Dança, Ginástica",
+        "area": "Educação Física Escolar",
         "pontosSorteados": [],
         "pontos": [
             "1. Corpo, movimento e expressão corporal na escola: o trabalho da Educação Física no desenvolvimento infantil.",
             "2. O estágio como campo de conhecimento: reflexões teórico-práticas.",
             "3. Teoria e prática da dança na Educação Física Escolar.",
             "4. Teoria e prática da ginástica na Educação Física Escolar.",
-            "5. Gênero, Sexualidade e práticas corporais e esportivas."
-        ]
-    },
-	{
-        "faculdade": "FAED",
-        "area": "Educação Física: Gênero, Sexualidade e práticas corporais e esportivas",
-        "pontosSorteados": [],
-        "pontos": [
-            "1. Corpo, movimento e expressão corporal na escola: o trabalho da Educação Física no desenvolvimento infantil",
-            "2. O estágio como campo de conhecimento: reflexões teórico-práticas;",
-            "3. Teoria e prática da dança na Educação Física Escolar; ",
-            "4. Teoria e prática da ginástica na Educação Física Escolar;",
-            "5. Gênero, Sexualidade e práticas corporais e esportivas."
-        ]
-    },
-	{
-        "faculdade": "FAED",
-        "area": "Educação Física: Esportes Individuais; Atpa; Handebol",
-        "pontosSorteados": [],
-        "pontos": [
-           	"1. Corpo, movimento e expressão corporal na escola: o trabalho da Educação Física no desenvolvimento infantil",
-            "2. O estágio como campo de conhecimento: reflexões teórico-práticas;",
-            "3. Teoria e prática da dança na Educação Física Escolar; ",
-            "4. Teoria e prática da ginástica na Educação Física Escolar;",
             "5. Gênero, Sexualidade e práticas corporais e esportivas."
         ]
     },
@@ -321,6 +297,18 @@ const areasData = [
             "3. Planejamento de intervenção nutricional para diferentes modalidades esportivas, em diferentes momentos da competição;",
             "4. Fisiologia da gestação;",
             "5. Avaliação do estado nutricional e planejamento dietético para gestantes."
+        ]
+    },
+	 {
+        "faculdade": "FAIND",
+        "area": "Sociologia da Educação/CiênciasPolíticas",
+        "pontosSorteados": [],
+        "pontos": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5"
         ]
     }
 ]
