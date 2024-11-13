@@ -13,7 +13,7 @@ const areasData = [
     },
     {
         "faculdade": "FACET",
-        "area": "Ciência da Computação/Algoritmos e Teoria da Computação",
+        "area": "Ciência da Computação/Algoritmos e Teoria da Computação I",
         "pontosSorteados": [],
         "pontos": [
             "1. Vetores, matrizes e registros.",
