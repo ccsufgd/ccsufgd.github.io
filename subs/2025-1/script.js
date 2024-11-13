@@ -16,7 +16,6 @@ document.addEventListener('keydown', function(event) {
 function navegarEntreSecoes(keyPressed) {
   const secoes = document.querySelectorAll('section.area, section.resultadoArea'); 
   let currentSectionId = -1;
-  console.log(currentSectionId);
 
   secoes.forEach((secao) => {
     const rect = secao.getBoundingClientRect();
