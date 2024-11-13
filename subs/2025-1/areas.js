@@ -301,7 +301,7 @@ const areasData = [
     },
 	 {
         "faculdade": "FAIND",
-        "area": "Sociologia da Educação/CiênciasPolíticas",
+        "area": "Sociologia da Educação/Ciências Políticas",
         "pontosSorteados": [],
         "pontos": [
             "1",
