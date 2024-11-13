@@ -11,9 +11,8 @@ document.addEventListener('keydown', function(event) {
   }
 });
 
-
 function scrollToSection(keyPressed) {
-  const sections = document.querySelectorAll('section'); // Seleciona todas as seções da página
+  const sections = document.querySelectorAll('section.area, section.resultado-area'); // Seleciona apenas as seções com as classes 'area' ou 'resultado-area'
 
   let currentSectionIndex = -1;
 
@@ -38,15 +37,14 @@ function scrollToSection(keyPressed) {
   if (targetIndex >= 0 && targetIndex < sections.length) {
       const targetSection = sections[targetIndex];
       
-      // Caso a seção seja a "resultado-area", garanta que a rolagem centralize corretamente
+      // Caso a seção seja a "area", garanta que a rolagem centralize corretamente
       if (targetSection.classList.contains('resultado-area') || targetSection.classList.contains('area')) {
         targetSection.scrollIntoView({ behavior: 'smooth', block: 'center' });
-    } else {
+      } else {
         targetSection.scrollIntoView({ behavior: 'smooth', block: 'start' }); // Padrão para outras seções
-    }
+      }
+  }
 }
-}
-
 // FIM SCROLL FUNCTION_________________
 
 console.log(areas.length);
