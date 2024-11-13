@@ -268,11 +268,11 @@ const areasData = [
         "area": "Sociologia da Educação/Ciências Políticas",
         "pontosSorteados": [],
         "pontos": [
-            "1",
-            "2",
-            "3",
-            "4",
-            "5"
+            "1. Movimentos Sociais e Educação.",
+            "2. Princípios e conceitos da Educação do Campo.",
+            "3. Panorama Histórico da Educação no Brasil: O Ensino da Sociologia, a “Educação Rural” e as Licenciaturas",
+            "4. Sociologia, Educação do Campo e Territórios Etnoeducacionais.",
+            "5. A Agroecologia como proposta de Sociedade: Epistemologia Indígena e de Povos Tradicionais na Educação."
         ]
     },
     {
