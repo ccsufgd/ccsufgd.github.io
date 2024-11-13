@@ -4,6 +4,7 @@ console.log(areas);
 
 const resultadosSorteio = [];
 
+//---- inicio section scroll
 document.addEventListener('keydown', function(event) {
     if (event.key === 'ArrowRight' || event.key === 'ArrowLeft') {
         scrollToSection(event.key);
@@ -12,12 +13,12 @@ document.addEventListener('keydown', function(event) {
 
 function scrollToSection(keyPressed) {
     const sections = document.querySelectorAll('section'); // Seleciona todas as seções da página
-
     let currentSectionIndex = -1;
 
     // Encontra o índice da seção atualmente visível
     sections.forEach((section, index) => {
         const rect = section.getBoundingClientRect();
+        // Verifica se a seção está totalmente visível na área da janela
         if (rect.top >= 0 && rect.bottom <= window.innerHeight) {
             currentSectionIndex = index;
         }
@@ -38,6 +39,9 @@ function scrollToSection(keyPressed) {
         targetSection.scrollIntoView({ behavior: 'smooth', block: 'center' }); // Rola para a seção de destino e centraliza verticalmente
     }
 }
+
+
+//---- fim section scroll----
 console.log(areas.length);
 let areasContador = areas.length;
 let contadorElement = document.getElementById('contador');
