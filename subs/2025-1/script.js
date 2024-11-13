@@ -18,11 +18,16 @@ function scrollToSection(keyPressed) {
     // Encontra o índice da seção atualmente visível
     sections.forEach((section, index) => {
         const rect = section.getBoundingClientRect();
-        // Verifica se a seção está totalmente visível na área da janela
+        // Verifica se a seção está visível (parcialmente ou completamente na tela)
         if (rect.top >= 0 && rect.bottom <= window.innerHeight) {
             currentSectionIndex = index;
         }
     });
+
+    if (currentSectionIndex === -1) {
+        // Se nenhuma seção estiver visível, não faz nada
+        return;
+    }
 
     let targetIndex;
 
@@ -33,12 +38,13 @@ function scrollToSection(keyPressed) {
         targetIndex = currentSectionIndex - 1;
     }
 
-    // Verifica se a seção de destino é válida e rola para ela
+    // Verifica se o índice da seção de destino é válido
     if (targetIndex >= 0 && targetIndex < sections.length) {
         const targetSection = sections[targetIndex];
         targetSection.scrollIntoView({ behavior: 'smooth', block: 'center' }); // Rola para a seção de destino e centraliza verticalmente
     }
 }
+
 
 
 //---- fim section scroll----
