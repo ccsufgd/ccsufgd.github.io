@@ -1,4 +1,4 @@
-[
+const areasData = [
     {
         "faculdade": "FACET",
         "area": "Ciência da Computação/Algoritmos e Teoria da Computação I",
