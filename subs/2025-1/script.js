@@ -4,43 +4,57 @@ console.log(areas);
 
 const resultadosSorteio = [];
 
-// INICIO SCROLL FUNCTION_________________
+// inicio SCROLL FUNCTION_________________
+
+
+let currentIndex = 0; // Índice inicial, começando na primeira seção
+let isNavigating = false; // Variável de controle para evitar múltiplas navegações enquanto a tecla está pressionada
+let sorteioAtribuido = false; // Variável de controle para atribuição do índice com base no sorteio
+
 document.addEventListener('keydown', function(event) {
-  if (event.key === 'ArrowRight' || event.key === 'ArrowLeft') {
-      navegarEntreSecoes(event.key);
-  
+  if ((event.key === 'ArrowRight' || event.key === 'ArrowLeft') && !isNavigating) {
+    isNavigating = true; // Ativa a trava
+    navegarEntreSecoes(event.key);
   }
 });
 
+document.addEventListener('keyup', function(event) {
+  if (event.key === 'ArrowRight' || event.key === 'ArrowLeft') {
+    isNavigating = false; // Desativa a trava ao soltar a tecla
+  }
+});
 
 function navegarEntreSecoes(keyPressed) {
   const secoes = document.querySelectorAll('section.area, section.resultadoArea'); 
-  let currentSectionId = -1;
+  const areasContador = secoes.length;
+  
+  // Verificar se o sorteio foi realizado e atribuir o índice apenas uma vez
+  if (sorteioRealizado && !sorteioAtribuido) {
+    currentIndex = Math.floor(areasContador / 2); // Ajuste de currentIndex
+    sorteioAtribuido = true; // Garante que a atribuição ocorra apenas uma vez
+    console.log("Índice ajustado para metade após o sorteio:", currentIndex);
+  }
 
-  secoes.forEach((secao) => {
-    const rect = secao.getBoundingClientRect();
-    if (rect.top >= 0 && rect.bottom <= window.innerHeight) {
-      currentSectionId = parseInt(secao.id);
-    }
-  });
-
-  let targetId;
+  // Atualizar o índice com base na tecla pressionada, respeitando os limites
   if (keyPressed === 'ArrowRight') {
-    targetId = currentSectionId + 1;
-    console.log(targetId);
+    if (currentIndex < areasContador - 1) {
+      currentIndex++; // Incrementa somente se não estiver na última seção
+      console.log("A seção atual é currentIndex:", currentIndex);
+    }
   } else if (keyPressed === 'ArrowLeft') {
-    targetId = currentSectionId - 1;
-    console.log(targetId);
+    if (currentIndex > 0) {
+      currentIndex--; // Decrementa somente se não estiver na primeira seção
+      console.log("A seção atual é currentIndex:", currentIndex);
+    }
   }
 
-  if (targetId > 0 && document.getElementById(targetId)) {
-    const targetSection = document.getElementById(targetId);
-    targetSection.scrollIntoView({ behavior: 'smooth', block: 'center' });
-  }
+  // Rolar para a seção correspondente ao índice atual
+  const targetSection = secoes[currentIndex];
+  console.log("Seção alvo:", targetSection);
+  targetSection.scrollIntoView({ behavior: 'smooth', block: 'center' });
 }
-
-
 // FIM SCROLL FUNCTION_________________
+
 
 console.log(areas.length);
 let areasContador = areas.length;
