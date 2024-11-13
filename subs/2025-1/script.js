@@ -27,8 +27,10 @@ function navegarEntreSecoes(keyPressed) {
   let targetId;
   if (keyPressed === 'ArrowRight') {
     targetId = currentSectionId + 1;
+    console.log(targetId);
   } else if (keyPressed === 'ArrowLeft') {
     targetId = currentSectionId - 1;
+    console.log(targetId);
   }
 
   if (targetId > 0 && document.getElementById(targetId)) {
