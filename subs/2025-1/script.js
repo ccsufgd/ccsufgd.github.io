@@ -7,44 +7,38 @@ const resultadosSorteio = [];
 // INICIO SCROLL FUNCTION_________________
 document.addEventListener('keydown', function(event) {
   if (event.key === 'ArrowRight' || event.key === 'ArrowLeft') {
-      scrollToSection(event.key);
+      navegarEntreSecoes(event.key);
+  
   }
 });
 
-function scrollToSection(keyPressed) {
-  const sections = document.querySelectorAll('section.area, section.resultado-area'); // Seleciona apenas as seções com as classes 'area' ou 'resultado-area'
 
-  let currentSectionIndex = -1;
+function navegarEntreSecoes(keyPressed) {
+  const secoes = document.querySelectorAll('section.area, section.resultadoArea'); 
+  let currentSectionId = -1;
+  console.log(currentSectionId);
 
-  // Encontra o índice da seção atualmente visível
-  sections.forEach((section, index) => {
-      const rect = section.getBoundingClientRect();
-      if (rect.top >= 0 && rect.bottom <= window.innerHeight) {
-          currentSectionIndex = index;
-      }
+  secoes.forEach((secao) => {
+    const rect = secao.getBoundingClientRect();
+    if (rect.top >= 0 && rect.bottom <= window.innerHeight) {
+      currentSectionId = parseInt(secao.id);
+    }
   });
 
-  let targetIndex;
-
-  // Determina o índice da seção de destino com base na tecla pressionada
+  let targetId;
   if (keyPressed === 'ArrowRight') {
-      targetIndex = currentSectionIndex + 1;
+    targetId = currentSectionId + 1;
   } else if (keyPressed === 'ArrowLeft') {
-      targetIndex = currentSectionIndex - 1;
+    targetId = currentSectionId - 1;
   }
 
-  // Verifica se a seção de destino é válida e rola para ela
-  if (targetIndex >= 0 && targetIndex < sections.length) {
-      const targetSection = sections[targetIndex];
-      
-      // Caso a seção seja a "area", garanta que a rolagem centralize corretamente
-      if (targetSection.classList.contains('resultado-area') || targetSection.classList.contains('area')) {
-        targetSection.scrollIntoView({ behavior: 'smooth', block: 'center' });
-      } else {
-        targetSection.scrollIntoView({ behavior: 'smooth', block: 'start' }); // Padrão para outras seções
-      }
+  if (targetId > 0 && document.getElementById(targetId)) {
+    const targetSection = document.getElementById(targetId);
+    targetSection.scrollIntoView({ behavior: 'smooth', block: 'center' });
   }
 }
+
+
 // FIM SCROLL FUNCTION_________________
 
 console.log(areas.length);
@@ -62,6 +56,9 @@ function imprimirArea(area) {
 
   const areaElement = document.createElement('section');
   areaElement.className = 'area';
+  const areaIndex = container.children.length + 1; // Número sequencial para a classe e ID
+// A classe será um número (1, 2, 3, etc.)
+  areaElement.id = `${areaIndex}`;
   areaElement.innerHTML = `<div><hr></hr>
     <p class="area-title"><strong style="font-size: 1.3em;">${area.area}</strong></p>
     <p class="area-title">${area.faculdade}</p>
@@ -152,7 +149,9 @@ function realizarSorteio() {
     resultadosSorteio.push(resultado);
 
     const resultadoElement = document.createElement('section');
-    resultadoElement.className = 'resultado-area';
+    resultadoElement.className = 'resultadoArea';
+    const resultadoIndex = sorteioContainer.children.length +1 ;
+    resultadoElement.id = `${resultadoIndex}`;
 
     resultadoElement.innerHTML = `<div>
       <hr>
@@ -319,6 +318,14 @@ function viewResults() {
   resultadosSorteio.forEach(resultado => {
     const resultadoElement = document.createElement('section');
     resultadoElement.className = 'resultado-area';
+    const resultadoIndex = sorteioContainer.children.length + 1; // Usando sorteioContainer
+    resultadoElement.id = `${resultadoIndex}`;
+
+
+
+
+
+
     resultadoElement.innerHTML = `
     <div>
       <hr>
@@ -455,4 +462,3 @@ function ocultarAlerta() {
   const customAlert = document.getElementById('customAlert');
   customAlert.style.display = 'none';
 }
-
