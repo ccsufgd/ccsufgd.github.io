@@ -4,40 +4,51 @@ console.log(areas);
 
 const resultadosSorteio = [];
 
+// INICIO SCROLL FUNCTION_________________
 document.addEventListener('keydown', function(event) {
-    if (event.key === 'ArrowRight' || event.key === 'ArrowLeft') {
-        scrollToSection(event.key);
-    }
+  if (event.key === 'ArrowRight' || event.key === 'ArrowLeft') {
+      scrollToSection(event.key);
+  }
 });
 
+
 function scrollToSection(keyPressed) {
-    const sections = document.querySelectorAll('section'); // Seleciona todas as seções da página
+  const sections = document.querySelectorAll('section'); // Seleciona todas as seções da página
 
-    let currentSectionIndex = -1;
+  let currentSectionIndex = -1;
 
-    // Encontra o índice da seção atualmente visível
-    sections.forEach((section, index) => {
-        const rect = section.getBoundingClientRect();
-        if (rect.top >= 0 && rect.bottom <= window.innerHeight) {
-            currentSectionIndex = index;
-        }
-    });
+  // Encontra o índice da seção atualmente visível
+  sections.forEach((section, index) => {
+      const rect = section.getBoundingClientRect();
+      if (rect.top >= 0 && rect.bottom <= window.innerHeight) {
+          currentSectionIndex = index;
+      }
+  });
 
-    let targetIndex;
+  let targetIndex;
 
-    // Determina o índice da seção de destino com base na tecla pressionada
-    if (keyPressed === 'ArrowRight') {
-        targetIndex = currentSectionIndex + 1;
-    } else if (keyPressed === 'ArrowLeft') {
-        targetIndex = currentSectionIndex - 1;
-    }
+  // Determina o índice da seção de destino com base na tecla pressionada
+  if (keyPressed === 'ArrowRight') {
+      targetIndex = currentSectionIndex + 1;
+  } else if (keyPressed === 'ArrowLeft') {
+      targetIndex = currentSectionIndex - 1;
+  }
 
-    // Verifica se a seção de destino é válida e rola para ela
-    if (targetIndex >= 0 && targetIndex < sections.length) {
-        const targetSection = sections[targetIndex];
-        targetSection.scrollIntoView({ behavior: 'smooth', block: 'center' }); // Rola para a seção de destino e centraliza verticalmente
+  // Verifica se a seção de destino é válida e rola para ela
+  if (targetIndex >= 0 && targetIndex < sections.length) {
+      const targetSection = sections[targetIndex];
+      
+      // Caso a seção seja a "resultado-area", garanta que a rolagem centralize corretamente
+      if (targetSection.classList.contains('resultado-area') || targetSection.classList.contains('area')) {
+        targetSection.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    } else {
+        targetSection.scrollIntoView({ behavior: 'smooth', block: 'start' }); // Padrão para outras seções
     }
 }
+}
+
+// FIM SCROLL FUNCTION_________________
+
 console.log(areas.length);
 let areasContador = areas.length;
 let contadorElement = document.getElementById('contador');
@@ -50,7 +61,9 @@ function imprimirArea(area) {
   const container = document.getElementById('areasContainer');
 
   // Criar elementos HTML
+
   const areaElement = document.createElement('section');
+  areaElement.className = 'area';
   areaElement.innerHTML = `<div><hr></hr>
     <p class="area-title"><strong style="font-size: 1.3em;">${area.area}</strong></p>
     <p class="area-title">${area.faculdade}</p>
@@ -444,3 +457,4 @@ function ocultarAlerta() {
   const customAlert = document.getElementById('customAlert');
   customAlert.style.display = 'none';
 }
+
