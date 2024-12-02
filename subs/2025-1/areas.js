@@ -131,6 +131,18 @@ const areasData = [
             "5. Medidas e avaliação da educação."
         ]
     },
+        {
+        "faculdade": "FCH",
+        "area": "Psicologia / Orientação Profissional",
+        "pontosSorteados": [],
+        "pontos": [
+            "1. Teorias da motivação no trabalho;",
+            "2. Percepção organizacional;",
+            "3. Saúde mental no trabalho;",
+            "4. Análise crítica em Orientação Profissional e de Carreira;",
+            "5. Orientação Profissional e de Carreira na interface com o mundo do trabalho."
+        ]
+    },
 {
         "faculdade": "FCH",
         "area": "Psicologia/Psicologia do Desenvolvimento",
