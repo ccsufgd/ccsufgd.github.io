@@ -317,7 +317,7 @@ const areasData = [
   },
   {
     faculdade: "FCS",
-    area: "Ginecologia e Obstetrícia;",
+    area: "Ginecologia e Obstetrícia",
     pontosSorteados: [],
     pontos: [
       "1 - Avaliação da vitalidade fetal.",
@@ -368,7 +368,7 @@ const areasData = [
   },
   {
     faculdade: "FCS",
-    area: "Nefrologia;",
+    area: "Nefrologia",
     pontosSorteados: [],
     pontos: [
       "1 - Metabolismo do sódio e edema.",
