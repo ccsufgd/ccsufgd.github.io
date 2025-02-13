@@ -162,7 +162,7 @@ function sortearProvaEscrita(pontos, area) {
   infoContainer.innerHTML += `<p><strong>Pontos disponíveis para Prova Escrita:</strong><br>${pontosOrdenados.join(
     "<br> "
   )}</p>`;
-
+  infoContainer.style.display = "none";
   // Embaralha os pontos para o sorteio
   const pontosEmbaralhados = shuffleArray(pontos);
   console.log(
@@ -206,7 +206,7 @@ function sortearProvaDidatica(pontos, pontoExcluido, area) {
   infoContainer.innerHTML += `<p><strong>Pontos disponíveis para Prova Didática:</strong><br>${pontosDisponiveisOrdenados.join(
     "<br> "
   )}</p>`;
-
+  infoContainer.style.display = "none";
   // Embaralha os pontos disponíveis para o sorteio
   const pontosDisponiveisEmbaralhados = shuffleArray(pontosDisponiveis);
   console.log(
