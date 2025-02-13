@@ -118,47 +118,145 @@ function loadingSorteio() {
   }, 2000);
 }
 
+function shuffleArray(array) {
+  const arr = array.slice(); // Criar uma cópia para evitar modificar o original
+  const length = arr.length;
+  const uintArray = new Uint32Array(length);
+
+  crypto.getRandomValues(uintArray); // Gera números aleatórios seguros
+
+  for (let i = length - 1; i > 0; i--) {
+    const randomIndex = uintArray[i] % (i + 1); // Escolher um índice dentro do intervalo válido
+    [arr[i], arr[randomIndex]] = [arr[randomIndex], arr[i]]; // Troca os elementos
+  }
+
+  return arr;
+}
+
+function sortearProvaEscrita(pontos, area) {
+  const infoContainer = document.getElementById("infoContainer");
+
+  // Cria uma cópia ordenada para os logs
+  const pontosOrdenados = [...pontos].sort((a, b) => {
+    const numA = parseInt(a.split(" - ")[0]);
+    const numB = parseInt(b.split(" - ")[0]);
+    return numA - numB;
+  });
+
+  console.log(
+    `Sorteio para a área: ${area.area} (Faculdade: ${area.faculdade})`
+  );
+  console.log(
+    "Pontos disponíveis para Prova Escrita (ordenados):",
+    pontosOrdenados
+  );
+
+  infoContainer.innerHTML += `
+    <div class="alert alert-dark" role="alert" style="text-align: center;">
+      <br>
+      <p class="area-title">
+        <strong>${area.area}</strong> (Faculdade: ${area.faculdade})
+      </p>
+      <br>
+    </div>`;
+  infoContainer.innerHTML += `<p><strong>Pontos disponíveis para Prova Escrita:</strong><br>${pontosOrdenados.join(
+    "<br> "
+  )}</p>`;
+
+  // Embaralha os pontos para o sorteio
+  const pontosEmbaralhados = shuffleArray(pontos);
+  console.log(
+    "Pontos disponíveis para Prova Escrita (embaralhados):",
+    pontosEmbaralhados
+  );
+
+  // Sorteio usando crypto API a partir do array embaralhado
+  const randomBytes = new Uint8Array(1);
+  crypto.getRandomValues(randomBytes);
+  const indiceAleatorio = randomBytes[0] % pontosEmbaralhados.length;
+  return pontosEmbaralhados[indiceAleatorio];
+}
+
+function sortearProvaDidatica(pontos, pontoExcluido, area) {
+  const infoContainer = document.getElementById("infoContainer");
+
+  // Filtra os pontos disponíveis excluindo o ponto sorteado na escrita
+  const pontosDisponiveis = pontos.filter((ponto) => ponto !== pontoExcluido);
+  const pontosDisponiveisOrdenados = [...pontosDisponiveis].sort((a, b) => {
+    const numA = parseInt(a.split(" - ")[0]);
+    const numB = parseInt(b.split(" - ")[0]);
+    return numA - numB;
+  });
+  console.log("Ponto sorteado Prova Escrita:", pontoExcluido);
+  console.log(
+    "Pontos disponíveis para Prova Didática (ordenados):",
+    pontosDisponiveisOrdenados
+  );
+
+  infoContainer.innerHTML += `
+    <div class="alert alert-success" role="alert" style="text-align: center;">
+      <p class="area-title">Ponto sorteado <strong>Prova Escrita:</strong><br>
+      <strong>${pontoExcluido}</strong></p>
+    </div>`;
+  infoContainer.innerHTML += `
+    <div class="alert alert-danger" role="alert" style="text-align: center;">
+      <p class="area-title">Ponto excluído para o sorteio da Prova Didática:<br>
+      <strong><s>${pontoExcluido}</s></strong></p>
+    </div>`;
+  infoContainer.innerHTML += `<p><strong>Pontos disponíveis para Prova Didática:</strong><br>${pontosDisponiveisOrdenados.join(
+    "<br> "
+  )}</p>`;
+
+  // Embaralha os pontos disponíveis para o sorteio
+  const pontosDisponiveisEmbaralhados = shuffleArray(pontosDisponiveis);
+  console.log(
+    "Pontos disponíveis para Prova Didática (Embaralhados):",
+    pontosDisponiveisEmbaralhados
+  );
+
+  // Sorteio usando crypto API a partir do array embaralhado
+  const randomBytes = new Uint8Array(1);
+  crypto.getRandomValues(randomBytes);
+  const indiceAleatorio = randomBytes[0] % pontosDisponiveisEmbaralhados.length;
+  const pontoSorteado = pontosDisponiveisEmbaralhados[indiceAleatorio];
+
+  console.log("Ponto sorteado Prova Didática:", pontoSorteado);
+
+  infoContainer.innerHTML += `
+    <div class="alert alert-success" role="alert" style="text-align: center;">
+      <p class="area-title">Ponto sorteado <strong>Prova Didática:</strong><br>
+      <strong>${pontoSorteado}</strong></p>
+    </div>`;
+
+  console.log(
+    "++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++"
+  );
+  return pontoSorteado;
+}
+
 function realizarSorteio() {
   ocultarAlerta();
   if (sorteioRealizado) {
     const confirmacao = confirm("Deseja sortear novamente?");
     if (!confirmacao) {
-      return; // Se o usuário clicar em "Cancelar", não faz nada
+      return;
     }
   }
 
   const sorteioContainer = document.getElementById("sorteioContainer");
-  sorteioContainer.innerHTML = ""; // Limpar resultados anteriores
-
-  resultadosSorteio.length = 0; // Limpar array de resultados
+  sorteioContainer.innerHTML = "";
+  resultadosSorteio.length = 0;
 
   const areasContainer = document.getElementById("areasContainer");
-  areasContainer.classList.add("d-none"); // Adiciona a classe 'd-none' para ocultar a div
-
-  const infoContainer = document.getElementById("infoContainer");
-
-  if (!infoContainer) {
-    console.error("Elemento infoContainer não encontrado.");
-    return;
-  }
-
-  infoContainer.innerHTML = ""; // Limpar o conteúdo anterior
-  infoContainer.style.display = "none"; // Define o estilo 'display' como 'block'
+  areasContainer.classList.add("d-none");
 
   areas.forEach((area) => {
-    const pontosProvaEscrita = sortearPonto(area.pontos, null, area);
-    const pontosProvaDidatica = sortearPonto(
+    const pontosProvaEscrita = sortearProvaEscrita(area.pontos, area);
+    const pontosProvaDidatica = sortearProvaDidatica(
       area.pontos,
       pontosProvaEscrita,
       area
     );
-
-    // alimentar array areas
-    area.pontosSorteados = [
-      ...area.pontosSorteados,
-      `Prova Escrita - ${pontosProvaEscrita}`,
-      `Prova Didática - ${pontosProvaDidatica}`,
-    ];
 
     const resultado = {
       area: area.area,
@@ -171,11 +269,8 @@ function realizarSorteio() {
 
     const resultadoElement = document.createElement("section");
     resultadoElement.className = "resultadoArea";
-    const resultadoIndex = sorteioContainer.children.length + 1;
-    resultadoElement.id = `${resultadoIndex}`;
-
     resultadoElement.innerHTML = `
-    <div>
+     <div>
       <hr>
       <br>
       <p class="area-title"><strong style="font-size: 1.3em;">${resultado.area} - ${resultado.faculdade}</strong></p>
@@ -186,148 +281,16 @@ function realizarSorteio() {
 
       <p><mark>${resultado.pontoProvaDidatica}</mark></p>
       <br>
-      </div>
-    `;
-
-    // Append the resultadoElement to the DOM or wherever you want to display it
-    document.body.appendChild(resultadoElement);
+      </div>`;
 
     sorteioContainer.appendChild(resultadoElement);
   });
 
-  const dataAtual = new Date();
-
-  // Formata a data e a hora (você pode ajustar o formato conforme necessário)
-  const formatoDataHora = {
-    weekday: "long",
-    year: "numeric",
-    month: "long",
-    day: "numeric",
-    hour: "numeric",
-    minute: "numeric",
-    second: "numeric",
-    timeZoneName: "short",
-  };
-  const dataHoraFormatada = dataAtual.toLocaleDateString(
-    "pt-BR",
-    formatoDataHora
-  );
-  infoContainer.innerHTML += `<div class="alert alert-info" role="alert">
-     <p class="area-title">${dataHoraFormatada}</p>
-  </div><br>`;
-
-  console.log("Sorteio Realizado");
-  console.log(resultadosSorteio);
+  console.log("Sorteio Realizado", resultadosSorteio);
   sorteioRealizado = true;
-  print = false;
-
   exibirAlerta("success", "Sorteio Realizado!");
-  document.getElementById("resultadoDiv").style.display = "block";
   loadingSorteio();
   showButtons();
-}
-
-function sortearPonto(pontos, pontoExcluido, area) {
-  const infoContainer = document.getElementById("infoContainer");
-
-  // Adicionar texto apenas se ainda não foi adicionado
-  if (!print) {
-    infoContainer.innerHTML += "<br><hr>";
-    infoContainer.innerHTML +=
-      '<div class="alert alert-success" role="alert"><p class="area-title"><strong>Arquivo de Logs</strong></p></div>';
-    infoContainer.innerHTML += "<br>";
-    print = true;
-  }
-
-  // logs de identificação
-  if (!pontoExcluido) {
-    console.log(
-      `Sorteio para a área: ${area.area} (Faculdade: ${area.faculdade})`
-    );
-    console.log("Os pontos disponíveis para sorteio da Prova Escrita", pontos);
-    infoContainer.innerHTML += `
-    <div class="alert alert-dark" role="alert" style="text-align: center;">
-    <br>
-      <p class="area-title">
-      <strong>${area.area}</strong> (Faculdade: ${area.faculdade})</p>
-      <br>
-    </div>`;
-    infoContainer.innerHTML += `<p><strong>Os pontos disponíveis para sorteio da Prova Escrita:</strong> <br>${pontos.join(
-      "<br> "
-    )}</p>`;
-  }
-
-  const pontosDisponiveis = pontoExcluido
-    ? pontos.filter((ponto) => ponto !== pontoExcluido)
-    : pontos;
-
-  // logs de identificação
-  if (pontoExcluido) {
-    console.log("Ponto sorteado Prova Escrita:", pontoExcluido);
-    console.log(
-      "Ponto excluído para sorteio da Prova Didática::",
-      pontoExcluido
-    );
-    console.log("Os pontos disponíveis após exclusão são:", pontosDisponiveis);
-
-    infoContainer.innerHTML += ``;
-    infoContainer.innerHTML += `
-    <div class="alert alert-success" role="alert" style="text-align: center;">
-    <p class="area-title">Ponto sorteado <strong>Prova Escrita:</strong><br>
-    <strong>${pontoExcluido}</strong>
-    </div>`;
-    infoContainer.innerHTML += `
-    <div class="alert alert-danger" role="alert" style="text-align: center;">
-    <p class="area-title">Ponto excluído para sorteio da <strong>Prova Didática:</strong><br>
-    <strong><s>${pontoExcluido}</s></strong>
-    </div>`;
-    infoContainer.innerHTML += `<p><strong>Os pontos disponíveis para sorteio da Prova Didática:</strong><br>${pontosDisponiveis.join(
-      "<br> "
-    )}</p>`;
-  }
-
-  const randomBytes = new Uint8Array(1);
-  crypto.getRandomValues(randomBytes);
-  crypto.getRandomValues(randomBytes);
-  const indiceAleatorio = randomBytes[0] % pontosDisponiveis.length;
-  const pontoSorteado = pontosDisponiveis[indiceAleatorio];
-
-  // logs de identificação
-  if (pontoExcluido) {
-    console.log("Ponto sorteado Prova Didática:", pontoSorteado);
-    console.log("Finalizado");
-
-    infoContainer.innerHTML += `
-    <div class="alert alert-success" role="alert" style="text-align: center;">
-    <p class="area-title">Ponto sorteado para <strong>Prova Didática:</strong><br>
-    <strong>${pontoSorteado}</strong>
-    </div>`;
-
-    infoContainer.innerHTML += `
-      <table class="table table-striped">
-        <thead>
-          <tr>
-            
-            <th scope="col"><strong>Resultado Sorteio - ${area.area}</strong> (Faculdade: ${area.faculdade})</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td><strong>Prova Escrita</strong>: ${pontoExcluido}</td>
-          </tr>
-          <tr>
-            <td><strong>Prova Didática:</strong> ${pontoSorteado}</td>
-          </tr>
-        </tbody>
-      </table>
-    `;
-
-    infoContainer.innerHTML += `<div class="alert alert-info" role="alert">
-   <p class="area-title">Finalizado!</p></div><br><hr></hr>
-`;
-  }
-
-  return pontoSorteado;
 }
 
 // Chamar a função para imprimir as áreas
@@ -379,7 +342,7 @@ function viewResults() {
     resultadoElement.id = `${resultadoIndex}`;
 
     resultadoElement.innerHTML = `
-    <div>
+     <div>
       <hr>
       <br>
       <p class="area-title"><strong style="font-size: 1.3em;">${resultado.area} - ${resultado.faculdade}</strong></p>
