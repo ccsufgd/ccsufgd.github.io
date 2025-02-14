@@ -192,6 +192,7 @@ const areasData = [
       "5 - Perdas de carga distribuída e localizadas em tubulações.",
       "6 - Equilíbrio dos Corpos Rígidos.",
       "7 - Controle numérico computadorizado (CNC) aplicado na engenharia.",
+      "8 - Liderança e gestão de pessoas.",
     ],
   },
   {
