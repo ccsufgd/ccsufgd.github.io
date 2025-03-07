@@ -460,6 +460,8 @@ const areasData = [
       "6 - Redes Geodésicas: planimétricas, altimétricas, tridimensionais, passivas, ativas e Sistema Geodésico Brasileiro",
       "7 - Posicionamento por GNSS (Global Navigation Satellite System): sistemas GNSS, princípio de funcionamento, métodos e técnicas de posicionamento, tipos de receptores.",
       "8 - Georreferenciamento de Imóveis Rurais.",
+      "9 - Projeções cartográficas: tipos, fundamentos, propriedades e aplicações.",
+      "10 - Ajustamento de observações: método paramétrico, MMQ paramétrico com injunção relativa, MMQ paramétrico com injunção absoluta",
     ],
   },
 ];
