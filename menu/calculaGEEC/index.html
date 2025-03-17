@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Calculadora de GEEC</title>
+    <title>Calculadora de Valores</title>
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body class="bg-gray-900 min-h-screen flex items-center justify-center p-4">
@@ -55,33 +55,35 @@
     </div>
 
     <script>
-        const baseCalculo = 29760.95;
-        const porcentagemSelect = document.getElementById('porcentagem');
-        const porcentagemCustom = document.getElementById('porcentagemCustom');
-        const horasInput = document.getElementById('horas');
-        const valorHoraSpan = document.getElementById('valorHora');
-        const valorTotalSpan = document.getElementById('valorTotal');
+         const baseCalculo = 29760.95;
+    const porcentagemSelect = document.getElementById('porcentagem');
+    const porcentagemCustom = document.getElementById('porcentagemCustom');
+    const horasInput = document.getElementById('horas');
+    const valorHoraSpan = document.getElementById('valorHora');
+    const valorTotalSpan = document.getElementById('valorTotal');
 
-        function calcular() {
-            let porcentagem = porcentagemSelect.value === 'custom' ? 
-                            parseFloat(porcentagemCustom.value) : 
-                            parseFloat(porcentagemSelect.value);
-            
-            const horas = parseFloat(horasInput.value) || 0;
-            
-            const valorHora = (porcentagem / 100) * baseCalculo;
-            const valorTotal = valorHora * horas;
+    function calcular() {
+        let porcentagem = porcentagemSelect.value === 'custom' ? 
+                        parseFloat(porcentagemCustom.value) : 
+                        parseFloat(porcentagemSelect.value);
+        
+        const horas = parseFloat(horasInput.value) || 0;
+        
+        // Arredonda o valor por hora para 2 casas decimais
+        const valorHora = Math.round(((porcentagem / 100) * baseCalculo) * 100) / 100;
+        // Arredonda o total para 2 casas decimais
+        const valorTotal = Math.round(valorHora * horas * 100) / 100;
 
-            valorHoraSpan.textContent = valorHora.toLocaleString('pt-BR', {
-                style: 'currency',
-                currency: 'BRL'
-            });
+        valorHoraSpan.textContent = valorHora.toLocaleString('pt-BR', {
+            style: 'currency',
+            currency: 'BRL'
+        });
 
-            valorTotalSpan.textContent = valorTotal.toLocaleString('pt-BR', {
-                style: 'currency',
-                currency: 'BRL'
-            });
-        }
+        valorTotalSpan.textContent = valorTotal.toLocaleString('pt-BR', {
+            style: 'currency',
+            currency: 'BRL'
+        });
+    }
 
         // Event Listeners
         porcentagemSelect.addEventListener('change', function() {
