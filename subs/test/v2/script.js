@@ -1,6 +1,6 @@
 // URL da sua planilha do Google Sheets publicada como JSON
 const sheetURL =
-  "https://docs.google.com/spreadsheets/d/e/2PACX-1vQ2hvEGuRFkOvuWVz8PVKQLiv1skNi4Rm87GuYXH5bB_-Jpzrw-Z8_TmRAJUmAjLG7eEdsmXn8mDxX6/pubhtml?gid=119001027&single=true"; // Substitua pela URL real da sua planilha
+  "https://docs.google.com/spreadsheets/d/e/2PACX-1vQS1jKuJlDpVY65ywnwdTzp2G-1TpEZj2gZU1b8wE_bsZ3qvkMBl6IRwy1f9O530X26CyD3iWOEKGo8/pubhtml?gid=119001027&single=true"; // Substitua pela URL real da sua planilha
 
 // Função para buscar os dados
 async function fetchAreas() {
