@@ -1,6 +1,26 @@
 
 const sheetURL =
   "https://docs.google.com/spreadsheets/d/e/2PACX-1vQS1jKuJlDpVY65ywnwdTzp2G-1TpEZj2gZU1b8wE_bsZ3qvkMBl6IRwy1f9O530X26CyD3iWOEKGo8/pubhtml?gid=474483196&single=true"; 
+// imagem 
+document.addEventListener('DOMContentLoaded', function() {
+    fetch(sheetURL)
+    .then(response => response.text())
+    .then(html => {
+        const parser = new DOMParser();
+        const doc = parser.parseFromString(html, 'text/html');
+        const rows = doc.querySelectorAll('table.waffle tr');
+        if (rows.length >= 3) {
+            const thirdRow = rows[2];
+            const firstCell = thirdRow.querySelector('td');
+            if (firstCell) {
+                const imageUrl = firstCell.textContent.trim();
+                document.getElementById('dynamicLogo').src = imageUrl;
+            }
+        }
+    })
+    .catch(error => console.error('Erro ao carregar a planilha:', error));
+});
+
 
 // Função para buscar os dados
 async function fetchAreas() {
