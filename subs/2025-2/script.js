@@ -10,7 +10,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const doc = parser.parseFromString(html, 'text/html');
         const rows = doc.querySelectorAll('table.waffle tr');
         if (rows.length >= 3) {
-            const thirdRow = rows[2];
+            const thirdRow = rows[3];
             const firstCell = thirdRow.querySelector('td');
             if (firstCell) {
                 const imageUrl = firstCell.textContent.trim();
