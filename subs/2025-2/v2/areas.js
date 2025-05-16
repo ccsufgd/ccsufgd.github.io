@@ -1,4 +1,4 @@
-[
+const areasData = [
     {
         "faculdade": "FACE",
         "area": "Administração Geral/Gestão de Materiais e Logística",
