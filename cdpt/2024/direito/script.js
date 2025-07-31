@@ -1,60 +1,62 @@
 
 const sheetURL =
-  "https://docs.google.com/spreadsheets/d/e/2PACX-1vQyxPifhFvpNagJcNZiWq6jFI-VLD5kqOWC4qTkb5VDzfAP3QCBjw8p33efpROa1bxaRL9f4Qw2_Zp-/pubhtml?gid=474483196&single=true"; 
-// imagem 
+  "https://docs.google.com/spreadsheets/d/e/2PACX-1vQyxPifhFvpNagJcNZiWq6jFI-VLD5kqOWC4qTkb5VDzfAP3QCBjw8p33efpROa1bxaRL9f4Qw2_Zp-/pubhtml?gid=474483196&single=true";
+
+// Carrega o logo dinamicamente da planilha
 document.addEventListener('DOMContentLoaded', function() {
-    fetch(sheetURL)
+  fetch(sheetURL)
     .then(response => response.text())
     .then(html => {
-        const parser = new DOMParser();
-        const doc = parser.parseFromString(html, 'text/html');
-        const rows = doc.querySelectorAll('table.waffle tr');
-        if (rows.length >= 3) {
-            const thirdRow = rows[3];
-            const firstCell = thirdRow.querySelector('td');
-            if (firstCell) {
-                const imageUrl = firstCell.textContent.trim();
-                document.getElementById('dynamicLogo').src = imageUrl;
-            }
+      const parser = new DOMParser();
+      const doc = parser.parseFromString(html, 'text/html');
+      const rows = doc.querySelectorAll('table.waffle tr');
+      // A URL da imagem está na 4ª linha (índice 3)
+      if (rows.length >= 4) {
+        const fourthRow = rows[3];
+        const firstCell = fourthRow.querySelector('td');
+        if (firstCell) {
+          const imageUrl = firstCell.textContent.trim();
+          if (imageUrl) {
+            document.getElementById('dynamicLogo').src = imageUrl;
+          }
         }
+      }
     })
-    .catch(error => console.error('Erro ao carregar a planilha:', error));
+    .catch(error => console.error('Erro ao carregar o logo da planilha:', error));
 });
 
+// Fornece os dados de backup caso a busca online falhe
+function getFallbackData() {
+    const fallbackJsonString = `[{"faculdade":"FADIR","area":"Direito Público","pontosSorteados":[],"pontos":["1 - Princípios do direito administrativo. Subtópicos: 01.1 Legalidade. 01.2 Supremacia do Interesse público. 01.03 Impessoalidade. 01.04 Presunção de legitimidade ou de veracidade. 01.05 Especialidade. 01.6 Controle ou Tutela. 02.7 Autotutela. 01.8 Hierarquia. 01.9 Continuidade. 01.10 Publicidade. 01.11 Moralidade. 01.12 Razoabilidade. 01.13 Motivação. 01.14 Eficiência. 01.14 Segurança Jurídica.","2 - Atos administrativos. Subtópicos: 02.1 Atos da Administração.02.2 Conceito. 02.3 Atributos. 02.4 Elementos. 02.5 Discricionariedade. 02.6 Legalidade. 02.07 Classificação. 02.8 Controle Judicial dos Atos Administrativos. 02.9 Atos Administrativos em Espécie. 02.10 Extinção dos Atos Administrativos. 02.11 Anulação ou invalidação.02.12 Vícios dos atos administrativos e suas consequências. 02.13 Confirmação e Revogação.","3 - Organização da Administração Pública. Subtópicos: 03.1 Administração Pública e organização administrativa. 03.2 Órgãos públicos. 03.3 Administração pública direita e indireta: autarquias, agências reguladoras, fundações públicas, agências executivas e empresas estatais. 03.4 Regimes jurídicos dos diversos órgãos da administração pública.","4 - Licitações. Subtópicos: 04.1 Conceito. 04.2 Princípios. 04.3 Modalidades. 04.4 Procedimento. 04.5 Sistema de registro de preços. 04.6 Anulação e revogação. 04.7 Recursos Administrativos. 04.8 Licitação no Regime Diferenciado de Contratação.","5 - Processo Administrativo. Subtópicos: 05.1 Processos Estatais. 05.2 Modalidades. 05.3 Princípios. 05.4 Processo Administrativo Disciplinar. 05.5 Processo Sumário","6 - Atividade financeira do Estado. Subtópicos: 06.1 Conceito, natureza e funções. 06.2 Autonomia e relação do Direito Financeiro com o Direito Tributário. 06.3 Federalismo fiscal, cidadania fiscal, educação fiscal. 06.4 Constituição financeira, sistemas tributário e orçamentário; 06.5. Fontes do Direito Financeiro.","9 - Tributos em espécie. Subtópicos: 09.1 Conceito de tributo. 09.2. Classificação dos tributos: visão constitucional, doutrinária e jurisprudencial. 09.2.1 Impostos federais, estaduais e municipais. 09.2.2 Taxas. 09.2.3. Contribuição de melhoria. 09.2.4 Contribuições. 09.2.5. Empréstimos compulsórios. 9.3 Tributos em espécie e a inovações promovidas pela reforma tributária (Emenda Constitucional nº 132, de 2023)","10 - Obrigação tributária. Subtópicos: 10.1 Conceito e espécies. 10.2 Fato gerador: conceito e classificações. 10.2.1 Planejamento tributário e normal geral antielisão. 10.3 Sujeito ativo. 10.4. Sujeito passivo. 10.5. Responsabilidade tributária"]}]`;
+    return JSON.parse(fallbackJsonString);
+}
 
-// Função para buscar os dados
+
+// Função para buscar os dados da planilha com fallback (VERSÃO CORRIGIDA)
 async function fetchAreas() {
   try {
-    // Buscar o HTML da página
     const response = await fetch(sheetURL);
     if (!response.ok) {
       throw new Error(`Erro HTTP: ${response.status}`);
     }
-
     const html = await response.text();
-
-    // Criar um parser de DOM temporário
     const parser = new DOMParser();
     const doc = parser.parseFromString(html, "text/html");
-
-    // Encontrar a célula com o JSON (geralmente na primeira linha, primeira coluna após cabeçalhos)
     const jsonCell = doc.querySelector("table.waffle td");
 
     if (!jsonCell) {
-      throw new Error("Não foi possível encontrar a célula com o JSON");
+      throw new Error("Não foi possível encontrar a célula com o JSON na planilha.");
     }
-
-    // Obter o texto da célula e converter para JSON
     const jsonText = jsonCell.textContent.trim();
-
-    console.log("JSON:", jsonText);
-
-    return JSON.parse(jsonText);
+    // Validação para garantir que o texto parece um JSON
+    if (jsonText.startsWith('[') && jsonText.endsWith(']')) {
+      return JSON.parse(jsonText);
+    }
+    throw new Error("O conteúdo da célula não parece ser um JSON válido.");
   } catch (error) {
-    console.error("Erro ao buscar os dados:", error);
-
-    console.log("Usando JSON de fallback");
-    return JSON.parse(jsonData);
+    console.error("Erro ao buscar os dados da planilha:", error);
+    console.log("Usando JSON de fallback.");
+    return getFallbackData(); // CORREÇÃO: Chama a função de fallback
   }
 }
 
