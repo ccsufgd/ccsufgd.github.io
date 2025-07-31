@@ -9,66 +9,78 @@ const sheetURL =
  */
 async function fetchSheetData() {
   try {
-    // Busca os dados do CSV a partir da URL da planilha
     const response = await fetch(sheetURL);
-    if (!response.ok) {
-      throw new Error(`Erro HTTP: ${response.status}`);
-    }
-
+    if (!response.ok) throw new Error(`Erro HTTP: ${response.status}`);
     const csvText = await response.text();
 
-    // Divide o texto do CSV em um array de linhas
-    const lines = csvText.split(/\r?\n/);
+    // Parser de CSV robusto
+    const parseCSV = (text) => {
+      const lines = [];
+      let currentLine = [];
+      let inQuotes = false;
+      let currentField = "";
 
-    // --- Processa o Logo ---
-    // A URL do logo está na terceira linha (índice 2)
-    if (lines.length >= 3 && lines[2]) {
-      let imageUrl = lines[2].trim();
+      for (let i = 0; i < text.length; i++) {
+        const char = text[i];
 
-      // Remove aspas apenas se existirem
-      if (imageUrl.startsWith('"') && imageUrl.endsWith('"')) {
-        imageUrl = imageUrl.slice(1, -1);
+        if (char === '"') {
+          // Detecta aspas duplas escapadas ("")
+          if (text[i + 1] === '"') {
+            currentField += '"';
+            i++; // Pula o próximo caractere
+          } else {
+            inQuotes = !inQuotes;
+          }
+        } else if (char === "," && !inQuotes) {
+          currentLine.push(currentField);
+          currentField = "";
+        } else if (char === "\n" && !inQuotes) {
+          currentLine.push(currentField);
+          lines.push(currentLine);
+          currentLine = [];
+          currentField = "";
+        } else {
+          currentField += char;
+        }
       }
 
-      const dynamicLogo = document.getElementById("dynamicLogo");
-      if (dynamicLogo) {
-        dynamicLogo.src = imageUrl;
-        console.log("Logo aplicado:", imageUrl);
-      } else {
-        console.warn("Elemento com ID 'dynamicLogo' não encontrado.");
+      // Adiciona última linha
+      if (currentField || currentLine.length > 0) {
+        currentLine.push(currentField);
+        lines.push(currentLine);
       }
-    } else {
-      console.error(
-        "Não foi possível encontrar a URL do logo na terceira linha do CSV."
-      );
+
+      return lines;
+    };
+
+    const csvData = parseCSV(csvText);
+    console.log("Dados do CSV parseado:", csvData);
+
+    // Extrair URL do logo (primeira célula da terceira linha)
+    if (csvData.length >= 3 && csvData[2][0]) {
+      let imageUrl = csvData[2][0].trim();
+      console.log("URL da imagem:", imageUrl);
+
+      // Valida e define o logo
+      if (/^https?:\/\//i.test(imageUrl)) {
+        const dynamicLogo = document.getElementById("dynamicLogo");
+        if (dynamicLogo) dynamicLogo.src = imageUrl;
+      }
     }
 
-    // --- Processa o JSON das Áreas ---
-    // Os dados JSON estão na primeira linha (índice 0)
-    if (lines.length > 0 && lines[0]) {
-      let jsonText = lines[0].trim();
-
-      // Remove aspas externas se existirem
-      if (jsonText.startsWith('"') && jsonText.endsWith('"')) {
-        jsonText = jsonText.slice(1, -1);
-      }
-
-      // Substitui aspas duplicadas escapadas por uma única aspa
-      const cleanJsonText = jsonText.replace(/""/g, '"');
-
-      console.log("JSON do CSV:", cleanJsonText);
-      return JSON.parse(cleanJsonText);
-    } else {
-      throw new Error("Não foi possível encontrar o JSON na primeira linha do CSV.");
+    // Extrair JSON da primeira célula da primeira linha
+    if (csvData.length > 0 && csvData[0][0]) {
+      const jsonText = csvData[0][0].trim();
+      console.log("JSON bruto:", jsonText);
+      return JSON.parse(jsonText);
     }
+
+    throw new Error("Formato do CSV inválido");
   } catch (error) {
-    console.error("Erro ao buscar ou processar os dados da planilha:", error);
-    throw error; // Propaga o erro para ser tratado fora da função
+    console.error("Erro ao processar CSV:", error);
+    throw error;
   }
 }
-
-
-
 // Função para iniciar a aplicação
 async function initApp() {
   try {
@@ -98,9 +110,6 @@ async function initApp() {
     );
   }
 }
-
-
-// O restante do seu código permanece o mesmo...
 
 // Inicializar variáveis globais
 let areas = []; // Inicializa como um array vazio
@@ -159,7 +168,7 @@ function navegarEntreSecoes(keyPressed) {
   console.log("Seção alvo:", targetSection);
   targetSection.scrollIntoView({
     behavior: "smooth",
-    block: "center"
+    block: "center",
   });
 }
 // FIM SCROLL FUNCTION_________________
@@ -426,7 +435,7 @@ function goHome() {
   areasContainer.classList.remove("d-none");
   window.scrollTo({
     top: 0,
-    behavior: "smooth"
+    behavior: "smooth",
   });
 }
 
@@ -474,7 +483,7 @@ function viewResults() {
 
   // Optionally, you can scroll to the results section for better visibility
   sorteioContainer.scrollIntoView({
-    behavior: "smooth"
+    behavior: "smooth",
   });
 
   // Hide the areas container
@@ -482,7 +491,7 @@ function viewResults() {
   areasContainer.classList.add("d-none");
   window.scrollTo({
     top: 0,
-    behavior: "smooth"
+    behavior: "smooth",
   });
 }
 
@@ -523,7 +532,7 @@ function saveResults() {
 
   // Create Blobs with the CSV and text content
   const csvBlob = new Blob([csvContent], {
-    type: "text/csv"
+    type: "text/csv",
   });
   const textBlobResults = new Blob([textContentResults], {
     type: "text/plain",
@@ -568,7 +577,7 @@ function mostrarLog() {
   }
   window.scrollTo({
     top: 0,
-    behavior: "smooth"
+    behavior: "smooth",
   });
   window.print();
 }
