@@ -25,14 +25,17 @@ async function fetchSheetData() {
     if (lines.length >= 3 && lines[2]) {
       let imageUrl = lines[2].trim();
 
-      // Adicionado: Remove as aspas externas que podem vir do CSV.
+      // Remove aspas apenas se existirem
       if (imageUrl.startsWith('"') && imageUrl.endsWith('"')) {
         imageUrl = imageUrl.slice(1, -1);
       }
-      
+
       const dynamicLogo = document.getElementById("dynamicLogo");
       if (dynamicLogo) {
         dynamicLogo.src = imageUrl;
+        console.log("Logo aplicado:", imageUrl);
+      } else {
+        console.warn("Elemento com ID 'dynamicLogo' não encontrado.");
       }
     } else {
       console.error(
@@ -45,14 +48,12 @@ async function fetchSheetData() {
     if (lines.length > 0 && lines[0]) {
       let jsonText = lines[0].trim();
 
-      // CSVs envolvem células que contêm vírgulas ou aspas em aspas duplas.
-      // Remove as aspas externas, se existirem.
+      // Remove aspas externas se existirem
       if (jsonText.startsWith('"') && jsonText.endsWith('"')) {
         jsonText = jsonText.slice(1, -1);
       }
 
-      // Dentro de uma célula CSV entre aspas, aspas duplas são escapadas duplicando-as ("").
-      // Substitui essas aspas duplas escapadas por uma única aspa dupla.
+      // Substitui aspas duplicadas escapadas por uma única aspa
       const cleanJsonText = jsonText.replace(/""/g, '"');
 
       console.log("JSON do CSV:", cleanJsonText);
@@ -62,8 +63,7 @@ async function fetchSheetData() {
     }
   } catch (error) {
     console.error("Erro ao buscar ou processar os dados da planilha:", error);
-    // Propaga o erro para que initApp possa tratá-lo.
-    throw error;
+    throw error; // Propaga o erro para ser tratado fora da função
   }
 }
 
