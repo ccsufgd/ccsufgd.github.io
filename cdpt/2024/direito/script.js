@@ -23,7 +23,13 @@ async function fetchSheetData() {
     // --- Processa o Logo ---
     // A URL do logo está na terceira linha (índice 2)
     if (lines.length >= 3 && lines[2]) {
-      const imageUrl = lines[2].trim();
+      let imageUrl = lines[2].trim();
+
+      // Adicionado: Remove as aspas externas que podem vir do CSV.
+      if (imageUrl.startsWith('"') && imageUrl.endsWith('"')) {
+        imageUrl = imageUrl.slice(1, -1);
+      }
+      
       const dynamicLogo = document.getElementById("dynamicLogo");
       if (dynamicLogo) {
         dynamicLogo.src = imageUrl;
@@ -60,6 +66,7 @@ async function fetchSheetData() {
     throw error;
   }
 }
+
 
 
 // Função para iniciar a aplicação
