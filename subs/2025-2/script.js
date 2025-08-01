@@ -1,60 +1,113 @@
-
+// URL da planilha apontando para a exportação em formato CSV
 const sheetURL =
-  "https://docs.google.com/spreadsheets/d/e/2PACX-1vQS1jKuJlDpVY65ywnwdTzp2G-1TpEZj2gZU1b8wE_bsZ3qvkMBl6IRwy1f9O530X26CyD3iWOEKGo8/pubhtml?gid=474483196&single=true"; 
-// imagem 
-document.addEventListener('DOMContentLoaded', function() {
-    fetch(sheetURL)
-    .then(response => response.text())
-    .then(html => {
-        const parser = new DOMParser();
-        const doc = parser.parseFromString(html, 'text/html');
-        const rows = doc.querySelectorAll('table.waffle tr');
-        if (rows.length >= 3) {
-            const thirdRow = rows[3];
-            const firstCell = thirdRow.querySelector('td');
-            if (firstCell) {
-                const imageUrl = firstCell.textContent.trim();
-                document.getElementById('dynamicLogo').src = imageUrl;
-            }
-        }
-    })
-    .catch(error => console.error('Erro ao carregar a planilha:', error));
-});
+  "https://docs.google.com/spreadsheets/d/e/2PACX-1vQyxPifhFvpNagJcNZiWq6jFI-VLD5kqOWC4qTkb5VDzfAP3QCBjw8p33efpROa1bxaRL9f4Qw2_Zp-/pub?gid=474483196&output=csv";
 
-
-// Função para buscar os dados
-async function fetchAreas() {
+/**
+ * Busca e analisa os dados do CSV da planilha.
+ * Extrai a URL do logo da terceira linha e os dados JSON da primeira linha.
+ * @returns {Promise<Array>} Uma promessa que resolve para o array de áreas.
+ */
+async function fetchSheetData() {
   try {
-    // Buscar o HTML da página
     const response = await fetch(sheetURL);
-    if (!response.ok) {
-      throw new Error(`Erro HTTP: ${response.status}`);
+    if (!response.ok) throw new Error(`Erro HTTP: ${response.status}`);
+    const csvText = await response.text();
+
+    // Parser de CSV robusto
+    const parseCSV = (text) => {
+      const lines = [];
+      let currentLine = [];
+      let inQuotes = false;
+      let currentField = "";
+
+      for (let i = 0; i < text.length; i++) {
+        const char = text[i];
+
+        if (char === '"') {
+          // Detecta aspas duplas escapadas ("")
+          if (text[i + 1] === '"') {
+            currentField += '"';
+            i++; // Pula o próximo caractere
+          } else {
+            inQuotes = !inQuotes;
+          }
+        } else if (char === "," && !inQuotes) {
+          currentLine.push(currentField);
+          currentField = "";
+        } else if (char === "\n" && !inQuotes) {
+          currentLine.push(currentField);
+          lines.push(currentLine);
+          currentLine = [];
+          currentField = "";
+        } else {
+          currentField += char;
+        }
+      }
+
+      // Adiciona última linha
+      if (currentField || currentLine.length > 0) {
+        currentLine.push(currentField);
+        lines.push(currentLine);
+      }
+
+      return lines;
+    };
+
+    const csvData = parseCSV(csvText);
+    console.log("Dados do CSV parseado:", csvData);
+
+    // Extrair URL do logo (primeira célula da terceira linha)
+    if (csvData.length >= 3 && csvData[2][0]) {
+      let imageUrl = csvData[2][0].trim();
+      console.log("URL da imagem:", imageUrl);
+
+      // Valida e define o logo
+      if (/^https?:\/\//i.test(imageUrl)) {
+        const dynamicLogo = document.getElementById("dynamicLogo");
+        if (dynamicLogo) dynamicLogo.src = imageUrl;
+      }
     }
 
-    const html = await response.text();
-
-    // Criar um parser de DOM temporário
-    const parser = new DOMParser();
-    const doc = parser.parseFromString(html, "text/html");
-
-    // Encontrar a célula com o JSON (geralmente na primeira linha, primeira coluna após cabeçalhos)
-    const jsonCell = doc.querySelector("table.waffle td");
-
-    if (!jsonCell) {
-      throw new Error("Não foi possível encontrar a célula com o JSON");
+    // Extrair JSON da primeira célula da primeira linha
+    if (csvData.length > 0 && csvData[0][0]) {
+      const jsonText = csvData[0][0].trim();
+      console.log("JSON bruto:", jsonText);
+      return JSON.parse(jsonText);
     }
 
-    // Obter o texto da célula e converter para JSON
-    const jsonText = jsonCell.textContent.trim();
-
-    console.log("JSON:", jsonText);
-
-    return JSON.parse(jsonText);
+    throw new Error("Formato do CSV inválido");
   } catch (error) {
-    console.error("Erro ao buscar os dados:", error);
+    console.error("Erro ao processar CSV:", error);
+    throw error;
+  }
+}
+// Função para iniciar a aplicação
+async function initApp() {
+  try {
+    // Chama a nova função para buscar os dados. Ela definirá o logo e retornará as áreas.
+    areas = await fetchSheetData();
+    console.log(areas);
 
-    console.log("Usando JSON de fallback");
-    return JSON.parse(jsonData);
+    // Se os dados foram carregados com sucesso, atualize o contador e renderize as áreas
+    if (areas && areas.length > 0) {
+      let areasContador = areas.length;
+      let contadorElement = document.getElementById("contador");
+      if (contadorElement) {
+        contadorElement.innerHTML = `Áreas: ${areasContador}</strong>`;
+      }
+
+      // Chama a função para imprimir as áreas
+      areas.forEach(imprimirArea);
+    } else {
+      throw new Error("Nenhum dado foi carregado");
+    }
+  } catch (error) {
+    console.error("Erro ao inicializar a aplicação:", error);
+    // Exibir mensagem de erro para o usuário
+    exibirAlerta(
+      "danger",
+      "Erro ao carregar os dados. Por favor, recarregue a página."
+    );
   }
 }
 
@@ -113,7 +166,10 @@ function navegarEntreSecoes(keyPressed) {
   // Rolar para a seção correspondente ao índice atual
   const targetSection = secoes[currentIndex];
   console.log("Seção alvo:", targetSection);
-  targetSection.scrollIntoView({ behavior: "smooth", block: "center" });
+  targetSection.scrollIntoView({
+    behavior: "smooth",
+    block: "center",
+  });
 }
 // FIM SCROLL FUNCTION_________________
 
@@ -227,14 +283,14 @@ function realizarSorteio() {
       <br>
       <p class="area-title"><strong style="font-size: 1.3em;">${resultado.area} - ${resultado.faculdade}</strong></p>
        <br>
-       
+      
       <p class="area-title"><strong>Prova Didática:</strong></p>
       <p class="area-title"><mark>${resultado.pontoProvaDidatica}</mark></p>
       <br>
       <br>
 
-     </div>
-    `;
+      </div>
+     `;
 
     // Append the resultadoElement to the DOM or wherever you want to display it
     document.body.appendChild(resultadoElement);
@@ -260,7 +316,7 @@ function realizarSorteio() {
     formatoDataHora
   );
   infoContainer.innerHTML += `<div class="alert alert-info" role="alert">
-     <p class="area-title">${dataHoraFormatada}</p>
+      <p class="area-title">${dataHoraFormatada}</p>
   </div><br>`;
 
   console.log("Sorteio Realizado");
@@ -338,7 +394,7 @@ function sortearPonto(pontos, area) {
           </tr>
         </tbody>
       </table>
-    `;
+     `;
 
   infoContainer.innerHTML += `<div class="alert alert-info" role="alert">
    <p class="area-title">Finalizado!</p></div><br><hr></hr>`;
@@ -377,7 +433,10 @@ function goHome() {
   // Show the areas container
   const areasContainer = document.getElementById("areasContainer");
   areasContainer.classList.remove("d-none");
-  window.scrollTo({ top: 0, behavior: "smooth" });
+  window.scrollTo({
+    top: 0,
+    behavior: "smooth",
+  });
 }
 
 function viewResults() {
@@ -423,12 +482,17 @@ function viewResults() {
   });
 
   // Optionally, you can scroll to the results section for better visibility
-  sorteioContainer.scrollIntoView({ behavior: "smooth" });
+  sorteioContainer.scrollIntoView({
+    behavior: "smooth",
+  });
 
   // Hide the areas container
   const areasContainer = document.getElementById("areasContainer");
   areasContainer.classList.add("d-none");
-  window.scrollTo({ top: 0, behavior: "smooth" });
+  window.scrollTo({
+    top: 0,
+    behavior: "smooth",
+  });
 }
 
 function saveResults() {
@@ -467,7 +531,9 @@ function saveResults() {
   textContentInfoContainer = textContentInfoContainer.replace(/\n/g, "\r\n");
 
   // Create Blobs with the CSV and text content
-  const csvBlob = new Blob([csvContent], { type: "text/csv" });
+  const csvBlob = new Blob([csvContent], {
+    type: "text/csv",
+  });
   const textBlobResults = new Blob([textContentResults], {
     type: "text/plain",
   });
@@ -509,7 +575,10 @@ function mostrarLog() {
   if (infoContainer) {
     infoContainer.style.display = "block";
   }
-  window.scrollTo({ top: 0, behavior: "smooth" });
+  window.scrollTo({
+    top: 0,
+    behavior: "smooth",
+  });
   window.print();
 }
 
@@ -537,35 +606,6 @@ function exibirAlerta(tipo, mensagem) {
 function ocultarAlerta() {
   const customAlert = document.getElementById("customAlert");
   customAlert.style.display = "none";
-}
-
-// Função para iniciar a aplicação
-async function initApp() {
-  try {
-    areas = await fetchAreas();
-    console.log(areas);
-
-    // Se os dados foram carregados com sucesso, atualize o contador e renderize as áreas
-    if (areas && areas.length > 0) {
-      let areasContador = areas.length;
-      let contadorElement = document.getElementById("contador");
-      if (contadorElement) {
-        contadorElement.innerHTML = `Áreas: ${areasContador}</strong>`;
-      }
-
-      // Chama a função para imprimir as áreas
-      areas.forEach(imprimirArea);
-    } else {
-      throw new Error("Nenhum dado foi carregado");
-    }
-  } catch (error) {
-    console.error("Erro ao inicializar a aplicação:", error);
-    // Exibir mensagem de erro para o usuário
-    exibirAlerta(
-      "danger",
-      "Erro ao carregar os dados. Por favor, recarregue a página."
-    );
-  }
 }
 
 // Iniciar a aplicação quando a página carregar
