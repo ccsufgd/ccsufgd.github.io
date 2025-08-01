@@ -72,7 +72,7 @@ const areasData = [
     ]
   },
   {
-    "faculdade": "FAED",
+    "faculdade": "FAEAD",
     "area": "Estudos Linguísticos e Estudos Linguísticos da Libras",
     "pontosSorteados": [],
     "pontos": [
